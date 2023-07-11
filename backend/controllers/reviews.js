@@ -1,5 +1,5 @@
 
-export const getAllReviews = (req, res) => {
+export const getAllUserReviews = (req, res) => {
     
 }
 export const getSingleReview = (req, res) => {

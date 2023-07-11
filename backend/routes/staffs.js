@@ -1,12 +1,12 @@
 import express from 'express';
-import { deleteStaff, getAllStaffs, getSingleStaff, updateStaff } from '../controllers/staffs.js';
+import { deleteStaff, getSingleStaff, updateStaff } from '../controllers/staffs.js';
+import { verifyTokenAndAuthorizeStaff } from '../middleware/verifyToken.js';
 
 const router = express.Router();
 
-router.get('/', getAllStaffs)
-router.get('/find/:id', getSingleStaff)
-router.put('/:id', updateStaff)
-router.delete('/:id', deleteStaff)
+router.get('/find/:id', verifyTokenAndAuthorizeStaff, getSingleStaff)
+router.put('/:id', verifyTokenAndAuthorizeStaff, updateStaff)
+router.delete('/:id', verifyTokenAndAuthorizeStaff, deleteStaff)
 
 
 export default router;

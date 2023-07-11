@@ -1,12 +1,12 @@
 import express from 'express';
-import { deleteStudent, getAllStudents, getSingleStudent, updateStudent } from '../controllers/students.js';
+import { deleteStudent, getSingleStudent, updateStudent } from '../controllers/students.js';
+import { verifyTokenAndAuthorizeStudent } from '../middleware/verifyToken.js';
 
 const router = express.Router();
 
-router.get('/', getAllStudents)
-router.get('/find/:id', getSingleStudent)
-router.put('/:id', updateStudent)
-router.delete('/:id', deleteStudent)
+router.get('/find/:id', verifyTokenAndAuthorizeStudent, getSingleStudent)
+router.put('/:id', verifyTokenAndAuthorizeStudent, updateStudent)
+router.delete('/:id', verifyTokenAndAuthorizeStudent, deleteStudent)
 
 
 export default router;

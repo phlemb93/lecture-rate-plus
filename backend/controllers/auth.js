@@ -90,7 +90,17 @@ if(!validator.isEmail(email)) {
             const match = bcrypt.compareSync(password, data[0].password)
 
             if(match) {
-                res.status(200).json(data)
+                const { password, studentId, ...others } = data[0];
+
+                jwt.sign({ studentId }, process.env.JWT_SECRET, { expiresIn: '3d' }, (err, token) => {
+
+                    if(err){
+                        res.status(500).json('JWT Server Error')
+                    }
+                    if(token){
+                        res.status(200).json({ studentId, ...others, token })
+                    }
+                })
             } else {
                 res.status(404).json('Incorrect password')
             }
@@ -105,7 +115,17 @@ if(!validator.isEmail(email)) {
                     const match = bcrypt.compareSync(password, data[0].password)
 
                     if(match) {
-                        res.status(200).json(data)
+                        const { password, staffId, ...others } = data[0];
+                        
+                        jwt.sign({ staffId }, process.env.JWT_SECRET, { expiresIn: '3d' }, (err, token) => {
+
+                            if(err){
+                                res.status(500).json('JWT Server Error')
+                            }
+                            if(token){
+                                res.status(200).json({ staffId, ...others, token })
+                            }
+                        })
                     } else {
                         res.status(404).json('Incorrect password')
                     }
