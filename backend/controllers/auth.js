@@ -62,15 +62,62 @@ export const register = (req, res) => {
                 }
             })
         } else {
-            res.status(404).json('Enter a valid student email')
+            res.status(404).json('Invalid email')
         }
     } else {
-        res.status(404).json('Enter a valid student email')
+        res.status(404).json('Invalid email')
     }
 }
 
 //LOGIN 
 export const login = (req, res) => {
+
+const { email, password } = req.body;
+
+if(!validator.isEmail(email)) {
+    res.status(404).json('Invalid email')
+} else {
+
+    const q1 = 'SELECT * FROM students WHERE email = ?'
+    const q2 = 'SELECT * FROM staffs WHERE email = ?'
+
+    db.query(q1, [email], (err, data) => {
+        if(err){
+            res.status(500).json('Server Error')
+        }
+        if(data.length) {
+
+            const match = bcrypt.compareSync(password, data[0].password)
+
+            if(match) {
+                res.status(200).json(data)
+            } else {
+                res.status(404).json('Incorrect password')
+            }
+
+        } else {
+
+            db.query(q2, [email], (err, data) => {
+                if(err){
+                    res.status(500).json('Server Error')
+                }
+                if(data.length) {
+                    const match = bcrypt.compareSync(password, data[0].password)
+
+                    if(match) {
+                        res.status(200).json(data)
+                    } else {
+                        res.status(404).json('Incorrect password')
+                    }
+
+                } else {
+                    res.status(404).json('Invalid email')
+                }
+            })
+           
+        }
+    })
+}
 
 }
 
