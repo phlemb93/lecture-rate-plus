@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt'
+import { db } from '../dbConnect.js';
 
 
 export const getSingleStudent = (req, res) => {
@@ -9,7 +10,6 @@ export const getSingleStudent = (req, res) => {
     if(id == studentId) {
 
         const q = "SELECT * FROM students WHERE studentId = ?";
-
         db.query(q, [studentId], (err, data) => {
             if(err) {
                 res.status(500).json('Server Error');
@@ -37,15 +37,13 @@ export const updateStudent = (req, res) => {
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(password, salt);
 
-        const values =[name, hashedPassword, image, studentId]
-
-        db.query(q, [values], (err, data) => {
+        db.query(q, [name, hashedPassword, image, studentId], (err, data) => {
             if(err) {
                 res.status(500).json('Server Error');
                 console.log(err)
             }
-            if(data.length){
-                res.status(200).json(data);
+            if(data){
+                res.status(200).json("User details updated");
             }
         })
     } else {
@@ -69,7 +67,7 @@ export const deleteStudent = (req, res) => {
                 console.log(err)
             }
             if(data){
-                res.status(200).json("User deleted successfully");
+                res.status(200).json("User deleted");
             }
         })
     } else {
