@@ -6,7 +6,7 @@ import { db } from '../dbConnect.js';
 
 //REGISTER 
 export const register = (req, res) => {
-    const { firstName, lastName, email, password, isStudent, isStaff, image } = req.body;
+    const { name, email, password, isStudent, isStaff, department, image } = req.body;
 
     if(validator.isEmail(email)) {
 
@@ -45,8 +45,8 @@ export const register = (req, res) => {
 
                                 if(isStudent) {
 
-                                    const q = 'INSERT INTO students (`firstName`,`lastName`,`email`, `password`, `image`) VALUE (?)';
-                                    const values = [firstName, lastName, email, hashedPassword, image];
+                                    const q = 'INSERT INTO students (`name`,`email`, `password`, `image`) VALUE (?)';
+                                    const values = [name, email, hashedPassword, image];
 
                                     db.query(q, [values], (err, data) => {
                                         if(err) {
@@ -60,8 +60,8 @@ export const register = (req, res) => {
 
                                 if(isStaff) {
 
-                                    const q = 'INSERT INTO staffs (`firstName`,`lastName`,`email`, `password`, `image`) VALUE (?)';
-                                    const values = [firstName, lastName, email, hashedPassword, image];
+                                    const q = 'INSERT INTO staffs (`name`,`email`, `password`, `department`, `image`) VALUE (?)';
+                                    const values = [name, email, hashedPassword, department, image];
 
                                     db.query(q, [values], (err, data) => {
                                         if(err) {
