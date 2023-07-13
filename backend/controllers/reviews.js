@@ -110,5 +110,20 @@ export const updateReview = (req, res) => {
 
 //DELETE A REVIEW
 export const deleteReview = (req, res) => {
- 
+    const { id } = req.params;
+    const { studentId } = req.user;
+
+    const q = "DELETE FROM reviews WHERE reviewId = ? AND studentId = ?"
+
+    db.query(q, [id, studentId], (err, data) => {
+        if(err){
+            res.status(500).json('Server error')
+            console.log(err)
+        }
+        if(data.affectedRows){
+            res.status(200).json("Review deleted")
+        }else{
+            res.status(404).json('You are not authorized')
+        }
+    })
 }
