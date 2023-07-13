@@ -66,14 +66,12 @@ export const getSingleReview = (req, res) => {
 
 //POST A REVIEW
 export const postReview = (req, res) => {
-
     const { studentId } = req.user;
-
     const { clarity, engagement, communication, comment, staffId, courseCode } = req.body;
-
-    const q = "INSERT INTO reviews (`clarity`, `engagement`, `communication`, `comment`, `staffId`, `studentId`, `courseCode`, `date`) VALUE (?)";
-
     const date = new Date();
+
+    const q = "INSERT INTO reviews (`clarity`, `engagement`, `communication`, `comment`, `staffId`, `studentId`, `courseCode`, `createdAt`) VALUE (?)";
+
     const values = [clarity, engagement, communication, comment, staffId, studentId, courseCode, date];
 
     db.query(q, [values], (err, data) => {
@@ -89,10 +87,28 @@ export const postReview = (req, res) => {
 
 //UPDATE A REVIEW
 export const updateReview = (req, res) => {
+    const { clarity, engagement, communication, comment } = req.body;
+    const { id } = req.params;
+    const { studentId } = req.user;
+    const date = new Date();
 
+    const q = "UPDATE reviews SET clarity = ?, engagement = ?, communication = ?, comment = ?, updatedAt = ? WHERE reviewId = ? AND studentId = ?"
+
+    db.query(q, [clarity, engagement, communication, comment, date, id, studentId], (err, data) => {
+        if(err){
+            res.status(500).json('Server error')
+            console.log(err)
+        }
+        if(data.affectedRows){
+            res.status(200).json("Review updated")
+        }else{
+            res.status(404).json('You are not authorized')
+        }
+    })
+    
 }
 
 //DELETE A REVIEW
 export const deleteReview = (req, res) => {
-
+ 
 }
