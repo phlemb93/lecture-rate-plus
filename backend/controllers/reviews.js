@@ -1,9 +1,29 @@
 import { db } from "../dbConnect.js";
 
 export const getAllUserReviews = (req, res) => {
-    const { id } = req.params;
+    const { userId } = req.params;
     
-    const q = "SELECT * FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId WHERE reviews.staffId = ?"
+    const q = "SELECT reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.date, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name  as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId WHERE reviews.staffId = ?"
+
+    db.query(q, [userId], (err, data) => {
+        if(err){
+            res.status(500).json('Server error')
+            console.log(err)
+        }
+        if(data){
+            res.status(200).json(data)
+        }else{
+            res.status(404).json('No review found')
+        }
+    })
+}
+
+
+export const getSingleReview = (req, res) => {
+
+    const { id } = req.params;
+
+    const q = "SELECT reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.date, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name  as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId WHERE reviews.reviewId = ?";
 
     db.query(q, [id], (err, data) => {
         if(err){
@@ -12,13 +32,10 @@ export const getAllUserReviews = (req, res) => {
         }
         if(data){
             res.status(200).json(data[0])
+        }else{
+            res.status(404).json('No review found')
         }
     })
-}
-
-
-export const getSingleReview = (req, res) => {
-
 }
 
 

@@ -6,7 +6,7 @@ import { verifyTokenAndAuthorization, verifyTokenAndAuthorizeStudent } from '../
 const router = express.Router();
 
 router.post('/', verifyTokenAndAuthorizeStudent, postReview)
-router.get('/find:userId', verifyTokenAndAuthorization, getAllUserReviews)
+router.get('/find/:userId', verifyTokenAndAuthorization, getAllUserReviews)
 router.get('/:id', verifyTokenAndAuthorization, getSingleReview)
 router.put('/:id', verifyTokenAndAuthorizeStudent, updateReview)
 router.delete('/:id', verifyTokenAndAuthorizeStudent, deleteReview)
