@@ -1,6 +1,6 @@
 import { db } from "../dbConnect.js";
 
-//GET ALL STAFF USER'S REVIEWS
+//GET A STAFF USER'S REVIEWS
 export const getAllStaffUserReviews = (req, res) => {
     const { userId } = req.params;
     
@@ -19,7 +19,7 @@ export const getAllStaffUserReviews = (req, res) => {
     })
 }
 
-//GET ALL STUDENT USER'S REVIEWS
+//GET A STUDENT USER'S REVIEWS
 export const getAllStudentUserReviews = (req, res) => {
     const { userId } = req.params;
     const { studentId } = req.user;
@@ -124,6 +124,54 @@ export const deleteReview = (req, res) => {
             res.status(200).json("Review deleted")
         }else{
             res.status(404).json('You are not authorized')
+        }
+    })
+}
+
+//STAFF USER'S REVIEWS STATS
+export const getStaffUserReviewStats = (req, res) => {
+    const { userId } = req.params;
+
+    const clarityRating = [];
+    const engagementRating = [];
+    const communicationRating = [];
+
+    const qC = "SELECT COUNT(clarity) FROM reviews WHERE staffId = ? GROUP BY clarity ORDER BY clarity DESC;"
+    const qE = "SELECT COUNT(engagement) FROM reviews WHERE staffId = ? GROUP BY engagement ORDER BY engagement DESC;"
+    const qComm = "SELECT COUNT(communication) FROM reviews WHERE staffId = ? GROUP BY communication ORDER BY communication DESC;"
+
+    db.query(qC, [userId], (err, data) => {
+        if(err){
+            res.status(500).json('Server error')
+            console.log(err)
+        }
+        if(data){
+
+            clarityRating.push(data)
+
+            db.query(qE, [userId], (err, data) => {
+                if(err){
+                    res.status(500).json('Server error')
+                    console.log(err)
+                }
+                if(data){
+
+                    engagementRating.push(data)
+
+                    db.query(qComm, [userId], (err, data) => {
+                        if(err){
+                            res.status(500).json('Server error')
+                            console.log(err)
+                        }
+                        if(data){
+                            communicationRating.push(data)
+
+                            res.status(200).json({ clarityRating, engagementRating, communicationRating })
+                        }
+                    })
+                    
+                }
+            })
         }
     })
 }

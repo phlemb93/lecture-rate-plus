@@ -1,9 +1,8 @@
 import bcrypt from 'bcrypt';
-
 import { db } from "../dbConnect.js";
 
+//GET STAFF USER'S DETAILS
 export const getSingleStaff = (req, res) => {
-
     const { id } = req.params;
 
         const q = "SELECT * FROM staffs WHERE staffId = ?";
@@ -22,8 +21,8 @@ export const getSingleStaff = (req, res) => {
         })
 }
 
+//UPDATE STAFF USER'S DETAILS
 export const updateStaff = (req, res) => {
-
     const { name, password, department, image } = req.body;
     const { staffId } = req.user;
     const { id } = req.params;
@@ -51,9 +50,8 @@ export const updateStaff = (req, res) => {
     }
 }
 
-
+//DELETE A STAFF USER
 export const deleteStaff = (req, res) => {
-
     const { staffId } = req.user;
     const { id } = req.params;
 

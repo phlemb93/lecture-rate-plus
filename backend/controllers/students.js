@@ -1,9 +1,8 @@
 import bcrypt from 'bcrypt'
 import { db } from '../dbConnect.js';
 
-
+//GET STUDENT USER'S DETAILS
 export const getSingleStudent = (req, res) => {
-
     const { studentId } = req.user;
     const { id } = req.params;
 
@@ -24,8 +23,8 @@ export const getSingleStudent = (req, res) => {
     }
 }
 
+//UPDATE STUDENT USER'S DETAILS
 export const updateStudent = (req, res) => {
-
     const { name, password, image } = req.body;
     const { studentId } = req.user;
     const { id } = req.params;
@@ -51,9 +50,8 @@ export const updateStudent = (req, res) => {
     }
 }
 
-
+//DELETE A STUDENT USER
 export const deleteStudent = (req, res) => {
-    
     const { studentId } = req.user;
     const { id } = req.params;
 
