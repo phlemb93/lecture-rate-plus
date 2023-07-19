@@ -98,7 +98,7 @@ export const register = (req, res) => {
                                                 }
                                             })
 
-                                            const emailToken = jwt.sign({email}, process.env.JWT_SECRET);
+                                            const emailToken = jwt.sign({email}, { expiresIn: '1h'}, process.env.JWT_SECRET);
 
                                             const url = `http://localhost:8000/auth/confirmation/${emailToken}`
                                             
@@ -107,7 +107,7 @@ export const register = (req, res) => {
                                                 to: email,
                                                 subject: 'Verify Your Email Address!',
                                                 html: `<div>
-                                                <p>Kindly click on the button below to verify your email address.</p>
+                                                <p>Kindly click on the button below to verify your email address. The link will expire in an hour time</p>
                                                 
                                                 <a href=${url}>Confirm Email</a>
                                                 `
@@ -127,15 +127,50 @@ export const register = (req, res) => {
 
                                 if(isStaff) {
 
-                                    const q = 'INSERT INTO staffs (`name`,`email`, `password`, `department`, `image`) VALUE (?)';
-                                    const values = [name, email, hashedPassword, department, image];
+                                    const q = 'INSERT INTO staffs (`name`,`email`, `password`, `department`, `image`, `verified`, `createdAt`) VALUE (?)';
+
+                                    const createdAt = new Date();
+
+                                    const values = [name, email, hashedPassword, department, image, 0, createdAt];
 
                                     db.query(q, [values], (err, data) => {
                                         if(err) {
                                             res.status(500).json('Server error')
                                             console.log(err)
                                         } else {
-                                            res.status(200).json('Staff user created')
+
+                                             //VERIFY USER EMAIL
+                                             const transporter = nodemailer.createTransport({
+                                                service: 'hotmail',
+                                                auth: {
+                                                    user: 'flemb6362@outlook.com',
+                                                    pass: 'Badrudeen'
+                                                }
+                                            })
+
+                                            const emailToken = jwt.sign({email}, process.env.JWT_SECRET,  { expiresIn: '1h' });
+
+                                            const url = `http://localhost:8000/auth/confirmation/${emailToken}`
+                                            
+                                            const mailOptions = {
+                                                from: '"LectureRate+" <flemb6362@outlook.com>',
+                                                to: email,
+                                                subject: 'Verify Your Email Address!',
+                                                html: `<div>
+                                                <p>Kindly click on the button below to verify your email address. The link will expire in an hour time</p>
+                                                
+                                                <a href=${url}>Confirm Email</a>
+                                                `
+                                            }
+                                            
+                                            transporter.sendMail(mailOptions, (err, info) => {
+                                                if(err){
+                                                   return console.log(err)
+                                                } else{
+                                                    console.log("Email sent")
+                                                    res.status(200).json('Verification email sent');
+                                                }
+                                            })
                                         }
                                     })
                                 }
@@ -180,6 +215,29 @@ export const verifyEmail = (req, res) => {
                         res.status(200).json('Student user verified')
                     }
                 })
+            } else {
+
+                const q = "SELECT * FROM staffs WHERE email = ?";
+
+                db.query(q, [emailId], (err, data) => {
+                    if(err){
+                        res.status(500).json('Server Error')
+                        console.log(err)
+                    }else {
+
+                        const q = "UPDATE staffs SET verified = ? WHERE email = ?"
+
+                        db.query(q, [1, emailId], (err, data) => {
+                            if(err){
+                                res.status(500).json('Server Error')
+                                console.log(err)
+                            } else {
+                                res.status(200).json('Staff user verified')
+                            }
+                        })
+                    } 
+                })
+
             }
         })
     }
