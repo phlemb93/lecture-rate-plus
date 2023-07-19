@@ -29,12 +29,13 @@ export const updateStaff = (req, res) => {
 
     if(id == staffId) {
 
-        const q = "UPDATE staffs SET name = ?, password = ?, department = ?, image = ?";
+        const q = "UPDATE staffs SET name = ?, password = ?, department = ?, image = ?, updatedAt = ? WHERE staffId = ?";
 
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(password, salt);
 
-        const values = [name, hashedPassword, department, image]
+        const date = new Date();
+        const values = [name, hashedPassword, department, image, date, staffId]
 
         db.query(q, [values], (err, data) => {
             if(err) {

@@ -78,10 +78,10 @@ export const register = (req, res) => {
 
                                 if(isStudent) {
 
-                                    const q = 'INSERT INTO students (`name`,`email`, `password`, `image`, `verified`, `createdAt`) VALUE (?)';
+                                    const q = 'INSERT INTO students (`name`,`email`, `password`, `image`, `verified`, `createdAt`, `updatedAt`) VALUE (?)';
 
                                     const createdAt = new Date();
-                                    const values = [name, email, hashedPassword, image, 0, createdAt];
+                                    const values = [name, email, hashedPassword, image, 0, createdAt, createdAt];
 
                                     db.query(q, [values], (err, data) => {
                                         if(err) {
@@ -127,11 +127,11 @@ export const register = (req, res) => {
 
                                 if(isStaff) {
 
-                                    const q = 'INSERT INTO staffs (`name`,`email`, `password`, `department`, `image`, `verified`, `createdAt`) VALUE (?)';
+                                    const q = 'INSERT INTO staffs (`name`,`email`, `password`, `department`, `image`, `verified`, `createdAt`, `updatedAt`) VALUE (?)';
 
                                     const createdAt = new Date();
 
-                                    const values = [name, email, hashedPassword, department, image, 0, createdAt];
+                                    const values = [name, email, hashedPassword, department, image, 0, createdAt, createdAt];
 
                                     db.query(q, [values], (err, data) => {
                                         if(err) {
@@ -263,6 +263,10 @@ if(!validator.isEmail(email)) {
         }
         if(data.length) {
 
+            if(!data[0].verified){
+                res.status(404).json('Kindly verify your email')
+            }
+
             const match = bcrypt.compareSync(password, data[0].password)
 
             if(match) {
@@ -288,6 +292,10 @@ if(!validator.isEmail(email)) {
                     res.status(500).json('Server Error')
                 }
                 if(data.length) {
+
+                    if(!data[0].verified){
+                        res.status(404).json('Kindly verify your email')
+                    }
                     const match = bcrypt.compareSync(password, data[0].password)
 
                     if(match) {

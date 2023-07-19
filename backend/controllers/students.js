@@ -31,12 +31,13 @@ export const updateStudent = (req, res) => {
 
     if(id == studentId) {
 
-        const q = "UPDATE students SET name = ?, password = ?, image = ? WHERE studentId = ?";
+        const q = "UPDATE students SET name = ?, password = ?, image = ?, updatedAt = ? WHERE studentId = ?";
 
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(password, salt);
+        const date = new Date();
 
-        db.query(q, [name, hashedPassword, image, studentId], (err, data) => {
+        db.query(q, [name, hashedPassword, image, date, studentId], (err, data) => {
             if(err) {
                 res.status(500).json('Server Error');
                 console.log(err)
