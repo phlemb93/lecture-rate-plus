@@ -1,0 +1,19 @@
+
+
+@import './variables';
+@import 'styles/confirmEmail.scss';
+@import 'styles/footer.scss';
+@import 'styles/home.scss';
+@import 'styles/login.scss';
+@import 'styles/navbar.scss';
+@import 'styles/notFound.scss';
+@import 'styles/register.scss';
+@import 'styles/staffProfile.scss';
+@import 'styles/studentProfile.scss';
+
+* {
+  font-family: $primary-font;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

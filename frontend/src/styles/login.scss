@@ -1,0 +1,64 @@
+main.login {
+    width: 100%;
+    height: 71vh;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .content {
+        width: 400px;
+        height: 400px;
+        padding: 20px;
+        box-shadow: 2px 2px 8px $deep-color;
+        
+        h2 {
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        form {
+            padding: 10px 20px;
+
+            .email, .password {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 10px;
+                
+                label {
+                    padding: 5px 0;
+                }
+
+                input {
+                    width: 100%;
+                    height: 20px;
+                    padding: 20px;
+                    border: 1px solid rgba(128, 128, 128, 0.576);
+                    border-radius: 5px;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                a {
+                    margin-bottom: 20px;
+                    padding: 5px 0;
+                    margin-left: auto;
+                    font-size: 14px;
+                    color: rgb(0, 126, 216);
+                }
+            }
+
+            button {
+                width: 100%;
+                padding: 20px;
+                background-color: $deepest-color;
+                color: #FFF;
+                border: none;
+                border-radius: 5px;
+            }
+        }
+    }
+
+}
