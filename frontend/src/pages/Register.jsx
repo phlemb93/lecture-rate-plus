@@ -5,24 +5,7 @@ const Register = () => {
   return (
     <main className='register'>
         <div className='content'>
-            <div className="title">
-                <h3>Quality Education</h3>
-                <ul>
-                    <li>
-                        <h5>Get Started Quickly</h5>
-                        <p>LectureRate+ makes it easy for students to leave reviews for their lecturers</p>
-                    </li>
-                    <li>
-                        <h5>Get Started Quickly</h5>
-                        <p>LectureRate+ makes it easy for students to leave reviews for their lecturers</p>
-                    </li>
-                    <li>
-                        <h5>Get Started Quickly</h5>
-                        <p>LectureRate+ makes it easy for students to leave reviews for their lecturers</p>
-                    </li>
-                </ul>
-
-            </div>
+            
             <div className="form">
                 <h2>Sign Up</h2>
                 <form method='POST'>
