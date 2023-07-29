@@ -26,35 +26,35 @@ const { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fo
                         <div className="one" 
                         onMouseEnter={selectOneC} 
                         onMouseLeave={deSelectOneC} 
-                        style={{backgroundColor: oneC ? 'rgba(255, 94, 0, 0.832)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: oneC ? 'rgba(255, 94, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="two" 
                         onMouseEnter={selectTwoC} 
                         onMouseLeave={deSelectTwoC} 
-                        style={{backgroundColor: twoC ? 'rgba(255, 128, 0, 0.832)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: twoC ? 'rgba(255, 128, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="three" 
                         onMouseEnter={selectThreeC} 
                         onMouseLeave={deSelectThreeC}  
-                        style={{backgroundColor: threeC ? 'rgba(213, 181, 0, 0.853)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: threeC ? 'rgba(213, 181, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="four" 
                         onMouseEnter={selectFourC} 
                         onMouseLeave={deSelectFourC}  
-                        style={{backgroundColor: fourC ? 'rgba(100, 223, 0, 0.745)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: fourC ? 'rgba(100, 223, 0, 0.5)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="five" 
                         onMouseEnter={selectFiveC} 
                         onMouseLeave={deSelectFiveC}  
-                        style={{backgroundColor: fiveC ? 'rgba(8, 153, 0, 0.9)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: fiveC ? 'rgba(8, 153, 0, 0.7)' : 'rgb(231, 229, 229)'}}
                         ></div>
                     </div>
                     <div className="text">
@@ -68,35 +68,35 @@ const { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fo
                         <div className="one" 
                         onMouseEnter={selectOneE} 
                         onMouseLeave={deSelectOneE} 
-                        style={{backgroundColor: oneE ? 'rgba(255, 94, 0, 0.832)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: oneE ? 'rgba(255, 94, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="two" 
                         onMouseEnter={selectTwoE} 
                         onMouseLeave={deSelectTwoE} 
-                        style={{backgroundColor: twoE ? 'rgba(255, 128, 0, 0.832)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: twoE ? 'rgba(255, 128, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="three" 
                         onMouseEnter={selectThreeE} 
                         onMouseLeave={deSelectThreeE}  
-                        style={{backgroundColor: threeE ? 'rgba(213, 181, 0, 0.853)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: threeE ? 'rgba(213, 181, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="four" 
                         onMouseEnter={selectFourE} 
                         onMouseLeave={deSelectFourE}  
-                        style={{backgroundColor: fourE ? 'rgba(100, 223, 0, 0.745)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: fourE ? 'rgba(100, 223, 0, 0.5)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="five" 
                         onMouseEnter={selectFiveE} 
                         onMouseLeave={deSelectFiveE}  
-                        style={{backgroundColor: fiveE ? 'rgba(8, 153, 0, 0.9)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: fiveE ? 'rgba(8, 153, 0, 0.7)' : 'rgb(231, 229, 229)'}}
                         ></div>
                     </div>
                     <div className="text">
@@ -111,35 +111,35 @@ const { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fo
                     <div className="one" 
                         onMouseEnter={selectOneCo} 
                         onMouseLeave={deSelectOneCo} 
-                        style={{backgroundColor: oneCo ? 'rgba(255, 94, 0, 0.832)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: oneCo ? 'rgba(255, 94, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="two" 
                         onMouseEnter={selectTwoCo} 
                         onMouseLeave={deSelectTwoCo} 
-                        style={{backgroundColor: twoCo ? 'rgba(255, 128, 0, 0.832)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: twoCo ? 'rgba(255, 128, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="three" 
                         onMouseEnter={selectThreeCo} 
                         onMouseLeave={deSelectThreeCo}  
-                        style={{backgroundColor: threeCo ? 'rgba(213, 181, 0, 0.853)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: threeCo ? 'rgba(213, 181, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="four" 
                         onMouseEnter={selectFourCo} 
                         onMouseLeave={deSelectFourCo}  
-                        style={{backgroundColor: fourCo ? 'rgba(100, 223, 0, 0.745)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: fourCo ? 'rgba(100, 223, 0, 0.5)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="five" 
                         onMouseEnter={selectFiveCo} 
                         onMouseLeave={deSelectFiveCo}  
-                        style={{backgroundColor: fiveCo ? 'rgba(8, 153, 0, 0.9)' : 'rgb(231, 229, 229)'}}
+                        style={{backgroundColor: fiveCo ? 'rgba(8, 153, 0, 0.7)' : 'rgb(231, 229, 229)'}}
                         ></div>
                     </div>
                     <div className="text">
