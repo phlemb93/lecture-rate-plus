@@ -9,6 +9,8 @@ import StudentProfile from './pages/StudentProfile';
 import StaffProfile from './pages/StaffProfile';
 import NotFound from './pages/NotFound';
 import About from './pages/About';
+import Review from './pages/Review';
+import ResetPassword from './pages/ResetPassword';
 
 const App = () => {
   return (
@@ -19,7 +21,9 @@ const App = () => {
         <Route path='/' element={ <Home /> } />
         <Route path='/login' element={ <Login /> } />
         <Route path='/register' element={ <Register /> } />
+        <Route path='/review' element={ <Review /> } />
         <Route path='/about' element={ <About /> } />
+        <Route path='/reset-password' element={ <ResetPassword /> } />
         <Route path='/student/:id' element={ <StudentProfile /> } />
         <Route path='/staff/:id' element={ <StaffProfile /> } />
         <Route path='*' element={ <NotFound /> } />
