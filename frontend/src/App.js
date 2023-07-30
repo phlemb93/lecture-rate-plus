@@ -11,11 +11,13 @@ import NotFound from './pages/NotFound';
 import About from './pages/About';
 import Review from './pages/Review';
 import ResetPassword from './pages/ResetPassword';
+import BurgerMenu from './components/BurgerMenu';
 
 const App = () => {
   return (
     <div className="App">
       <ConfirmEmail /> 
+      {/* <BurgerMenu /> */}
       <NavBar />
       <Routes>
         <Route path='/' element={ <Home /> } />
