@@ -8,6 +8,8 @@ const { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fo
 
     {/* REVIEW FORM */}
         <section className="form">
+            <h2>Rate: <strong>John Doe</strong></h2>
+
             <div className="course">
                 <h3>Select Course Code</h3>
                 <select name="" id="" >
@@ -18,6 +20,7 @@ const { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fo
                     <option value="CSC 135">CSC 135</option>
                 </select>
             </div>
+
             <div className="ratings">
                 <div className='head'>
                     <h3>Clarity</h3>
