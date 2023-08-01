@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div className="App">
       <ConfirmEmail /> 
-      {/* <BurgerMenu /> */}
+      <BurgerMenu />
       <NavBar />
       <Routes>
         <Route path='/' element={ <Home /> } />

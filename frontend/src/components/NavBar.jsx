@@ -1,11 +1,43 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useIsOpenContext } from '../utilities/IsOpenContext';
 
 const NavBar = () => {
+
+    const { openBurgerMenu, isMenuOpen, toggleNavMenu, closeNavMenu } = useIsOpenContext();
+    const iconRef = useRef(null);
+    const menuRef = useRef(null);
+
+   
+
+    useEffect(() => {
+
+        document.addEventListener('click', (e) => {
+
+            const menuIcon = iconRef.current;
+            const menuChildOne = menuIcon.children[0];
+            const childOneOne = menuChildOne.children[0];
+            const childOneTwo = menuChildOne.children[1];
+            const menuChildTwo = menuIcon.children[1];
+            const childTwoOne = menuChildTwo.firstChild;
+
+console.log(e.target)
+console.log(isMenuOpen)
+
+            if(e.target === menuIcon || e.target === menuChildOne || e.target === childOneOne || e.target === childOneTwo || e.target === menuChildTwo || e.target === childTwoOne) {
+                toggleNavMenu()
+            }
+            if(!(e.target === menuIcon || e.target === menuChildOne || e.target === childOneOne || e.target === childOneTwo || e.target === menuChildTwo || e.target === childTwoOne)) {
+                closeNavMenu()
+            } 
+           
+        })
+    }, [])
+
   return (
     <nav>
         <div className="logo">
@@ -14,7 +46,7 @@ const NavBar = () => {
             </Link>
         </div>
         <div className="menu">
-            <div className="burger">
+            <div className="burger" onClick={openBurgerMenu}>
                 <MenuIcon style={{ fontSize: 32 }} />
             </div>
             <div className="not-active">
@@ -25,12 +57,16 @@ const NavBar = () => {
             <div className="active">
                 <Link to='#'>Ratings</Link>
                 <div className="profile">
-                    <div className="name">
-                        <p>John Doe</p>
-                        <small>Student</small>
+
+                    <div className="drop-down-icon" ref={iconRef}>
+                        <div className="name">
+                            <p>John Doe</p>
+                            <small>Student</small>
+                        </div>
+                        <ArrowDropDownIcon />
                     </div>
-                    <ArrowDropDownIcon />
-                    <div className="drop-down">
+                   
+                    <div className="drop-down-menu" style={{display: isMenuOpen ? 'flex' : 'none'}} ref={menuRef}>
                         <Link to='#'>
                             <div>
                                 <p>Reset password</p>

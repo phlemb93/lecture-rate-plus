@@ -49,24 +49,35 @@ nav {
             font-size: 14px;
 
             .profile {
-                font-size: 13px;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                cursor: pointer;
+                // font-size: 13px;
+                // display: flex;
+                // align-items: center;
+                // gap: 10px;
+                // cursor: pointer;
                 position: relative;
 
-                .name {
-                    small {
-                        font-size: 10px;
-                        color: $link-color;
+                .drop-down-icon {
+                    font-size: 13px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    cursor: pointer;
+                    position: relative;
+                    padding: 10px;
+
+                    .name {
+                        height: 100%;
+                        small {
+                            font-size: 10px;
+                            color: $link-color;
+                        }
                     }
                 }
             }
 
-            .drop-down {
+            .drop-down-menu {
                 position: absolute;
-                top: 150%;
+                top: 110%;
                 right: 0;
                 border: 1px solid $deepest-color;
                 display: flex;
@@ -107,10 +118,10 @@ nav {
         .menu {
 
             .burger {
-                display: flex;
+                display: none;
             }
             .active {
-                display: none;
+                display: flex;
             }
             .not-active {
                 display: none;
