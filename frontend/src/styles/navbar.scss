@@ -118,10 +118,10 @@ nav {
         .menu {
 
             .burger {
-                display: none;
+                display: flex;
             }
             .active {
-                display: flex;
+                display: none;
             }
             .not-active {
                 display: none;

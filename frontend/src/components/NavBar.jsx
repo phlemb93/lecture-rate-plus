@@ -12,8 +12,6 @@ const NavBar = () => {
     const iconRef = useRef(null);
     const menuRef = useRef(null);
 
-   
-
     useEffect(() => {
 
         document.addEventListener('click', (e) => {
@@ -25,12 +23,10 @@ const NavBar = () => {
             const menuChildTwo = menuIcon.children[1];
             const childTwoOne = menuChildTwo.firstChild;
 
-console.log(e.target)
-console.log(isMenuOpen)
-
             if(e.target === menuIcon || e.target === menuChildOne || e.target === childOneOne || e.target === childOneTwo || e.target === menuChildTwo || e.target === childTwoOne) {
                 toggleNavMenu()
             }
+
             if(!(e.target === menuIcon || e.target === menuChildOne || e.target === childOneOne || e.target === childOneTwo || e.target === menuChildTwo || e.target === childTwoOne)) {
                 closeNavMenu()
             } 
@@ -50,9 +46,9 @@ console.log(isMenuOpen)
                 <MenuIcon style={{ fontSize: 32 }} />
             </div>
             <div className="not-active">
-                <Link to='/about'><a>About</a></Link>
-                <Link to='/register' className='signup'><a>Sign Up</a></Link>
-                <Link to='/login'><a>Login</a></Link>
+                <Link to='/about'>About</Link>
+                <Link to='/register' className='signup'>Sign Up</Link>
+                <Link to='/login'>Login</Link>
             </div>
             <div className="active">
                 <Link to='#'>Ratings</Link>
