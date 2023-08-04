@@ -24,11 +24,11 @@ const Home = () => {
 
         <section className='second'>
             <div className="right">
-                <h3>About Us</h3>
+                <h3>Provide a Feedback</h3>
                 <p>LectureRate+ makes it easy for students to leave reviews for their lecturers, and lecturers can in turn respond to reviews thereby encouraging motivation, networking and communication.</p>
           
-                <Link to='/about'>
-                    <div>Read More</div>
+                <Link to='/review'>
+                    <div>Review</div>
                 </Link>
             </div>
             <div className="left">

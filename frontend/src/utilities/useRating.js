@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const useRating = () => {
 
@@ -179,7 +180,94 @@ const useRating = () => {
         setFiveCo(false)
     }
 
-  return { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE }
+
+const [clarity, setClarity] = useState(0);
+const [engagement, setEngagement] = useState(0);
+const [communication, setCommunication] = useState(0);
+
+const handleClarityClick = (e) => {
+    switch(e.target.className) {
+        case 'one': 
+            return setClarity(1);
+        case 'two': 
+            return setClarity(2);
+        case 'three': 
+            return setClarity(3);
+        case 'four': 
+            return setClarity(4);
+        case 'five': 
+            return setClarity(5);
+        default:
+            return setClarity(0);
+    }
+}
+const handleEngageClick = (e) => {
+    switch(e.target.className) {
+        case 'one': 
+            return setEngagement(1);
+        case 'two': 
+            return setEngagement(2);
+        case 'three': 
+            return setEngagement(3);
+        case 'four': 
+            return setEngagement(4);
+        case 'five': 
+            return setEngagement(5);
+        default:
+            return setEngagement(0);
+    }
+}
+const handleCommClick = (e) => {
+    switch(e.target.className) {
+        case 'one': 
+            return setCommunication(1);
+        case 'two': 
+            return setCommunication(2)
+        case 'three': 
+            return setCommunication(3);
+        case 'four': 
+            return setCommunication(4);
+        case 'five': 
+            return setCommunication(5);
+        default:
+            return setCommunication(0);
+    }
+}
+
+const [course, setCourse] = useState('');
+const [comment, setComment] = useState('');
+const [anon, setAnon] = useState(false);
+const [inactive, setInactive] = useState(true);
+
+const navigate = useNavigate();
+
+useEffect(() => {
+
+    if(course) {
+        setInactive(false)
+    }
+}, [course, clarity, engagement, communication, comment, anon])
+
+const handleSubmit = () => {
+    console.log({
+        "course": course,
+        "clarity": clarity,
+        "engagement": engagement,
+        "communication": communication,
+        "comment": comment,
+        "anonymous": anon
+    })
+
+    navigate('/');
+    setCourse('');
+    setClarity(0);
+    setEngagement(0);
+    setCommunication(0);
+    setComment('');
+    setAnon(false);
+}
+
+  return { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, course, setCourse, comment, setComment, anon, setAnon,  inactive }
 }
 
 export default useRating

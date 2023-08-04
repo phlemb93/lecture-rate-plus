@@ -172,16 +172,12 @@ main.review {
         button {
             width: 300px;
             padding: 20px;
-            border: 1px solid $deepest-color;
+            border: none;
             border-radius: 30px;
             cursor: pointer;
             font-size: 14px;
-            transition: all 0.2s ease-in-out;
-
-            &:hover {
-                background-color: $deep-color;
-                color: #FFF;
-            }
+            background-color: $deep-color;
+            color: #FFF;
         }
     }
 }

@@ -12,10 +12,12 @@ import About from './pages/About';
 import Review from './pages/Review';
 import ResetPassword from './pages/ResetPassword';
 import BurgerMenu from './components/BurgerMenu';
+import Overlay from './components/Overlay';
 
 const App = () => {
   return (
     <div className="App">
+      <Overlay />
       <ConfirmEmail /> 
       <BurgerMenu />
       <NavBar />
