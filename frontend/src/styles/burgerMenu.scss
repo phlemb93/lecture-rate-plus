@@ -4,8 +4,52 @@
     position: fixed;
     left: 0;
     top: 0;
-    background-color: #FFF;
+    background-color: $lightest-color;
     z-index: 100;
-    // display: flex;
     transition: all 0.5s ease-in-out;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 20px 10px;
+
+        .logo {
+            font-size: 1.25rem;
+            color: $deepest-color;
+
+            span {
+                color: $primary-color;
+            }
+        }
+    }
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        padding: 20px;
+        color: $deepest-color;
+     
+        .not-active, .active {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            div {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 20px;
+                cursor: pointer;
+            }
+
+        }
+    }
+
+}
+
+@media screen and (min-width: 780px) {
+    .burger-menu {
+        left: -100%;
+    }
 }

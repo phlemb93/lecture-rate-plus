@@ -1,60 +1,88 @@
-import { Link } from 'react-router-dom'
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import LockResetIcon from '@mui/icons-material/LockReset';
-import LogoutIcon from '@mui/icons-material/Logout';
-import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from 'react-router-dom'
 import { useIsOpenContext } from '../utilities/IsOpenContext';
+import PersonIcon from '@mui/icons-material/Person';
+import InfoIcon from '@mui/icons-material/Info';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ReviewsIcon from '@mui/icons-material/Reviews';
 
 
 function BurgerMenu() {
 
     const { isBurgerOpen, closeBurgerMenu } = useIsOpenContext();
+    const navigate = useNavigate();
 
+    const handleProfile = (e) => {
+       closeBurgerMenu();
+       navigate('/students/1')
+    }
+    const handleRating = (e) => {
+       closeBurgerMenu();
+       navigate('/review')
+    }
+    const handleAbout = (e) => {
+       closeBurgerMenu();
+       navigate('/about')
+    }
+    const handleRegister = (e) => {
+       closeBurgerMenu();
+       navigate('/register')
+    }
+    const handleLogin = (e) => {
+       closeBurgerMenu();
+       navigate('/login')
+    }
+
+    const handleLogout = () => {
+        closeBurgerMenu();
+        navigate('/')
+    }
 
   return (
         <main 
             className="burger-menu" 
             style={{ transform: isBurgerOpen ? 'translateX(0%)' : 'translateX(-100%)'}}>
 
-            <div className="close-btn" onClick={closeBurgerMenu}>
-                <CloseIcon style={{ fontSize: 32, cursor:'pointer'}}/>
+            <div className="header">
+                <div className="logo">
+                    <h4>LectureRate<span>+</span></h4>
+                </div>
+                <div className="user" onClick={handleProfile}>
+                    <PersonIcon 
+                        style={{fontSize: 28, cursor: 'pointer', color: '#320900'}}
+                     />
+                </div>
             </div>
 
             <div className="content">
                 <div className="not-active">
-                    <Link to='/about'>About</Link>
-                    <Link to='/register' className='signup'>Sign Up</Link>
-                    <Link to='/login'>Login</Link>
+                    <div onClick={handleAbout}>
+                        <InfoIcon />
+                        <p>About</p>
+                    </div>
+
+                    <div onClick={handleRegister}>
+                        <AppRegistrationIcon />
+                        <p>Sign Up</p>
+                    </div>
+
+                    <div onClick={handleLogin}>
+                        <LoginIcon />
+                        <p>Login</p>
+                    </div>
                 </div>
 
                 <div className="active">
-                    <Link to='#'>Ratings</Link>
-                    <div className="profile">
-
-                        <div className="drop-down-icon">
-                            <div className="name">
-                                <p>John Doe</p>
-                                <small>Student</small>
-                            </div>
-                            <ArrowDropDownIcon />
-                        </div>
-                    
-                        <div className="drop-down-menu">
-                            <Link to='#'>
-                                <div>
-                                    <p>Reset password</p>
-                                    <LockResetIcon style={{fontSize:'18px'}} />
-                                </div>
-                            </Link>
-                            <Link to='/login'>
-                                <div>
-                                    <p>Log out</p>
-                                    <LogoutIcon style={{fontSize:'18px'}} />
-                                </div>
-                            </Link>
-                        </div>
+                    <div onClick={handleRating}>
+                        <ReviewsIcon />
+                        <p>Ratings</p>
                     </div>
-                    
+
+                    <div onClick={handleLogout}>
+                        <LogoutIcon />
+                        <p>Logout</p>
+                    </div>
                 </div>
             </div>
             

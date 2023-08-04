@@ -28,8 +28,8 @@ const App = () => {
         <Route path='/review' element={ <Review /> } />
         <Route path='/about' element={ <About /> } />
         <Route path='/reset-password' element={ <ResetPassword /> } />
-        <Route path='/student/:id' element={ <StudentProfile /> } />
-        <Route path='/staff/:id' element={ <StaffProfile /> } />
+        <Route path='/students/:id' element={ <StudentProfile /> } />
+        <Route path='/staffs/:id' element={ <StaffProfile /> } />
         <Route path='*' element={ <NotFound /> } />
       </Routes>
       <Footer />
