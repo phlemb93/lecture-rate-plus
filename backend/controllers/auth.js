@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import { db } from '../dbConnect.js';
 
 
-//CREATE A TRANSPORTER FOR EMAIL VERIFICATION
+// // CREATE A TRANSPORTER FOR EMAIL VERIFICATION
 
 // const verifyUser = (email) => {
 //     const transporter = nodemailer.createTransport({
@@ -43,7 +43,7 @@ export const register = (req, res) => {
 
     if(validator.isEmail(email)) {
 
-        if(email.toLowerCase().includes('@study.beds.ac.uk')) {
+        if(email.toLowerCase().includes('@study.beds.ac.uk') || email.toLowerCase().includes('@beds.ac.uk')) {
 
             const q = 'SELECT * FROM students WHERE email = ?';
 
@@ -78,99 +78,35 @@ export const register = (req, res) => {
 
                                 if(isStudent) {
 
-                                    const q = 'INSERT INTO students (`name`,`email`, `password`, `image`, `verified`, `createdAt`, `updatedAt`) VALUE (?)';
+                                    const q = 'INSERT INTO students (`name`,`email`, `password`, `verified`, `createdAt`, `updatedAt`) VALUE (?)';
 
                                     const createdAt = new Date();
-                                    const values = [name, email, hashedPassword, image, 0, createdAt, createdAt];
+                                    const values = [name, email, hashedPassword, 0, createdAt, createdAt];
 
                                     db.query(q, [values], (err, data) => {
                                         if(err) {
                                             res.status(500).json('Server error')
                                             console.log(err)
                                         } else {                                        
-                                            
-                                            //VERIFY USER EMAIL
-                                            const transporter = nodemailer.createTransport({
-                                                service: 'hotmail',
-                                                auth: {
-                                                    user: 'flemb6362@outlook.com',
-                                                    pass: 'Badrudeen'
-                                                }
-                                            })
-
-                                            const emailToken = jwt.sign({email}, { expiresIn: '1h'}, process.env.JWT_SECRET);
-
-                                            const url = `http://localhost:8000/auth/confirmation/${emailToken}`
-                                            
-                                            const mailOptions = {
-                                                from: '"LectureRate+" <flemb6362@outlook.com>',
-                                                to: email,
-                                                subject: 'Verify Your Email Address!',
-                                                html: `<div>
-                                                <p>Kindly click on the button below to verify your email address. The link will expire in an hour time</p>
-                                                
-                                                <a href=${url}>Confirm Email</a>
-                                                `
-                                            }
-                                            
-                                            transporter.sendMail(mailOptions, (err, info) => {
-                                                if(err){
-                                                   return console.log(err)
-                                                } else{
-                                                    console.log("Email sent")
-                                                    res.status(200).json('Verification email sent');
-                                                }
-                                            })
+                                            res.status(200).json('User registered')
                                         }
                                     })
                                 }
 
                                 if(isStaff) {
 
-                                    const q = 'INSERT INTO staffs (`name`,`email`, `password`, `department`, `image`, `verified`, `createdAt`, `updatedAt`) VALUE (?)';
+                                    const q = 'INSERT INTO staffs (`name`,`email`, `password`, `department`, `verified`, `createdAt`, `updatedAt`) VALUE (?)';
 
                                     const createdAt = new Date();
 
-                                    const values = [name, email, hashedPassword, department, image, 0, createdAt, createdAt];
+                                    const values = [name, email, hashedPassword, department, 0, createdAt, createdAt];
 
                                     db.query(q, [values], (err, data) => {
                                         if(err) {
                                             res.status(500).json('Server error')
                                             console.log(err)
                                         } else {
-
-                                             //VERIFY USER EMAIL
-                                             const transporter = nodemailer.createTransport({
-                                                service: 'hotmail',
-                                                auth: {
-                                                    user: 'flemb6362@outlook.com',
-                                                    pass: 'Badrudeen'
-                                                }
-                                            })
-
-                                            const emailToken = jwt.sign({email}, process.env.JWT_SECRET,  { expiresIn: '1h' });
-
-                                            const url = `http://localhost:8000/auth/confirmation/${emailToken}`
-                                            
-                                            const mailOptions = {
-                                                from: '"LectureRate+" <flemb6362@outlook.com>',
-                                                to: email,
-                                                subject: 'Verify Your Email Address!',
-                                                html: `<div>
-                                                <p>Kindly click on the button below to verify your email address. The link will expire in an hour time</p>
-                                                
-                                                <a href=${url}>Confirm Email</a>
-                                                `
-                                            }
-                                            
-                                            transporter.sendMail(mailOptions, (err, info) => {
-                                                if(err){
-                                                   return console.log(err)
-                                                } else{
-                                                    console.log("Email sent")
-                                                    res.status(200).json('Verification email sent');
-                                                }
-                                            })
+                                            res.status(200).json('User registered')
                                         }
                                     })
                                 }
@@ -186,6 +122,46 @@ export const register = (req, res) => {
         res.status(404).json('Invalid email')
     }
 }
+
+//CONFIRM EMAIL ADDRESS
+
+export const confirmEmail = (req, res) => {
+
+    const { email } = req.body
+
+     const transporter = nodemailer.createTransport({
+        service: 'hotmail',
+        auth: {
+            user: 'flemb6362@outlook.com',
+            pass: 'Badrudeen'
+        }
+    })
+
+    const emailToken = jwt.sign({email}, { expiresIn: '1h'}, process.env.JWT_SECRET);
+
+    const url = `http://localhost:8000/auth/confirmation/${emailToken}`
+    
+    const mailOptions = {
+        from: '"LectureRate+" <flemb6362@outlook.com>',
+        to: email,
+        subject: 'Verify Your Email Address!',
+        html: `<div>
+        <p>Kindly click on the button below to verify your email address. The link will expire in an hour time</p>
+        
+        <a href=${url}>Confirm Email</a>
+        `
+    }
+    
+    transporter.sendMail(mailOptions, (err, info) => {
+        if(err){
+           return console.log(err)
+        } else{
+            console.log("Email sent")
+            res.status(200).json('Verification email sent');
+        }
+    })
+}
+
 
 
 //VERIFY EMAIL ADDRESS
@@ -213,6 +189,7 @@ export const verifyEmail = (req, res) => {
                         console.log(err)
                     } else {
                         res.status(200).json('Student user verified')
+                        res.redirect('http://localhost:3000/login');
                     }
                 })
             } else {
@@ -233,6 +210,7 @@ export const verifyEmail = (req, res) => {
                                 console.log(err)
                             } else {
                                 res.status(200).json('Staff user verified')
+                                res.redirect('http://localhost:3000/login');
                             }
                         })
                     } 
