@@ -50,7 +50,7 @@ function BurgerMenu() {
                 </div>
                 <div className="user" onClick={handleProfile}>
                     <PersonIcon 
-                        style={{fontSize: 28, cursor: 'pointer', color: '#320900'}}
+                        style={{fontSize: 30, cursor: 'pointer', color: '#320900'}}
                      />
                 </div>
             </div>
@@ -58,29 +58,29 @@ function BurgerMenu() {
             <div className="content">
                 <div className="not-active">
                     <div onClick={handleAbout}>
-                        <InfoIcon />
+                        <InfoIcon style={{fontSize: 20}} />
                         <p>About</p>
                     </div>
 
                     <div onClick={handleRegister}>
-                        <AppRegistrationIcon />
+                        <AppRegistrationIcon style={{fontSize: 20}} />
                         <p>Sign Up</p>
                     </div>
 
                     <div onClick={handleLogin}>
-                        <LoginIcon />
+                        <LoginIcon style={{fontSize: 20}} />
                         <p>Login</p>
                     </div>
                 </div>
 
                 <div className="active">
                     <div onClick={handleRating}>
-                        <ReviewsIcon />
+                        <ReviewsIcon style={{fontSize: 20}} />
                         <p>Ratings</p>
                     </div>
 
                     <div onClick={handleLogout}>
-                        <LogoutIcon />
+                        <LogoutIcon style={{fontSize: 20}} />
                         <p>Logout</p>
                     </div>
                 </div>

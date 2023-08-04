@@ -10,6 +10,7 @@ export const IsOpenContextProvider = ({ children }) => {
 
     const [isBurgerOpen, setIsBurgerOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [openEmail, setOpenEmail] = useState(false);
 
     const openBurgerMenu = () => {
         setIsBurgerOpen(true)
@@ -27,8 +28,15 @@ export const IsOpenContextProvider = ({ children }) => {
         setIsMenuOpen(prev => !prev)
     }
 
+    const handleOpenEmail = () => {
+        setOpenEmail(true)
+    }
+    const handleCloseEmail = () => {
+        setOpenEmail(false)
+    }
+
     return (
-        <IsOpenContext.Provider value={{ isBurgerOpen, isMenuOpen, openBurgerMenu, closeBurgerMenu, openNavMenu, closeNavMenu, toggleNavMenu }}>
+        <IsOpenContext.Provider value={{ isBurgerOpen, isMenuOpen, openBurgerMenu, closeBurgerMenu, openNavMenu, closeNavMenu, toggleNavMenu, openEmail, handleOpenEmail, handleCloseEmail }}>
             { children }
         </IsOpenContext.Provider>
     )

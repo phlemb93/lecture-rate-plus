@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from "axios"
+import { useIsOpenContext } from '../utilities/IsOpenContext';
+
 
 const Register = () => {
 
@@ -8,26 +11,55 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [status, setStatus] = useState('Student');
-    const [agreement, setAgreement] = useState(false)
+    const [agreement, setAgreement] = useState(false);
+    const [isStudent, setIsStudent] = useState(true);
+    const [isStaff, setIsStaff] = useState(false);
 
-    const handleSubmit = (e) => {
+    const { handleOpenEmail } = useIsOpenContext();
+
+    useEffect(() => {
+        if(status === 'Student'){
+            setIsStudent(true)
+            setIsStaff(false)
+        } else if(status === 'Staff'){
+            setIsStaff(true)
+            setIsStudent(false)
+        }
+
+    }, [status])
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const values = { name, email, password, isStudent, isStaff }
+
         if(agreement) {
 
             if(password !== confirmPassword) {
                 console.log("Must be the same as the password")
             } else {
-                console.log({name, email, password, confirmPassword, status})
 
-                setName('')
-                setEmail('')
-                setPassword('')
-                setConfirmPassword('')
-                setStatus('Student')
-                setAgreement(false)
+                const res = await axios.post('http://localhost:8000/api/auth/register', values)
+
+                if (res.status === 404) {
+                    console.log('There is an error')
+                }
+
+                if(res.status === 200) {
+                    setName('');
+                    setEmail('');
+                    setPassword('');
+                    setConfirmPassword('');
+                    setStatus('Student');
+                    setAgreement(false);
+
+                    handleOpenEmail();
+                }
             }
         } 
     }
+
+
 
   return (
     <main className='register'>
