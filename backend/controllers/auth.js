@@ -242,13 +242,14 @@ if(!validator.isEmail(email)) {
         if(data.length) {
 
             if(!data[0].verified){
-                res.status(404).json('Kindly verify your email')
+               return res.status(404).json('Kindly verify your email');
             }
 
             const match = bcrypt.compareSync(password, data[0].password)
 
             if(match) {
-                const { password, studentId, ...others } = data[0];
+                const { password, name, studentId, token, ...others } = data[0];
+                const firstName = name.split(' ')[0];
 
                 jwt.sign({ studentId }, process.env.JWT_SECRET, { expiresIn: '3d' }, (err, token) => {
 
@@ -256,7 +257,7 @@ if(!validator.isEmail(email)) {
                         res.status(500).json('JWT Server Error')
                     }
                     if(token){
-                        res.status(200).json({ studentId, ...others, token })
+                        res.status(200).json({ firstName, token })
                     }
                 })
             } else {
@@ -277,7 +278,7 @@ if(!validator.isEmail(email)) {
                     const match = bcrypt.compareSync(password, data[0].password)
 
                     if(match) {
-                        const { password, staffId, ...others } = data[0];
+                        const { password, name, staffId, ...others } = data[0];
                         
                         jwt.sign({ staffId }, process.env.JWT_SECRET, { expiresIn: '3d' }, (err, token) => {
 
@@ -285,7 +286,7 @@ if(!validator.isEmail(email)) {
                                 res.status(500).json('JWT Server Error')
                             }
                             if(token){
-                                res.status(200).json({ staffId, ...others, token })
+                                res.status(200).json({ name, token })
                             }
                         })
                     } else {
