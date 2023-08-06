@@ -87,8 +87,8 @@ export const register = (req, res) => {
                                         if(err) {
                                             res.status(500).json('Server error')
                                             console.log(err)
-                                        } else {                                        
-                                            res.status(200).json('User registered')
+                                        } else {                         
+                                            res.status(200).json(email)
                                         }
                                     })
                                 }
@@ -106,7 +106,7 @@ export const register = (req, res) => {
                                             res.status(500).json('Server error')
                                             console.log(err)
                                         } else {
-                                            res.status(200).json('User registered')
+                                            res.status(200).json(email)
                                         }
                                     })
                                 }
@@ -125,9 +125,14 @@ export const register = (req, res) => {
 
 //CONFIRM EMAIL ADDRESS
 
-export const confirmEmail = (req, res) => {
+export const confirmEmail = async (req, res) => {
 
     const { email } = req.body
+
+    const emailToken = jwt.sign({email}, process.env.JWT_SECRET, { expiresIn: '1h'})
+
+
+    const url = `http://localhost:8000/api/auth/confirmation/${emailToken}`;
 
      const transporter = nodemailer.createTransport({
         service: 'hotmail',
@@ -136,10 +141,6 @@ export const confirmEmail = (req, res) => {
             pass: 'Badrudeen'
         }
     })
-
-    const emailToken = jwt.sign({email}, { expiresIn: '1h'}, process.env.JWT_SECRET);
-
-    const url = `http://localhost:8000/auth/confirmation/${emailToken}`
     
     const mailOptions = {
         from: '"LectureRate+" <flemb6362@outlook.com>',
@@ -154,7 +155,8 @@ export const confirmEmail = (req, res) => {
     
     transporter.sendMail(mailOptions, (err, info) => {
         if(err){
-           return console.log(err)
+          console.log(err)
+          console.log('There is an error here')
         } else{
             console.log("Email sent")
             res.status(200).json('Verification email sent');
@@ -188,8 +190,7 @@ export const verifyEmail = (req, res) => {
                         res.status(500).json('Server Error')
                         console.log(err)
                     } else {
-                        res.status(200).json('Student user verified')
-                        res.redirect('http://localhost:3000/login');
+                        res.status(200).redirect('http://localhost:3000/login');
                     }
                 })
             } else {
@@ -209,8 +210,7 @@ export const verifyEmail = (req, res) => {
                                 res.status(500).json('Server Error')
                                 console.log(err)
                             } else {
-                                res.status(200).json('Staff user verified')
-                                res.redirect('http://localhost:3000/login');
+                                res.status(200).redirect('http://localhost:3000/login');
                             }
                         })
                     } 
