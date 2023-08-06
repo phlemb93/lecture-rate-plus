@@ -54,24 +54,44 @@ main.confirm-email {
 
             .btns {
                 margin-right: auto;
+                // border: 1px solid red;
+                width: 100%;
+                display: flex;
+                gap: 10px;
 
-                button {
-                    padding: 10px;
-                    margin-right: 10px;
-                    border-radius: 5px;
+                div {
+                    width: 120px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     cursor: pointer;
 
-                    &:first-child {
-                        border: none;
-                        padding: 11px 10px;
-                        background-color: $deepest-color;
-                        color: #FFF;
+                    a {
+                        padding: 10px;
+                        width: 100%;
+                        text-decoration: none;
+                        border-radius: 5px;
+
                     }
+
+                    &:first-child {
+
+                        a {
+                            border: none;
+                            padding: 11px 10px;
+                            background-color: $deepest-color;
+                            color: #FFF;
+                        }
+                    }
+
                     &:last-child {
-        
-                        border: 1px solid $deepest-color;
+                        a {
+                            color: #000;
+                            border: 1px solid $deepest-color;
+                        }
                     }
                 }
+
             }
         }
     }

@@ -1,19 +1,40 @@
 import React from 'react'
 import { useIsOpenContext } from '../utilities/IsOpenContext'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ConfirmEmail = () => {
   const { openEmail, handleCloseEmail } = useIsOpenContext();
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const email = JSON.parse(localStorage.getItem('userEmail'))
+
+  const handleSubmit = async () => {
+
+    try {
+      const postData = async () => {
+        const res =  await axios.post('http://localhost:8000/api/auth/confirmation', { email })
+  
+        if(res.status === 200) {
+          localStorage.removeItem('userEmail');
+        }
+      }
+      email && postData();
+
+    } catch (error) {
+      console.log(error)
+    }
+
     handleCloseEmail();
     navigate('/login')
   }
+
   const handleCancel = () => {
     handleCloseEmail();
     navigate('/register');
   }
+
+
   return (
     <main className='confirm-email' style={{display: openEmail ? 'flex' : 'none'}}>
       <div className="content">
@@ -21,10 +42,14 @@ const ConfirmEmail = () => {
         <div className="confirm">
           <h3>LectureRate<span>+</span></h3>
           <h4>First, let's verify your email</h4>
-          <p>Check <span>johndoe@study.beds.ac.uk</span> to verify your account and get started</p>
+          <p>Check <span>{email}</span><br />to verify your account and get started</p>
           <div className="btns">
-            <button onClick={handleSubmit}>Open Email</button>
-            <button onClick={handleCancel}>Go Back</button>
+            <div>
+              <Link to='https://outlook.office.com/mail/inbox/' onClick={handleSubmit}>Open Email</Link>
+            </div>
+            <div>
+              <Link onClick={handleCancel}>Go Back</Link>
+            </div>
           </div>
         </div>
       </div>

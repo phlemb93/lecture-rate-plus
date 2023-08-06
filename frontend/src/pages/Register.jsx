@@ -14,8 +14,15 @@ const Register = () => {
     const [agreement, setAgreement] = useState(false);
     const [isStudent, setIsStudent] = useState(true);
     const [isStaff, setIsStaff] = useState(false);
+    const [error, setError] = useState('');
+    const [passError, setPassError] = useState(false);
 
     const { handleOpenEmail } = useIsOpenContext();
+
+    const handleError = (e) => {
+        setConfirmPassword(e.target.value)
+        setPassError(false)
+    }
 
     useEffect(() => {
         if(status === 'Student'){
@@ -36,29 +43,42 @@ const Register = () => {
         if(agreement) {
 
             if(password !== confirmPassword) {
-                console.log("Must be the same as the password")
+                setPassError(true)
             } else {
 
-                const res = await axios.post('http://localhost:8000/api/auth/register', values)
+                try {
+                    const res = await axios.post('http://localhost:8000/api/auth/register', values)
 
-                if (res.status === 404) {
-                    console.log('There is an error')
-                }
+                    if (res.status === 404) {
+                        return setError('Invalid credentials')
+                    }
+                    if (res.status === 500) {
+                        return setError('There is an error')
+                    }
 
-                if(res.status === 200) {
-                    setName('');
-                    setEmail('');
-                    setPassword('');
-                    setConfirmPassword('');
-                    setStatus('Student');
-                    setAgreement(false);
+                    if(res.status === 200) {
 
-                    handleOpenEmail();
+                        //SETTING EMAIL TO LOCAL STORAGE
+                        localStorage.setItem('userEmail', JSON.stringify(res.data));
+
+                        //RETURNING ALL DATA BACK TO DEFAULT
+                        setName('');
+                        setEmail('');
+                        setPassword('');
+                        setConfirmPassword('');
+                        setStatus('Student');
+                        setAgreement(false);
+
+                        //OPEN EMAIL CONFIRMATION PAGE
+                        handleOpenEmail();
+                    }
+                    
+                } catch (error) {
+                    console.log(error)
                 }
             }
         } 
     }
-
 
 
   return (
@@ -106,8 +126,9 @@ const Register = () => {
                         <label htmlFor="confirm-password">Confirm Password</label>
                         <input type="password" name="confirm-password"
                           placeholder='Re-enter Password' 
-                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          onChange={handleError}
                           value={confirmPassword}
+                          style={{border: passError ? '2px solid red' : '1px solid rgba(128, 128, 128, 0.576)'}}
                           />
                     </div>
                     <div className="terms">
@@ -123,6 +144,10 @@ const Register = () => {
                     >Sign Up</button>
 
                     <Link to='/login'>Log In</Link>
+                    { error && 
+                    <div className="error">
+                        <p>{error}</p>
+                    </div> }
                 </form>
             </div>
             
