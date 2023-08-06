@@ -6,10 +6,12 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ReviewsIcon from '@mui/icons-material/Reviews';
+import { useUserContext } from '../utilities/UserContext';
 
 
 function BurgerMenu() {
 
+    const { user, dispatch } = useUserContext();
     const { isBurgerOpen, closeBurgerMenu } = useIsOpenContext();
     const navigate = useNavigate();
 
@@ -36,6 +38,8 @@ function BurgerMenu() {
 
     const handleLogout = () => {
         closeBurgerMenu();
+        dispatch({type: 'logout'});
+        localStorage.removeItem('user');
         navigate('/')
     }
 
@@ -48,7 +52,7 @@ function BurgerMenu() {
                 <div className="logo">
                     <h4>LectureRate<span>+</span></h4>
                 </div>
-                <div className="user" onClick={handleProfile}>
+                <div className="user" onClick={handleProfile} style={{display: user ? 'flex' : 'none'}}>
                     <PersonIcon 
                         style={{fontSize: 30, cursor: 'pointer', color: '#320900'}}
                      />
@@ -62,18 +66,18 @@ function BurgerMenu() {
                         <p>About</p>
                     </div>
 
-                    <div onClick={handleRegister}>
+                    <div onClick={handleRegister} style={{display: user ? 'none' : 'flex'}}>
                         <AppRegistrationIcon style={{fontSize: 20}} />
                         <p>Sign Up</p>
                     </div>
 
-                    <div onClick={handleLogin}>
+                    <div onClick={handleLogin} style={{display: user ? 'none' : 'flex'}}>
                         <LoginIcon style={{fontSize: 20}} />
                         <p>Login</p>
                     </div>
                 </div>
 
-                <div className="active">
+                <div className="active" style={{display: user ? 'flex' : 'none'}}>
                     <div onClick={handleRating}>
                         <ReviewsIcon style={{fontSize: 20}} />
                         <p>Ratings</p>

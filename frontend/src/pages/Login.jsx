@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { useUserContext } from '../utilities/UserContext';
 
 const Login = () => {
 
@@ -9,6 +10,7 @@ const Login = () => {
     const [error, setError] = useState('');
     const [verifyError, setVerifyError] = useState(false);
 
+    const { user, dispatch } = useUserContext();
     const navigate = useNavigate();
 
     const handleEmailChange = (e) => {
@@ -37,7 +39,9 @@ const Login = () => {
                 if(res.status === 200) {
 
                     //SETTING EMAIL TO LOCAL STORAGE
-                    localStorage.setItem('userEmail', JSON.stringify(res.data));
+                    dispatch({ type: 'login', payload: res.data})
+                    localStorage.setItem('user', JSON.stringify(res.data));
+
 
                     //RETURNING ALL DATA BACK TO DEFAULT
                     setEmail('');
@@ -45,8 +49,7 @@ const Login = () => {
                     setError('');
 
                     //OPEN EMAIL CONFIRMATION PAGE
-                    console.log(res.data)
-                    // navigate();
+                    navigate('/review');
                 }
                 
             } catch (error) {

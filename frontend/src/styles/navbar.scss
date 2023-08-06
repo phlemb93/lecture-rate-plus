@@ -7,14 +7,17 @@ nav {
     max-width: 1100px;
     padding: 30px 20px;    
     margin: 0 auto;
+    background-color: $lightest-color;
 
     a {
         text-decoration: none;
-        color: #000;
+        color: $deepest-color;
     }
 
     .logo {
         font-family: $primary-font;
+        color: $deepest-color;
+        
         flex: 1;
         span {
             color: $primary-color;

@@ -13,8 +13,12 @@ import Review from './pages/Review';
 import ResetPassword from './pages/ResetPassword';
 import BurgerMenu from './components/BurgerMenu';
 import Overlay from './components/Overlay';
+import { useUserContext } from './utilities/UserContext';
 
 const App = () => {
+
+  const { user } = useUserContext();
+
   return (
     <div className="App">
       <Overlay />
@@ -22,14 +26,14 @@ const App = () => {
       <BurgerMenu />
       <NavBar />
       <Routes>
-        <Route path='/' element={ <Home /> } />
+        <Route path='/' element={ user ? <Review /> : <Home /> } />
         <Route path='/login' element={ <Login /> } />
         <Route path='/register' element={ <Register /> } />
-        <Route path='/review' element={ <Review /> } />
+        <Route path='/review' element={ user ? <Review /> : <Login />} />
         <Route path='/about' element={ <About /> } />
         <Route path='/reset-password' element={ <ResetPassword /> } />
-        <Route path='/students/:id' element={ <StudentProfile /> } />
-        <Route path='/staffs/:id' element={ <StaffProfile /> } />
+        <Route path='/students/:id' element={ user ? <StudentProfile /> : <Login />} />
+        <Route path='/staffs/:id' element={ user ? <StaffProfile /> : <Login /> } />
         <Route path='*' element={ <NotFound /> } />
       </Routes>
       <Footer />
