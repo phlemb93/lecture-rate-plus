@@ -14,6 +14,8 @@ import ResetPassword from './pages/ResetPassword';
 import BurgerMenu from './components/BurgerMenu';
 import Overlay from './components/Overlay';
 import { useUserContext } from './utilities/UserContext';
+import Success from './components/Success';
+import Ratings from './pages/Ratings';
 
 const App = () => {
 
@@ -22,6 +24,7 @@ const App = () => {
   return (
     <div className="App">
       <Overlay />
+      <Success />
       <ConfirmEmail /> 
       <BurgerMenu />
       <NavBar />
@@ -30,6 +33,7 @@ const App = () => {
         <Route path='/login' element={ <Login /> } />
         <Route path='/register' element={ <Register /> } />
         <Route path='/review' element={ user ? <Review /> : <Login />} />
+        <Route path='/ratings' element={ <Ratings />} />
         <Route path='/about' element={ <About /> } />
         <Route path='/reset-password' element={ <ResetPassword /> } />
         <Route path='/students/:id' element={ user ? <StudentProfile /> : <Login />} />

@@ -1,0 +1,44 @@
+.success {
+    background-color: #FFF;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+
+    .img {
+        background-image: url('../images/reviews.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 350px;
+        height: 300px;
+
+    }
+
+    h2 {
+        color: $deepest-color;
+
+        span {
+            color: $primary-color;
+        }
+    }
+    
+
+    button {
+        width: 200px;
+        padding: 12px;
+        border: none;
+        border-radius: 20px;
+        background-color: $deeper-color;
+        color: #FFF;
+        cursor: pointer;
+    }
+}

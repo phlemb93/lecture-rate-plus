@@ -7,7 +7,7 @@ nav {
     // max-width: 1100px;
     padding: 30px 20px;    
     margin: 0 auto;
-    background-color: $lightest-color;
+    box-shadow: 2px 2px 10px $deep-color;
 
     .container {
         display: flex;
