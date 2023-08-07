@@ -44,22 +44,38 @@ export const getAllStudentUserReviews = (req, res) => {
     }
 }
 
+//GET ALL REVIEWS
+export const getAllReviews = (req, res) => {
+
+    const q = "SELECT reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.createdAt, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId";
+
+    db.query(q, (err, data) => {
+        if(err){
+           return res.status(500).json(err)
+        }
+        if(data){
+            res.status(200).json(data)
+        }else{
+           return res.status(404).json('No review found')
+        }
+    })
+}
 //GET A SINGLE REVIEW
 export const getSingleReview = (req, res) => {
 
     const { id } = req.params;
 
-    const q = "SELECT reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.date, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name  as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId WHERE reviews.reviewId = ?";
+    const q = "SELECT reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.createdAt, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId WHERE reviews.reviewId = ?";
 
     db.query(q, [id], (err, data) => {
         if(err){
-            res.status(500).json('Server error')
+           return res.status(500).json('Server error')
             console.log(err)
         }
         if(data){
             res.status(200).json(data[0])
         }else{
-            res.status(404).json('No review found')
+            return res.status(404).json('No review found')
         }
     })
 }
