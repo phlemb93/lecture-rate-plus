@@ -47,7 +47,7 @@ export const getAllStudentUserReviews = (req, res) => {
 //GET ALL REVIEWS
 export const getAllReviews = (req, res) => {
 
-    const q = "SELECT reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.createdAt, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId";
+    const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.createdAt, reviews.anonymous, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId";
 
     db.query(q, (err, data) => {
         if(err){
