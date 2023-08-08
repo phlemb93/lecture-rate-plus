@@ -80,7 +80,7 @@ function BurgerMenu() {
                 <div className="active" style={{display: user ? 'flex' : 'none'}}>
                     <div onClick={handleRating}>
                         <ReviewsIcon style={{fontSize: 20}} />
-                        <p>Ratings</p>
+                        <p>Provide a Feedback</p>
                     </div>
 
                     <div onClick={handleLogout}>

@@ -16,6 +16,9 @@ import Overlay from './components/Overlay';
 import { useUserContext } from './utilities/UserContext';
 import Success from './components/Success';
 import Ratings from './pages/Ratings';
+import Rating from './pages/Rating';
+
+
 
 const App = () => {
 
@@ -29,13 +32,14 @@ const App = () => {
       <BurgerMenu />
       <NavBar />
       <Routes>
-        <Route path='/' element={ user ? <Review /> : <Home /> } />
-        <Route path='/login' element={ <Login /> } />
-        <Route path='/register' element={ <Register /> } />
+        <Route path='/' element={ user ? <Ratings /> : <Home /> } />
+        <Route path='/login' element={ user ? <Ratings /> : <Login /> } />
+        <Route path='/register' element={ user ? <Ratings /> : <Register /> } />
         <Route path='/review' element={ user ? <Review /> : <Login />} />
-        <Route path='/ratings' element={ <Ratings />} />
+        <Route path='/ratings' element={ user ? <Ratings /> : <Home />} />
         <Route path='/about' element={ <About /> } />
         <Route path='/reset-password' element={ <ResetPassword /> } />
+        <Route path='/ratings/:id' element={ user ? <Rating /> : <Home />} />
         <Route path='/students/:id' element={ user ? <StudentProfile /> : <Login />} />
         <Route path='/staffs/:id' element={ user ? <StaffProfile /> : <Login /> } />
         <Route path='*' element={ <NotFound /> } />
