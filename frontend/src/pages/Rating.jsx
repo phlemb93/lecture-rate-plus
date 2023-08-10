@@ -1,16 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { Chart } from "react-google-charts";
+import { Link, useParams } from 'react-router-dom'
 import ScaleRating from '../components/ScaleRating';
-
-
 
 const token = JSON.parse(localStorage.getItem('user')).token;
 
 
-
-                    
 const Rating = () => {
 
     const [review, setReview] = useState({});
@@ -44,7 +39,7 @@ const Rating = () => {
   return (
     <main className='rating'>
         <section className="container">
-                <h2>{review.staffName}</h2>
+              <Link to={`/staffs/${review.staffId}`}> <h2>{review.staffName}</h2></Link> 
                 <small>{review.staffDept}</small>
                 <p className="comment">{review.comment}</p>
                 <div className="rate">
@@ -61,7 +56,7 @@ const Rating = () => {
                         <ScaleRating num={review.communication} />
                     </div>
                 </div>
-                { review.anonymous === 0 ? <p className='author'>by Anonymous</p> : <p className='author'>by {review.studentName}</p>}
+                { review.anonymous === 1 ? <p className='author'>by Anonymous</p> : <p className='author'>by {review.studentName}</p>}
         </section>
     </main>
   )

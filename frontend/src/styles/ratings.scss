@@ -22,6 +22,8 @@ main.ratings {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            border: none;
+            border-radius: 5px;
 
             h2 {
                 margin-bottom: 5px;

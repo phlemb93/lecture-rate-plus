@@ -236,7 +236,7 @@ const handleCommClick = (e) => {
 
 const [course, setCourse] = useState('');
 const [comment, setComment] = useState('');
-const [anon, setAnon] = useState(false);
+const [anon, setAnon] = useState(0);
 const [inactive, setInactive] = useState(true);
 
 const navigate = useNavigate();
@@ -264,7 +264,7 @@ const handleSubmit = () => {
     setEngagement(0);
     setCommunication(0);
     setComment('');
-    setAnon(false);
+    setAnon(0);
 }
 
   return { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, course, setCourse, comment, setComment, anon, setAnon,  inactive }

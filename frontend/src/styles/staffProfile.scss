@@ -1,0 +1,97 @@
+.staff-profile {
+    width: 100%;
+    max-width: 1200px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    padding: 0 50px;
+
+
+    .profile {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 50px;
+
+        .image {
+            width: 110px;
+            height: 100px;
+            border: 1px solid $deep-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+        small {
+            color: $link-color;
+        }
+        .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 150px;
+            border: none;
+            border-radius: 5px;
+            gap: 5px;
+            background-color: $deepest-color;
+            color: #FFF;
+            padding: 10px;
+            font-size: 12px;
+            margin: 10px auto;
+            cursor: pointer;
+        }
+    }
+
+    .ratings-count {
+        opacity: 0.6;
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .rating-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 100%;
+
+        .clarity, .engagement, .communication {
+            border: 1px solid rgba(128, 128, 128, 0.389);
+            width: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+
+}
+
+
+@media screen and (max-width: 960px) {
+
+    .staff-profile {
+
+        height: auto;
+
+        .rating-container {
+         
+            .clarity, .engagement, .communication {
+                width: 400px;
+            }
+        }
+    }
+}
