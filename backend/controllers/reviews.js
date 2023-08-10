@@ -147,9 +147,9 @@ export const getStaffUserReviewStats = (req, res) => {
     const engagementRating = [];
     const communicationRating = [];
 
-    const qC = "SELECT COUNT(clarity) FROM reviews WHERE staffId = ? GROUP BY clarity ORDER BY clarity DESC;"
-    const qE = "SELECT COUNT(engagement) FROM reviews WHERE staffId = ? GROUP BY engagement ORDER BY engagement DESC;"
-    const qComm = "SELECT COUNT(communication) FROM reviews WHERE staffId = ? GROUP BY communication ORDER BY communication DESC;"
+    const qC = "SELECT COUNT(clarity) as clarityCount FROM reviews WHERE staffId = ? GROUP BY clarity ORDER BY clarity DESC;"
+    const qE = "SELECT COUNT(engagement) as engageCount FROM reviews WHERE staffId = ? GROUP BY engagement ORDER BY engagement DESC;"
+    const qComm = "SELECT COUNT(communication) as commCount FROM reviews WHERE staffId = ? GROUP BY communication ORDER BY communication DESC;"
 
     db.query(qC, [userId], (err, data) => {
         if(err){
