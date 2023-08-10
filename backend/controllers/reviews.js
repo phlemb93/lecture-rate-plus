@@ -4,17 +4,16 @@ import { db } from "../dbConnect.js";
 export const getAllStaffUserReviews = (req, res) => {
     const { userId } = req.params;
     
-    const q = "SELECT reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.date, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name  as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId WHERE reviews.staffId = ?"
+    const q = "SELECT reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.createdAt, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name  as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId WHERE reviews.staffId = ?"
 
     db.query(q, [userId], (err, data) => {
         if(err){
-            res.status(500).json('Server error')
-            console.log(err)
+            return res.status(500).json('Server error')
         }
         if(data){
             res.status(200).json(data)
         }else{
-            res.status(404).json('No review found')
+           return res.status(404).json('No review found')
         }
     })
 }
@@ -30,17 +29,16 @@ export const getAllStudentUserReviews = (req, res) => {
     
         db.query(q, [userId], (err, data) => {
             if(err){
-                res.status(500).json('Server error')
-                console.log(err)
+                return res.status(500).json('Server error')
             }
             if(data){
                 res.status(200).json(data)
             }else{
-                res.status(404).json('No review found')
+               return res.status(404).json('No review found')
             }
         })
     }else {
-        res.status(404).json('You are not authorized')
+       return res.status(404).json('You are not authorized')
     }
 }
 
@@ -60,17 +58,17 @@ export const getAllReviews = (req, res) => {
         }
     })
 }
+
 //GET A SINGLE REVIEW
 export const getSingleReview = (req, res) => {
 
     const { id } = req.params;
 
-    const q = "SELECT reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.createdAt, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId WHERE reviews.reviewId = ?";
+    const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.createdAt, reviews.anonymous, staffs.staffId, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId WHERE reviews.reviewId = ?";
 
     db.query(q, [id], (err, data) => {
         if(err){
            return res.status(500).json('Server error')
-            console.log(err)
         }
         if(data){
             res.status(200).json(data[0])
@@ -92,8 +90,7 @@ export const postReview = (req, res) => {
 
     db.query(q, [values], (err, data) => {
         if(err){
-            res.status(500).json('Server error')
-            console.log(err)
+            return res.status(500).json('Server error')
         }
         if(data){
             res.status(200).json('Review submitted successfully')
@@ -112,13 +109,12 @@ export const updateReview = (req, res) => {
 
     db.query(q, [clarity, engagement, communication, comment, date, id, studentId], (err, data) => {
         if(err){
-            res.status(500).json('Server error')
-            console.log(err)
+           return res.status(500).json('Server error')
         }
         if(data.affectedRows){
             res.status(200).json("Review updated")
         }else{
-            res.status(404).json('You are not authorized')
+           return res.status(404).json('You are not authorized')
         }
     })
     
@@ -133,13 +129,12 @@ export const deleteReview = (req, res) => {
 
     db.query(q, [id, studentId], (err, data) => {
         if(err){
-            res.status(500).json('Server error')
-            console.log(err)
+          return  res.status(500).json('Server error')
         }
         if(data.affectedRows){
             res.status(200).json("Review deleted")
         }else{
-            res.status(404).json('You are not authorized')
+           return res.status(404).json('You are not authorized')
         }
     })
 }
@@ -158,8 +153,7 @@ export const getStaffUserReviewStats = (req, res) => {
 
     db.query(qC, [userId], (err, data) => {
         if(err){
-            res.status(500).json('Server error')
-            console.log(err)
+           return res.status(500).json('Server error')
         }
         if(data){
 
@@ -167,8 +161,7 @@ export const getStaffUserReviewStats = (req, res) => {
 
             db.query(qE, [userId], (err, data) => {
                 if(err){
-                    res.status(500).json('Server error')
-                    console.log(err)
+                    return res.status(500).json('Server error')
                 }
                 if(data){
 
@@ -176,8 +169,7 @@ export const getStaffUserReviewStats = (req, res) => {
 
                     db.query(qComm, [userId], (err, data) => {
                         if(err){
-                            res.status(500).json('Server error')
-                            console.log(err)
+                            return res.status(500).json('Server error')
                         }
                         if(data){
                             communicationRating.push(data)
