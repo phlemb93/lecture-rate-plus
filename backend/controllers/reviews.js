@@ -4,7 +4,7 @@ import { db } from "../dbConnect.js";
 export const getAllStaffUserReviews = (req, res) => {
     const { userId } = req.params;
     
-    const q = "SELECT reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.createdAt, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name  as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId WHERE reviews.staffId = ?"
+    const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.createdAt, reviews.anonymous, courses.courseCode, courses.staffNum, staffs.name as staffName, staffs.department as staffDept, students.name as studentName FROM reviews JOIN courses ON reviews.courseId = courses.courseId JOIN students ON reviews.studentId = students.studentId JOIN staffs ON courses.staffNum = staffs.staffId WHERE staffs.staffId = ?"
 
     db.query(q, [userId], (err, data) => {
         if(err){
@@ -42,16 +42,16 @@ export const getAllStudentUserReviews = (req, res) => {
     }
 }
 
-//GET ALL REVIEWS
+//GET ALL REVIEWS 
 export const getAllReviews = (req, res) => {
 
-    const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.createdAt, reviews.anonymous, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId";
+    const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.createdAt, reviews.anonymous, courses.courseCode, courses.staffNum, staffs.name as staffName, staffs.department as staffDept, students.name as studentName FROM reviews JOIN courses ON reviews.courseId = courses.courseId JOIN students ON reviews.studentId = students.studentId JOIN staffs ON courses.staffNum = staffs.staffId";
 
     db.query(q, (err, data) => {
         if(err){
            return res.status(500).json(err)
         }
-        if(data){
+        if(data.length){
             res.status(200).json(data)
         }else{
            return res.status(404).json('No review found')
@@ -64,7 +64,7 @@ export const getSingleReview = (req, res) => {
 
     const { id } = req.params;
 
-    const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.createdAt, reviews.anonymous, staffs.staffId, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId WHERE reviews.reviewId = ?";
+    const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.createdAt, reviews.anonymous, courses.courseCode, courses.staffNum as staffId, staffs.name as staffName, staffs.department as staffDept, students.name as studentName FROM reviews JOIN courses ON reviews.courseId = courses.courseId JOIN students ON reviews.studentId = students.studentId JOIN staffs ON courses.staffNum = staffs.staffId WHERE reviews.reviewId = ?";
 
     db.query(q, [id], (err, data) => {
         if(err){
@@ -80,13 +80,14 @@ export const getSingleReview = (req, res) => {
 
 //POST A REVIEW
 export const postReview = (req, res) => {
+
     const { studentId } = req.user;
-    const { clarity, engagement, communication, comment, staffId, courseCode, anonymous } = req.body;
+    const { clarity, engagement, communication, comment, courseId, anonymous } = req.body;
     const date = new Date();
 
-    const q = "INSERT INTO reviews (`clarity`, `engagement`, `communication`, `comment`, `staffId`, `studentId`, `courseCode`, `anonymous`, `createdAt`, `updatedAt`) VALUE (?)";
+    const q = "INSERT INTO reviews (`clarity`, `engagement`, `communication`, `comment`, `courseId`, `studentId`, `anonymous`, `createdAt`, `updatedAt`) VALUE (?)";
 
-    const values = [clarity, engagement, communication, comment, staffId, studentId, courseCode, anonymous, date, date];
+    const values = [clarity, engagement, communication, comment, courseId, studentId, anonymous, date, date];
 
     db.query(q, [values], (err, data) => {
         if(err){
@@ -147,15 +148,15 @@ export const getStaffUserReviewStats = (req, res) => {
     const engagementRating = [];
     const communicationRating = [];
 
-    const qC = "SELECT COUNT(clarity) as clarityCount FROM reviews WHERE staffId = ? GROUP BY clarity ORDER BY clarity DESC;"
-    const qE = "SELECT COUNT(engagement) as engageCount FROM reviews WHERE staffId = ? GROUP BY engagement ORDER BY engagement DESC;"
-    const qComm = "SELECT COUNT(communication) as commCount FROM reviews WHERE staffId = ? GROUP BY communication ORDER BY communication DESC;"
+    const qC = "SELECT COUNT(reviews.clarity) as clarityCount FROM reviews JOIN courses ON reviews.courseId = courses.courseId JOIN staffs ON courses.staffNum = staffs.staffId WHERE staffId = ? GROUP BY clarity ORDER BY clarity DESC"
+    const qE = "SELECT COUNT(engagement) as engageCount FROM reviews JOIN courses ON reviews.courseId = courses.courseId JOIN staffs ON courses.staffNum = staffs.staffId WHERE staffId = ? GROUP BY engagement ORDER BY engagement DESC"
+    const qComm = "SELECT COUNT(communication) as commCount FROM reviews JOIN courses ON reviews.courseId = courses.courseId JOIN staffs ON courses.staffNum = staffs.staffId WHERE staffId = ? GROUP BY communication ORDER BY communication DESC"
 
     db.query(qC, [userId], (err, data) => {
         if(err){
            return res.status(500).json('Server error')
         }
-        if(data){
+        if(data.length){
 
             clarityRating.push(data)
 
@@ -163,7 +164,7 @@ export const getStaffUserReviewStats = (req, res) => {
                 if(err){
                     return res.status(500).json('Server error')
                 }
-                if(data){
+                if(data.length){
 
                     engagementRating.push(data)
 
@@ -171,15 +172,21 @@ export const getStaffUserReviewStats = (req, res) => {
                         if(err){
                             return res.status(500).json('Server error')
                         }
-                        if(data){
+                        if(data.length){
                             communicationRating.push(data)
 
                             res.status(200).json({ clarityRating, engagementRating, communicationRating })
+                        }else {
+                            return res.status(404).json('No stats found')
                         }
                     })
                     
+                }else {
+                    return res.status(404).json('No stats found')
                 }
             })
+        }else {
+            return res.status(404).json('No stats found')
         }
     })
 }
