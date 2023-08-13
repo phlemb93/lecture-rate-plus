@@ -1,16 +1,26 @@
+import { useLocation } from 'react-router-dom';
 import useRating from '../utilities/useRating'
+import { useFetchUrl } from '../utilities/useFetchUrl';
 
 const Review = () => {
 
-const { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, setCourse, course, setComment, comment, setAnon, anon, inactive } = useRating();
+const { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, setCourse, course, instructor, setInstructor, setComment, comment, setAnonymous, anonymous, inactive } = useRating();
 
-console.log(inactive)
-  return (
+
+// const { name, id } = useLocation().state;
+const { data: instructors } = useFetchUrl('staffs');
+const { data: courses } = useFetchUrl('courses');
+
+const { courseId } = courses && courses.filter(program => program.courseCode === course.split(' - ')[0] && program.staffName === course.split(' - ')[1])[0];
+
+console.log(courseId)
+
+return (
     <main className='review'>
 
     {/* REVIEW FORM */}
         <section className="form">
-            <h2>Rate: <strong>John Doe</strong></h2>
+            {/* { name ? <h2>Rate: <strong>{ name }</strong></h2> : null } */}
 
             <div className="course">
                 <h3>Select Course Code</h3>
@@ -19,10 +29,22 @@ console.log(inactive)
                     value={course}
                 >
                     <option hidden >Select Course Code</option>
-                    <option value="CSC 111">CSC 111</option>
-                    <option value="CSC 211">CSC 211</option>
-                    <option value="CSC 121">CSC 121</option>
-                    <option value="CSC 135">CSC 135</option>
+                    { courses && courses.map(program => (
+                        <option value={`${program.courseCode} - ${program.staffName}`} key={program.courseId}>{`${program.courseCode} - ${program.staffName}`}</option>
+                    ))}
+                </select>
+            </div> 
+
+            <div className="instructor">
+                <h3>Select Course Code</h3>
+                <select 
+                    onChange={(e) => setInstructor(e.target.value)}
+                    value={course}
+                >
+                    <option hidden >Select Course Instructor</option>
+                    { instructors && instructors.map(instructor => (
+                        <option value={instructor.name} key={instructor.staffId}>{ instructor.name }</option>
+                    ))}
                 </select>
             </div>
 
@@ -195,8 +217,8 @@ console.log(inactive)
             <div className="anon">
                 <input 
                     type="checkbox" 
-                    checked={anon}
-                    onChange={(e) => setAnon(e.target.checked)}
+                    checked={anonymous}
+                    onChange={(e) => setAnonymous(e.target.checked)}
                 />
                 <div>
                     <p>Send anonymously</p>

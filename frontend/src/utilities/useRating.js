@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
@@ -236,38 +237,67 @@ const handleCommClick = (e) => {
 
 const [course, setCourse] = useState('');
 const [comment, setComment] = useState('');
-const [anon, setAnon] = useState(0);
+const [anonymous, setAnonymous] = useState(false);
 const [inactive, setInactive] = useState(true);
 
 const navigate = useNavigate();
+
+const token = JSON.parse(localStorage.getItem('user')).token;
 
 useEffect(() => {
 
     if(course) {
         setInactive(false)
     }
-}, [course, clarity, engagement, communication, comment, anon])
+}, [course, clarity, engagement, communication, comment, anonymous])
 
-const handleSubmit = () => {
-    console.log({
-        "course": course,
-        "clarity": clarity,
-        "engagement": engagement,
-        "communication": communication,
-        "comment": comment,
-        "anonymous": anon
-    })
 
-    navigate('/');
-    setCourse('');
-    setClarity(0);
-    setEngagement(0);
-    setCommunication(0);
-    setComment('');
-    setAnon(0);
+//REVIEW SUBMISSION
+const handleSubmit = async () => {
+
+    const data = { courseCode: course, clarity, engagement, communication, comment, anonymous, staffId: 7 }
+
+    try {
+        const res = await axios.post('http://localhost:8000/api/reviews/', { ...data }, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        })
+
+        if(res.status === 200) {
+            console.log(res.data)
+            
+            navigate('/');
+            setCourse('');
+            setClarity(0);
+            setEngagement(0);
+            setCommunication(0);
+            setComment('');
+            setAnonymous(false);
+        }
+        
+    } catch (error) {
+        console.log(error)
+    }
+
+   
+    // console.log({
+    //     "course": course,
+    //     "clarity": clarity,
+    //     "engagement": engagement,
+    //     "communication": communication,
+    //     "comment": comment,
+    //     "anonymous": anon
+    // })
+
+
 }
 
-  return { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, course, setCourse, comment, setComment, anon, setAnon,  inactive }
+
+
+
+  return { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, course, setCourse, comment, setComment, anonymous, setAnonymous,  inactive }
 }
 
 export default useRating

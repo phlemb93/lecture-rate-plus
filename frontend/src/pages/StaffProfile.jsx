@@ -154,7 +154,7 @@ const StaffProfile = () => {
           </div>
           <h2>{ staff.staffName }</h2>
           <small>{ staff.staffDept }</small>
-          <div className="btn" onClick={() => navigate('/review')}>
+          <div className="btn" onClick={() => navigate('/review', { state: { name: `${staff.staffName}`, id } })}>
             <RateReviewIcon style={{fontSize: 14}}/>
             <p>Add a Review</p>
           </div>

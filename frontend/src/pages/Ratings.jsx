@@ -32,7 +32,11 @@ const Ratings = () => {
                 console.log(error)
             }
         }
-       getReviews();
+        if(token) {
+            getReviews();
+        } else {
+            navigate('/login');
+        }
     }, [])
 
   return (
@@ -54,7 +58,7 @@ const Ratings = () => {
                             <p>engagement: <span>{review.engagement}</span></p>
                             <p>communication: <span>{review.communication}</span></p>
                         </div>
-                        { review.anonymous === 0 ? <p className='author'>by Anonymous</p> : <p className='author'>by {review.studentName}</p>}
+                        { review.anonymous !== 0 ? <p className='author'>by Anonymous</p> : <p className='author'>by {review.studentName}</p>}
                     </div>
                 ))
             ) : <h3>Loading...</h3> }
