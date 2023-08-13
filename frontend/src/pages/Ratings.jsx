@@ -25,7 +25,6 @@ const Ratings = () => {
                 if(res.status === 200) {
                     setReviews(res.data)
                     setIsLoading(false)
-                    // console.log(res.data)
                 }
 
             } catch (error) {

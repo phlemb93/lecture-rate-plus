@@ -3,12 +3,17 @@ import Chart from 'react-google-charts';
 import { useNavigate, useParams } from 'react-router-dom';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import axios from 'axios';
+import { useUserContext } from '../utilities/UserContext';
 
 
-const token = JSON.parse(localStorage.getItem('user')).token;
+// const token = JSON.parse(localStorage.getItem('user')).token;
+
 
 
 const StaffProfile = () => {
+
+  const { user } = useUserContext();
+  const { token } = user;
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -17,7 +22,7 @@ const StaffProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [staff, setStaff] = useState({staffName: 'John Doe'});
 
-  const firstNameInit = staff.staffName.split(" ")[0].slice(0, 2).toUpperCase();
+  const firstNameInit = staff && staff.staffName.split(" ")[0].slice(0, 2).toUpperCase();
 
 
   //CLARITY RATINGS
@@ -152,9 +157,9 @@ const StaffProfile = () => {
           <div className="image">
             <h1>{ firstNameInit }</h1>
           </div>
-          <h2>{ staff.staffName }</h2>
-          <small>{ staff.staffDept }</small>
-          <div className="btn" onClick={() => navigate('/review', { state: { name: `${staff.staffName}`, id } })}>
+          <h2>{ staff && staff.staffName }</h2>
+          <small>{ staff && staff.staffDept }</small>
+          <div className="btn" onClick={() => navigate('/review', { state: { name: `${ staff && staff.staffName}`, id } })}>
             <RateReviewIcon style={{fontSize: 14}}/>
             <p>Add a Review</p>
           </div>

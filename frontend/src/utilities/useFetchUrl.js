@@ -1,10 +1,14 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useUserContext } from "./UserContext";
 
 
-const { token } = JSON.parse(localStorage.getItem('user'));
+// const { token } = JSON.parse(localStorage.getItem('user'));
 
 export const useFetchUrl = (url) => {
+
+    const { user } = useUserContext();
+    const { token } = user;
 
     const [data, setData] = useState(null);
 

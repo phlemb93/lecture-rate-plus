@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useFetchUrl } from './useFetchUrl';
 
 const useRating = () => {
 
@@ -244,6 +245,9 @@ const navigate = useNavigate();
 
 const token = JSON.parse(localStorage.getItem('user')).token;
 
+const { data: courses } = useFetchUrl('courses');
+
+
 useEffect(() => {
 
     if(course) {
@@ -255,7 +259,9 @@ useEffect(() => {
 //REVIEW SUBMISSION
 const handleSubmit = async () => {
 
-    const data = { courseCode: course, clarity, engagement, communication, comment, anonymous, staffId: 7 }
+    const { courseId } = courses && courses.filter(program => program.courseCode === course.split(' - ')[0] && program.staffName === course.split(' - ')[1])[0];
+
+    const data = { clarity, engagement, communication, comment, courseId, anonymous }
 
     try {
         const res = await axios.post('http://localhost:8000/api/reviews/', { ...data }, {
@@ -266,8 +272,6 @@ const handleSubmit = async () => {
         })
 
         if(res.status === 200) {
-            console.log(res.data)
-            
             navigate('/');
             setCourse('');
             setClarity(0);
@@ -281,23 +285,13 @@ const handleSubmit = async () => {
         console.log(error)
     }
 
-   
-    // console.log({
-    //     "course": course,
-    //     "clarity": clarity,
-    //     "engagement": engagement,
-    //     "communication": communication,
-    //     "comment": comment,
-    //     "anonymous": anon
-    // })
-
 
 }
 
 
 
 
-  return { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, course, setCourse, comment, setComment, anonymous, setAnonymous,  inactive }
+  return { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, course, setCourse, comment, setComment, anonymous, setAnonymous,  inactive, courses }
 }
 
 export default useRating

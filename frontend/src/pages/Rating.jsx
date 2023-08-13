@@ -2,11 +2,15 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ScaleRating from '../components/ScaleRating';
+import { useUserContext } from '../utilities/UserContext';
 
-const token = JSON.parse(localStorage.getItem('user')).token;
+// const token = JSON.parse(localStorage.getItem('user')).token;
 
 
 const Rating = () => {
+
+    const { user } = useUserContext();
+    const { token } = user;
 
     const [review, setReview] = useState({});
     const [isLoading, setIsLoading] = useState(true);

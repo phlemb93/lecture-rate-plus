@@ -4,16 +4,11 @@ import { useFetchUrl } from '../utilities/useFetchUrl';
 
 const Review = () => {
 
-const { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, setCourse, course, instructor, setInstructor, setComment, comment, setAnonymous, anonymous, inactive } = useRating();
+const { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, setCourse, course, setComment, comment, setAnonymous, anonymous, inactive, courses } = useRating();
 
 
 // const { name, id } = useLocation().state;
-const { data: instructors } = useFetchUrl('staffs');
-const { data: courses } = useFetchUrl('courses');
 
-const { courseId } = courses && courses.filter(program => program.courseCode === course.split(' - ')[0] && program.staffName === course.split(' - ')[1])[0];
-
-console.log(courseId)
 
 return (
     <main className='review'>
@@ -34,19 +29,6 @@ return (
                     ))}
                 </select>
             </div> 
-
-            <div className="instructor">
-                <h3>Select Course Code</h3>
-                <select 
-                    onChange={(e) => setInstructor(e.target.value)}
-                    value={course}
-                >
-                    <option hidden >Select Course Instructor</option>
-                    { instructors && instructors.map(instructor => (
-                        <option value={instructor.name} key={instructor.staffId}>{ instructor.name }</option>
-                    ))}
-                </select>
-            </div>
 
             <div className="ratings">
                 <div className='head'>

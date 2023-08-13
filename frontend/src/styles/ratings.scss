@@ -16,7 +16,7 @@ main.ratings {
         gap: 20px;
 
         .rating {
-            box-shadow: 2px 2px 10px $deepest-color;
+            background-color: $rate-color;
             padding: 20px;
             cursor: pointer;
             display: flex;
