@@ -251,6 +251,7 @@ if(!validator.isEmail(email)) {
                 const { password, name, studentId, token, ...others } = data[0];
                 const firstName = name.split(' ')[0];
 
+                //JWT LOGIC
                 jwt.sign({ studentId }, process.env.JWT_SECRET, { expiresIn: '3d' }, (err, token) => {
 
                     if(err){
@@ -280,6 +281,7 @@ if(!validator.isEmail(email)) {
                     if(match) {
                         const { password, name, staffId, ...others } = data[0];
                         
+                        //JWT LOGIC
                         jwt.sign({ staffId }, process.env.JWT_SECRET, { expiresIn: '3d' }, (err, token) => {
 
                             if(err){

@@ -81,12 +81,12 @@ export const getSingleReview = (req, res) => {
 //POST A REVIEW
 export const postReview = (req, res) => {
     const { studentId } = req.user;
-    const { clarity, engagement, communication, comment, staffId, courseCode } = req.body;
+    const { clarity, engagement, communication, comment, staffId, courseCode, anonymous } = req.body;
     const date = new Date();
 
-    const q = "INSERT INTO reviews (`clarity`, `engagement`, `communication`, `comment`, `staffId`, `studentId`, `courseCode`, `createdAt`) VALUE (?)";
+    const q = "INSERT INTO reviews (`clarity`, `engagement`, `communication`, `comment`, `staffId`, `studentId`, `courseCode`, `anonymous`, `createdAt`, `updatedAt`) VALUE (?)";
 
-    const values = [clarity, engagement, communication, comment, staffId, studentId, courseCode, date];
+    const values = [clarity, engagement, communication, comment, staffId, studentId, courseCode, anonymous, date, date];
 
     db.query(q, [values], (err, data) => {
         if(err){

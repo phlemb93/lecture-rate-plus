@@ -1,6 +1,23 @@
 import bcrypt from 'bcrypt';
 import { db } from "../dbConnect.js";
 
+//GET ALL STAFF MEMBERS
+export const getAllStaff = (req, res) => {
+
+        const q = "SELECT staffId, name, email, department FROM staffs";
+
+        db.query(q, (err, data) => {
+            if(err) {
+                return res.status(500).json('Server error');
+            }
+            if(data.length){
+                res.status(200).json(data);
+            } else {
+               return res.status(404).json('Data not found');
+            }
+        })
+}
+
 //GET STAFF USER'S DETAILS
 export const getSingleStaff = (req, res) => {
     const { id } = req.params;
