@@ -1,6 +1,7 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import useRating from '../utilities/useRating'
 import { useFetchUrl } from '../utilities/useFetchUrl';
+import WarningIcon from '@mui/icons-material/Warning';
 
 const Review = () => {
 
@@ -185,6 +186,17 @@ return (
         <section className="comment">
             <h3>Write a Review</h3>
             <p>Discuss the professor's professional abilities including teaching style and ability to convey the material clearly</p>
+            <div className="caution">
+                <div className="header">
+                    <WarningIcon style={{color: 'rgb(190, 0, 0)'}}/>
+                    <p>Notice</p>
+                </div>
+                <ul>
+                    <li>Students are expected to conduct themselves in accordance with the principles set out in the University's Student Code of Conduct.</li>
+                    <li>Your rating could be removed if you use profanity or derogatory terms.</li>
+                </ul>
+                <Link to='https://www.beds.ac.uk/student-experience/academic-information/student-code-of-conduct/#:~:text=As%20independent%20adults%20with%20legal,students%2C%20staff%20and%20their%20successors.' target='_blank'>View the University's Student Code of Conduct</Link>
+            </div>
             <textarea 
                 placeholder='What do you want other students to know about this professor' 
                 cols="30" 
