@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { format } from 'timeago.js';
 
 const Ratings = () => {
 
@@ -45,7 +46,7 @@ const Ratings = () => {
         </header>
         <section className='ratings-container'>
             { !isLoading ? (
-                reviews.map(review => (
+                reviews.reverse().map(review => (
                     <div className='rating' key={review.reviewId} 
                         onClick={() => navigate(`/ratings/${review.reviewId}`)}
                     >
@@ -53,11 +54,14 @@ const Ratings = () => {
                         <small>{review.staffDept}</small>
                         <p className="comment">{review.comment.slice(0, 50)}</p>
                         <div className="rate">
-                            <p>clarity: <span>{review.clarity}</span></p>
-                            <p>engagement: <span>{review.engagement}</span></p>
-                            <p>communication: <span>{review.communication}</span></p>
+                            <p>clarity: <span>{review.clarity}/5</span></p>
+                            <p>engagement: <span>{review.engagement}/5</span></p>
+                            <p>communication: <span>{review.communication}/5</span></p>
                         </div>
-                        { review.anonymous !== 0 ? <p className='author'>by Anonymous</p> : <p className='author'>by {review.studentName}</p>}
+                        <div className="foot-note">
+                            <p className='time'>{format(review.createdAt)}</p>
+                            { review.anonymous !== 0 ? <p className='author'>by Anonymous</p> : <p className='author'>by {review.studentName}</p>}
+                        </div>
                     </div>
                 ))
             ) : <h3>Loading...</h3> }

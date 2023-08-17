@@ -45,9 +45,16 @@ main.ratings {
                 font-size: 14px;
             }
 
-            .author {
-                font-size: 12px;
-                color: gray;
+            .foot-note {
+                display: flex;
+                justify-content: space-between;
+
+                p {
+                    font-size: 12px;
+                    color: gray;
+                }
+
+            
             }
         }
     }
