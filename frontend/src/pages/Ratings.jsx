@@ -7,7 +7,6 @@ const Ratings = () => {
 
     const [reviews, setReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState('');
 
     const navigate = useNavigate();
     const token = JSON.parse(localStorage.getItem('user')).token;
@@ -38,7 +37,7 @@ const Ratings = () => {
             navigate('/login');
         }
     }, [])
-
+    
   return (
     <main className='ratings'>
         <header>
@@ -46,7 +45,7 @@ const Ratings = () => {
         </header>
         <section className='ratings-container'>
             { !isLoading ? (
-                reviews.reverse().map(review => (
+                reviews.map(review => (
                     <div className='rating' key={review.reviewId} 
                         onClick={() => navigate(`/ratings/${review.reviewId}`)}
                     >

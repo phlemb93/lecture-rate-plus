@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ScaleRating from '../components/ScaleRating';
 import { useUserContext } from '../utilities/UserContext';
+import Chart from 'react-google-charts';
+
 
 // const token = JSON.parse(localStorage.getItem('user')).token;
 
@@ -16,7 +18,34 @@ const Rating = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
 
+    // DATE AND TIME OF REVIEW
+    const date =  new Date(review.createdAt);
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const minutes = date.getMinutes();
+    const hours = date.getHours();
+
     const { id } = useParams();
+
+    console.log(minutes)
+
+    const chartData = [
+        [
+    "Element",
+    "Metrics",
+    { role: "style" },
+    {
+      sourceColumn: 0,
+      role: "annotation",
+      type: "string",
+      calc: "stringify",
+    },
+  ],
+        ["Clarity", 5, 'color: #4F1800', null],
+        ["Engagement", 3, 'color: #c35300', null],
+        ["Communication", 4, 'color: #ffd2a1', null]
+      ];
 
     useEffect(() => {
         const getReviews = async () => {
@@ -43,24 +72,34 @@ const Rating = () => {
   return (
     <main className='rating'>
         <section className="container">
-              <Link to={`/staffs/${review.staffId}`}> <h2>{review.staffName}</h2></Link> 
-                <small>{review.staffDept}</small>
-                <p className="comment">{review.comment}</p>
-                <div className="rate">
-                    <div className="clarity">
-                        <p>clarity</p>
-                        <ScaleRating num={review.clarity} />
-                    </div>
-                    <div className="engagement">
-                        <p>engagement</p>
-                        <ScaleRating num={review.engagement} />
-                    </div>
-                    <div className="communication">
-                        <p>communication</p>
-                        <ScaleRating num={review.communication} />
-                    </div>
-                </div>
-                { review.anonymous === 1 ? <p className='author'>by Anonymous</p> : <p className='author'>by {review.studentName}</p>}
+
+            <h2 className='header'>Rating for <Link to={`/staffs/${review.staffId}`}>{review.staffName}</Link></h2> 
+            
+            <textarea 
+                className="comment"
+                disabled={true}
+                value={review.comment}
+            />
+
+            <div className="rate">
+                <Chart 
+                    chartType='BarChart'
+                    data={chartData}
+                    options={{
+                        title: 'Metrics',
+                    }}
+                    width='500px'
+                    height='300px'
+                />
+            </div>
+
+
+            <div className="foot-note">
+                <p>{`${hours}:${minutes} . ${day}/${month}/${year}`}</p>
+                { review.anonymous !== 0 ? <p className='author'>Anonymous</p> : <p className='author'>{review.studentName}</p>}
+
+            </div>
+
         </section>
     </main>
   )

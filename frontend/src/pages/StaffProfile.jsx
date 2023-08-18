@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import axios from 'axios';
 import { useUserContext } from '../utilities/UserContext';
+import { format } from 'timeago.js';
 
 
 // const token = JSON.parse(localStorage.getItem('user')).token;
@@ -149,8 +150,6 @@ const StaffProfile = () => {
     ];
 
 
-
-
   return (
     <div className='staff-profile'>
         <div className="profile">
@@ -167,34 +166,64 @@ const StaffProfile = () => {
 
         <p className='ratings-count'>Based on <span>{ reviews ? reviews.length : 0 }</span> ratings</p>
         <div className="rating-container">
-          <div className="clarity">
-            <Chart
-                chartType="PieChart"
-                data={clarityData}
-                options={{ title: 'Clarity', is3D: true }}
-                width={"250px"}
-                height={"300px"}
-                // style={{fontSize: 20, border: '1px solid red'}}
-            />
+          <div className="charts">
+            <div className="clarity">
+              <Chart
+                  chartType="PieChart"
+                  data={clarityData}
+                  options={{ 
+                    title: 'Clarity', 
+                    is3D: true,
+                    colors: ['#ffd2a1', '#feb26b', '#c35300', '#6c2600', '#4F1800',],
+                    fontSize: 14
+                     }}
+                  width="100%"
+                  height="100%"
+              />
+            </div>
+            <div className="engagement">
+              <Chart
+                  chartType="PieChart"
+                  data={engagementData}
+                  options={
+                    { title: 'Engagement', 
+                    is3D: true ,
+                    colors: ['#ffd2a1', '#feb26b', '#c35300', '#6c2600', '#4F1800',],
+                    fontSize: 14
+                    }}
+                  width="100%"
+                  height="100%"
+              />
+            </div>
+            <div className="communication">
+              <Chart
+                  chartType="PieChart"
+                  data={commData}
+                  options={{ 
+                    title: 'Communication', 
+                    is3D: true ,
+                    colors: ['#ffd2a1', '#feb26b', '#c35300', '#6c2600', '#4F1800'],
+                    fontSize: 14
+                    }}
+                    width= "100%"
+                    height= "100%"
+               
+              />
+            </div>
           </div>
-          <div className="engagement">
-            <Chart
-                chartType="PieChart"
-                data={engagementData}
-                options={{ title: 'Engagement', is3D: true }}
-                width={"250px"}
-                height={"300px"}
-            />
+
+          <div className="all-reviews">
+            <h3>Recent Reviews</h3>
+            <div className="content">
+              { reviews && reviews.slice(0,5).map(review => (
+                <div className="review" key={review.reviewId} onClick={() => navigate(`/ratings/${review.reviewId}`)}>
+                  { review.anonymous !== 0 ? <p className='author'><span>Anonymous</span> provided a review</p> : <p className='author'><span>{review.studentName}</span> provided a review</p>}
+                  <p className='time'>{format(review.createdAt)}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="communication">
-            <Chart
-                chartType="PieChart"
-                data={commData}
-                options={{ title: 'Communication', is3D: true }}
-                width={"250px"}
-                height={"300px"}
-            />
-          </div>
+          
         </div>
 
        
@@ -205,29 +234,4 @@ const StaffProfile = () => {
 export default StaffProfile
 
 
-  //CLARITY RATINGS
-    //  if(res.data.clarityRating[0][0].clarityCount === undefined){
-    //   setNumOf5Clarity(0)
-    // }else {
-    //   setNumOf5Clarity(res.data.clarityRating[0][0].clarityCount);
-    // }
-    // if(res.data.clarityRating[0][1].clarityCount === undefined) {
-    //   setNumOf4Clarity(0)
-    // }else {
-    //   setNumOf4Clarity(res.data.clarityRating[0][1].clarityCount);
-    // }
-    // if(res.data.clarityRating[0][2].clarityCount === undefined){
-    //   setNumOf3Clarity(0)
-    // } else {
-    //   setNumOf3Clarity(res.data.clarityRating[0][2].clarityCount);
-    // }
-    // if(res.data.clarityRating[0][3] === undefined){
-    //   setNumOf2Clarity(0)
-    // } else {
-    //   setNumOf2Clarity(res.data.clarityRating[0][3].clarityCount);
-    // }
-    // if(res.data.clarityRating[0][4] === undefined){
-    //   setNumOf1Clarity(0)
-    // }else {
-    //   setNumOf1Clarity(res.data.clarityRating[0][4].clarityCount);
-    //
+ 
