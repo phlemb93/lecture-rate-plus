@@ -28,6 +28,7 @@ const Login = () => {
         e.preventDefault();
     
         const values = { email, password };
+        let notification;
 
         if(!email || !password) {
             return setError('All fields must be filled')
@@ -36,7 +37,8 @@ const Login = () => {
             try {
                 const res = await axios.post('http://localhost:8000/api/auth/login', values);
 
-                if(res.status === 200) {
+
+                if(res && res.status === 200) {
 
                     //SETTING EMAIL TO LOCAL STORAGE
                     dispatch({ type: 'login', payload: res.data})
@@ -48,26 +50,51 @@ const Login = () => {
                     setPassword('');
                     setError('');
 
+                    Notification.requestPermission().then(perm => {
+
+                        if(perm === 'granted'){
+                           new Notification('Lecture Feedback', {
+                                body: 'You will be notified after every lecture!',
+                                // tag: 'Lecture Feedback'
+                            })
+                
+
+                        } else {
+                            new Notification('Lecture Feedback', {
+                                body: 'Kindly allow the notification for full functioning of the application',
+                                // tag: 'Lecture Feedback'
+                            })
+
+                        }
+                    })
+
                     //OPEN EMAIL CONFIRMATION PAGE
-                    navigate('/review');
+                   if(user.studentId !== null){
+                        // navigate('/review');
+                        console.log('Student logs in')
+                   } else if(user.staffId !== null){
+                        // navigate('/ratings');
+                        console.log('Staff logs in')
+                   }
                 }
                 
             } catch (error) {
                 console.log(error)
-                if (error.response.status === 404) {
+
+                if (error && error.response.status === 404) {
 
                     console.log('404 Error')
                     
-                    if(error.response.data === "Kindly verify your email") {
+                    if(error && error.response.data === "Kindly verify your email") {
                         setVerifyError(true)
                         setError('Kindly verify your email')
                     } else {
-                        return setError('Invalid credentials')
+                        setError('Invalid credentials')
                     }
                 }
 
-                if (error.response.status === 500) {
-                    return setError('There is an error')
+                if (error && error.response.status === 500) {
+                    setError('There is an error')
                 }
             }
     }

@@ -6,7 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ConfirmEmail from './components/ConfirmEmail';
 import StudentProfile from './pages/StudentProfile';
-import StaffProfile from './pages/StaffProfile';
+import StaffRatings from './pages/StaffRatings';
 import NotFound from './pages/NotFound';
 import About from './pages/About';
 import Review from './pages/Review';
@@ -17,6 +17,7 @@ import { useUserContext } from './utilities/UserContext';
 import Success from './components/Success';
 import Ratings from './pages/Ratings';
 import Rating from './pages/Rating';
+import StaffProfile from './pages/StaffProfile';
 
 
 
@@ -35,13 +36,13 @@ const App = () => {
         <Route path='/' element={ user ? <Ratings /> : <Home /> } />
         <Route path='/login' element={ user ? <Ratings /> : <Login /> } />
         <Route path='/register' element={ user ? <Ratings /> : <Register /> } />
-        <Route path='/review' element={ user ? <Review /> : <Login />} />
+        <Route path='/review' element={ user ? ( user.studentId ? <Review /> : <Ratings /> ) : <Login />} />
         <Route path='/ratings' element={ user ? <Ratings /> : <Home />} />
         <Route path='/about' element={ <About /> } />
         <Route path='/reset-password' element={ <ResetPassword /> } />
         <Route path='/ratings/:id' element={ user ? <Rating /> : <Home />} />
-        <Route path='/students/:id' element={ user ? <StudentProfile /> : <Login />} />
-        <Route path='/staffs/:id' element={ user ? <StaffProfile /> : <Login /> } />
+        <Route path='/staffs/:id' element={ user ? <StaffRatings /> : <Login /> } />
+        <Route path='/profile/:id' element={ user ? ( user.studentId ? <StudentProfile /> : <StaffProfile /> ): <Login /> } />
         <Route path='*' element={ <NotFound /> } />
       </Routes>
       <Footer />

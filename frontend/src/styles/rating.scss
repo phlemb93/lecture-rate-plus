@@ -17,13 +17,16 @@ main.rating {
             width: 100%;
             max-width: 700px;
             text-align: center;
+            font-weight: normal;
 
             a {
                 color: $link-color;
+                text-decoration: none;
+                font-weight: bold;
             }
         }
         .comment {
-            height: 400px;
+            height: 300px;
             margin: 10px auto 20px;
             width: 100%;
             max-width: 700px;

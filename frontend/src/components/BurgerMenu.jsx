@@ -15,9 +15,13 @@ function BurgerMenu() {
     const { isBurgerOpen, closeBurgerMenu } = useIsOpenContext();
     const navigate = useNavigate();
 
+
     const handleProfile = (e) => {
+
+    const id = user.studentId || user.staffId;
+
        closeBurgerMenu();
-       navigate('/students/1')
+       navigate(`/profile/${id}`)
     }
     const handleRating = (e) => {
        closeBurgerMenu();
@@ -78,7 +82,7 @@ function BurgerMenu() {
                 </div>
 
                 <div className="active" style={{display: user ? 'flex' : 'none'}}>
-                    <div onClick={handleRating}>
+                    <div onClick={handleRating} style={{display: user && user.studentId ? 'flex' : 'none'}}>
                         <ReviewsIcon style={{fontSize: 20}} />
                         <p>Provide a Feedback</p>
                     </div>

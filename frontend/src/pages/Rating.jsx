@@ -1,12 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import ScaleRating from '../components/ScaleRating';
 import { useUserContext } from '../utilities/UserContext';
 import Chart from 'react-google-charts';
 
-
-// const token = JSON.parse(localStorage.getItem('user')).token;
 
 
 const Rating = () => {
@@ -16,19 +13,15 @@ const Rating = () => {
 
     const [review, setReview] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState('');
 
     // DATE AND TIME OF REVIEW
     const date =  new Date(review.createdAt);
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
-    const minutes = date.getMinutes();
-    const hours = date.getHours();
+    const time = date.toLocaleTimeString().slice(0, 5);
 
     const { id } = useParams();
-
-    console.log(minutes)
 
     const chartData = [
         [
@@ -69,39 +62,53 @@ const Rating = () => {
        getReviews();
     }, [])
 
+    const name = () => {
+        if(review.staffName) {
+            const first = review.staffName.split(' ')[0];
+            const second = review.staffName.split(' ')[1];
+
+            return first + ' ' + second;
+
+        } else {
+            console.log('undefined')
+        }
+    }
+
   return (
-    <main className='rating'>
-        <section className="container">
+    <> { !isLoading ? 
+        <main className='rating'>
+            <section className="container">
 
-            <h2 className='header'>Rating for <Link to={`/staffs/${review.staffId}`}>{review.staffName}</Link></h2> 
-            
-            <textarea 
-                className="comment"
-                disabled={true}
-                value={review.comment}
-            />
-
-            <div className="rate">
-                <Chart 
-                    chartType='BarChart'
-                    data={chartData}
-                    options={{
-                        title: 'Metrics',
-                    }}
-                    width='500px'
-                    height='300px'
+                <h2 className='header'>Rating for <Link to={`/staffs/${review.staffId}`}>{ name()}</Link></h2> 
+                
+                <textarea 
+                    className="comment"
+                    disabled={true}
+                    value={review.comment}
                 />
-            </div>
+
+                <div className="rate">
+                    <Chart 
+                        chartType='BarChart'
+                        data={chartData}
+                        options={{
+                            title: 'Metrics',
+                        }}
+                        width='500px'
+                        height='300px'
+                    />
+                </div>
 
 
-            <div className="foot-note">
-                <p>{`${hours}:${minutes} . ${day}/${month}/${year}`}</p>
-                { review.anonymous !== 0 ? <p className='author'>Anonymous</p> : <p className='author'>{review.studentName}</p>}
+                <div className="foot-note">
+                    <p>{`${time} . ${day}/${month}/${year}`}</p>
+                    { review.anonymous !== 0 ? <p className='author'>Anonymous</p> : <p className='author'>{review.studentName}</p>}
 
-            </div>
+                </div>
 
-        </section>
-    </main>
+            </section>
+        </main> : <h3>Loading...</h3>}
+    </>
   )
 }
 

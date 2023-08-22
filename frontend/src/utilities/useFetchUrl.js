@@ -8,11 +8,15 @@ import { useUserContext } from "./UserContext";
 export const useFetchUrl = (url) => {
 
     const { user } = useUserContext();
-    const { token } = user;
+    const token = user && user.token;
+
+    
 
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true)
         const getData = async () => {
 
             try {
@@ -25,10 +29,12 @@ export const useFetchUrl = (url) => {
 
                 if(res.status === 200){
                     setData(res.data)
+                    setLoading(false)
                 }
 
             } catch (error) {
                 console.log(error)
+                setLoading(false)
             }
         }
 
