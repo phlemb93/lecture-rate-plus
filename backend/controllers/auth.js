@@ -134,7 +134,7 @@ export const confirmEmail = async (req, res) => {
 
     const url = `http://localhost:8000/api/auth/confirmation/${emailToken}`;
 
-     const transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
         service: 'hotmail',
         auth: {
             user: 'flemb6362@outlook.com',
@@ -249,7 +249,6 @@ if(!validator.isEmail(email)) {
 
             if(match) {
                 const { password, name, studentId, token, ...others } = data[0];
-                const firstName = name.split(' ')[0];
 
                 //JWT LOGIC
                 jwt.sign({ studentId }, process.env.JWT_SECRET, { expiresIn: '3d' }, (err, token) => {
@@ -258,7 +257,7 @@ if(!validator.isEmail(email)) {
                         res.status(500).json('JWT Server Error')
                     }
                     if(token){
-                        res.status(200).json({ firstName, token })
+                        res.status(200).json({ name, studentId, token })
                     }
                 })
             } else {
@@ -288,7 +287,7 @@ if(!validator.isEmail(email)) {
                                 res.status(500).json('JWT Server Error')
                             }
                             if(token){
-                                res.status(200).json({ name, token })
+                                res.status(200).json({ name, staffId, token })
                             }
                         })
                     } else {

@@ -4,7 +4,7 @@ import { db } from "../dbConnect.js";
 export const getAllStaffUserReviews = (req, res) => {
     const { userId } = req.params;
     
-    const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.createdAt, reviews.anonymous, courses.courseCode, courses.staffNum, staffs.name as staffName, staffs.department as staffDept, students.name as studentName FROM reviews JOIN courses ON reviews.courseId = courses.courseId JOIN students ON reviews.studentId = students.studentId JOIN staffs ON courses.staffNum = staffs.staffId WHERE staffs.staffId = ?"
+    const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.createdAt, reviews.anonymous, courses.courseCode, courses.staffNum, staffs.name as staffName, staffs.department as staffDept, students.name as studentName FROM reviews JOIN courses ON reviews.courseId = courses.courseId JOIN students ON reviews.studentId = students.studentId JOIN staffs ON courses.staffNum = staffs.staffId WHERE staffs.staffId = ? ORDER BY reviews.createdAt DESC"
 
     db.query(q, [userId], (err, data) => {
         if(err){
@@ -45,7 +45,7 @@ export const getAllStudentUserReviews = (req, res) => {
 //GET ALL REVIEWS 
 export const getAllReviews = (req, res) => {
 
-    const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.createdAt, reviews.anonymous, courses.courseCode, courses.staffNum, staffs.name as staffName, staffs.department as staffDept, students.name as studentName FROM reviews JOIN courses ON reviews.courseId = courses.courseId JOIN students ON reviews.studentId = students.studentId JOIN staffs ON courses.staffNum = staffs.staffId";
+    const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.createdAt, reviews.anonymous, courses.courseCode, courses.staffNum, staffs.name as staffName, staffs.department as staffDept, students.name as studentName FROM reviews JOIN courses ON reviews.courseId = courses.courseId JOIN students ON reviews.studentId = students.studentId JOIN staffs ON courses.staffNum = staffs.staffId ORDER BY reviews.createdAt DESC";
 
     db.query(q, (err, data) => {
         if(err){
