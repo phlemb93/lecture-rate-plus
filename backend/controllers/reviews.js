@@ -25,7 +25,7 @@ export const getAllStudentUserReviews = (req, res) => {
 
     if(studentId == userId){
 
-        const q = "SELECT reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.courseCode, reviews.date, staffs.name as staffName, staffs.department as staffDept, staffs.image as staffImg, students.name  as studentName FROM reviews JOIN staffs ON reviews.staffId = staffs.staffId JOIN students ON reviews.studentId = students.studentId WHERE reviews.studentId = ?"
+        const q = "SELECT reviews.reviewId, reviews.clarity, reviews.engagement, reviews.communication, reviews.comment, reviews.createdAt, reviews.anonymous, staffs.name as staffName, staffs.department as staffDept, students.name as studentName, students.email as studentEmail FROM reviews JOIN students ON reviews.studentId = students.studentId JOIN courses ON reviews.courseId = courses.courseId JOIN staffs ON courses.staffNum = staffs.staffId WHERE reviews.studentId = ? ORDER BY reviews.createdAt DESC"
     
         db.query(q, [userId], (err, data) => {
             if(err){
