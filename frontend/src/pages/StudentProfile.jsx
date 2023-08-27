@@ -1,56 +1,79 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useUserContext } from '../utilities/UserContext';
 import { useFetchUrl } from '../utilities/useFetchUrl';
 import axios from 'axios';
+import { format } from 'timeago.js';
+
 
 const StudentProfile = () => {
   const { user } = useUserContext();
-  const studentId = user && user.studentId;
-  const { data: courses } = useFetchUrl('courses');
-  const [day, setDay] = useState('');
-  let d; 
- 
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const token = user && user.token
 
-  const setNotification = () => {
+  const [reviews, setReviews] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [student, setStudent] = useState({});
 
-    const today = new Date();
-    d = today.getDay();
-    const time = today.toLocaleTimeString();
-
-    courses && courses.map(course => {
-
-      if(course.days.includes(day) && course.notifyTime === time) {
-          console.log(course)
-          axios.post('http://localhost:8000/api/courses/notification', { course, studentId })
-          .then(res => console.log(res))
-          .catch(err => console.log(err))
-      }
-  })
-  }
-
-  setInterval(setNotification, 1000)
-
+  //FETCH ALL THE REVIEWS OF THE STAFF MEMBER
   useEffect(() => {
 
-  switch(d){
-    case 0: return setDay('Sunday');
-    case 1: return setDay('Monday');
-    case 2: return setDay('Tuesday');
-    case 3: return setDay('Wednesday');
-    case 4: return setDay('Thursday');
-    case 5: return setDay('Friday');
-    case 6: return setDay('Saturday');
-    default: setDay('');
-  }
+    setIsLoading(true)
 
-  }, [])
+    const getReviews = async () => {
+        try {
+            const res = await axios.get('http://localhost:8000/api/reviews/find/students/' + id, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
 
+            if(res.status === 200) {
+                setReviews(res.data);
+                setIsLoading(false);
+                setStudent(res.data[0]);
+            }
 
-  const { id } = useParams();
+        } catch (error) {
+            console.log(error)
+            setIsLoading(false);
+        }
+    }
+   getReviews();
+}, [])
+
 
   return (
-    <div>StudentProfile - {id}</div>
+    <main className='student-profile'>
+      <h3>Good day, { student.studentName.split(' ')[0] }!</h3>
+      <section className="details">
+        <div className="pic">{`${student.studentName.split(' ')[0].slice(0, 1)}${student.studentName.split(' ')[1].slice(0, 1)} `}</div>
+        <p>{ student.studentName }</p>
+        <div className="hr"></div>
+        <p className="email">{ student.studentEmail }</p>
+        <div className="status">Student</div>
+      </section>
+
+      <section className="feedback">
+        <h4>Rate your Lecturer</h4>
+        <p>LectureRate+ makes it easy for students to leave reviews for theirs lecturers and lectures.</p>
+        <button onClick={() => navigate('/review')}>Give a Rating</button>
+      </section>
+
+      <section className="ratings">
+        <p className="header">Latest Ratings</p>
+        <div className="data">
+          { reviews && reviews.slice(0,5).map(review => (
+                  <div className="review" key={review.reviewId} onClick={() => navigate(`/ratings/${review.reviewId}`)}>
+                    { review.anonymous !== 0 ? <p className='author'><span>Anonymous</span> provided a review</p> : <p className='author'><span>{review.studentName}</span> provided a review</p>}
+                    <p className='time'>{format(review.createdAt)}</p>
+                  </div>
+          ))}
+        </div>
+      </section>
+    </main>
   )
 }
 

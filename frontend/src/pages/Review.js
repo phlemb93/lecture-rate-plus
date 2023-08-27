@@ -39,40 +39,40 @@ return (
                         <div 
                         className="one" 
                         onClick={handleClarityClick}
-                        onMouseEnter={selectOneC} 
-                        onMouseLeave={clarity ? selectOneC : deSelectOneC } 
+                        // onMouseEnter={selectOneC} 
+                        // onMouseLeave={clarity ? selectOneC : deSelectOneC } 
                         style={{backgroundColor: oneC ? 'rgba(255, 94, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="two" 
                         onClick={handleClarityClick}
-                        onMouseEnter={selectTwoC} 
-                        onMouseLeave={clarity ? selectTwoC : deSelectTwoC} 
+                        // onMouseEnter={selectTwoC} 
+                        // onMouseLeave={clarity ? selectTwoC : deSelectTwoC} 
                         style={{backgroundColor: twoC ? 'rgba(255, 128, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="three" 
                         onClick={handleClarityClick}
-                        onMouseEnter={selectThreeC} 
-                        onMouseLeave={clarity ? selectThreeC : deSelectThreeC}  
+                        // onMouseEnter={selectThreeC} 
+                        // onMouseLeave={clarity ? selectThreeC : deSelectThreeC}  
                         style={{backgroundColor: threeC ? 'rgba(213, 181, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="four" 
                         onClick={handleClarityClick}
-                        onMouseEnter={selectFourC} 
-                        onMouseLeave={clarity ? selectFourC : deSelectFourC}  
+                        // onMouseEnter={selectFourC} 
+                        // onMouseLeave={clarity ? selectFourC : deSelectFourC}  
                         style={{backgroundColor: fourC ? 'rgba(100, 223, 0, 0.5)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="five" 
                         onClick={handleClarityClick}
-                        onMouseEnter={selectFiveC} 
-                        onMouseLeave={clarity ? selectFiveC : deSelectFiveC}  
+                        // onMouseEnter={selectFiveC} 
+                        // onMouseLeave={clarity ? selectFiveC : deSelectFiveC}  
                         style={{backgroundColor: fiveC ? 'rgba(8, 153, 0, 0.7)' : 'rgb(231, 229, 229)'}}
                         ></div>
                     </div>
@@ -198,7 +198,7 @@ return (
                 <Link to='https://www.beds.ac.uk/student-experience/academic-information/student-code-of-conduct/#:~:text=As%20independent%20adults%20with%20legal,students%2C%20staff%20and%20their%20successors.' target='_blank'>View the University's Student Code of Conduct</Link>
             </div>
             <textarea 
-                placeholder='What do you want other students to know about this professor' 
+                placeholder='What do you have to say about the just concluded lecture' 
                 cols="30" 
                 rows="10" 
                 onChange={(e) => setComment(e.target.value)}

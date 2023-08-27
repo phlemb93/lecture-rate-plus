@@ -38,41 +38,12 @@ const Ratings = () => {
         }
     }, [])
 
-    let img = "../images/icon-128.png";
-    
-    const handleNotification = () => {
-        Notification.requestPermission().then(perm => {
-            if(perm === "granted"){
-                new Notification("Lecture Feedback", {
-                    body: "You will be notified after every lecture!",
-                    // tag: "Lecture Feedback",
-                    icon: img
-                })
-            }
-        })
-    }
 
-    // let notification;
-
-    // useEffect(() => {
-
-    //     document.addEventListener("visibilitychange", () => {
-    //         if(document.visibilityState === "hidden") {
-    //            notification = new Notification("Please, come back", {
-    //                 body: "Pleaseeeee!",
-    //                 tag: "Come Back"
-    //             })
-    //         } else {
-    //             notification.close();
-    //         }
-    //     })
-    // }, [])
     
   return (
     <main className='ratings'>
         <header>
             <h1>Reviews</h1>
-            <button onClick={handleNotification}>Notification</button>
         </header>
         <section className='ratings-container'>
             { !isLoading ? (

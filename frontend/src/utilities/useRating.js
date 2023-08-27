@@ -23,25 +23,13 @@ const useRating = () => {
     const [fourCo, setFourCo] = useState(false);
     const [fiveCo, setFiveCo] = useState(false);
 
+    //CLARITY
     const selectOneC = () => {
         setOneC(true)
     }
     const deSelectOneC = () => {
         setOneC(false)
     }
-    const selectOneE = () => {
-        setOneE(true)
-    }
-    const deSelectOneE = () => {
-        setOneE(false)
-    }
-    const selectOneCo = () => {
-        setOneCo(true)
-    }
-    const deSelectOneCo = () => {
-        setOneCo(false)
-    }
-
 
     const selectTwoC = () => {
         setOneC(true)
@@ -51,23 +39,6 @@ const useRating = () => {
         setOneC(false)
         setTwoC(false)
     }
-    const selectTwoE = () => {
-        setOneE(true)
-        setTwoE(true)
-    }
-    const deSelectTwoE = () => {
-        setOneE(false)
-        setTwoE(false)
-    }
-    const selectTwoCo = () => {
-        setOneCo(true)
-        setTwoCo(true)
-    }
-    const deSelectTwoCo = () => {
-        setOneCo(false)
-        setTwoCo(false)
-    }
-
 
     const selectThreeC = () => {
         setOneC(true)
@@ -79,27 +50,6 @@ const useRating = () => {
         setTwoC(false)
         setThreeC(false)
     }
-    const selectThreeE = () => {
-        setOneE(true)
-        setTwoE(true)
-        setThreeE(true)
-    }
-    const deSelectThreeE = () => {
-        setOneE(false)
-        setTwoE(false)
-        setThreeE(false)
-    }
-    const selectThreeCo = () => {
-        setOneCo(true)
-        setTwoCo(true)
-        setThreeCo(true)
-    }
-    const deSelectThreeCo = () => {
-        setOneCo(false)
-        setTwoCo(false)
-        setThreeCo(false)
-    }
-
 
     const selectFourC = () => {
         setOneC(true)
@@ -113,31 +63,6 @@ const useRating = () => {
         setThreeC(false)
         setFourC(false)
     }
-    const selectFourE = () => {
-        setOneE(true)
-        setTwoE(true)
-        setThreeE(true)
-        setFourE(true)
-    }
-    const deSelectFourE = () => {
-        setOneE(false)
-        setTwoE(false)
-        setThreeE(false)
-        setFourE(false)
-    }
-    const selectFourCo = () => {
-        setOneCo(true)
-        setTwoCo(true)
-        setThreeCo(true)
-        setFourCo(true)
-    }
-    const deSelectFourCo = () => {
-        setOneCo(false)
-        setTwoCo(false)
-        setThreeCo(false)
-        setFourCo(false)
-    }
-
 
     const selectFiveC = () => {
         setOneC(true)
@@ -153,6 +78,50 @@ const useRating = () => {
         setFourC(false)
         setFiveC(false)
     }
+
+
+
+    //ENGAGEMENT
+    const selectOneE = () => {
+        setOneE(true)
+    }
+    const deSelectOneE = () => {
+        setOneE(false)
+    }
+
+    const selectTwoE = () => {
+        setOneE(true)
+        setTwoE(true)
+    }
+    const deSelectTwoE = () => {
+        setOneE(false)
+        setTwoE(false)
+    }
+
+    const selectThreeE = () => {
+        setOneE(true)
+        setTwoE(true)
+        setThreeE(true)
+    }
+    const deSelectThreeE = () => {
+        setOneE(false)
+        setTwoE(false)
+        setThreeE(false)
+    }
+
+    const selectFourE = () => {
+        setOneE(true)
+        setTwoE(true)
+        setThreeE(true)
+        setFourE(true)
+    }
+    const deSelectFourE = () => {
+        setOneE(false)
+        setTwoE(false)
+        setThreeE(false)
+        setFourE(false)
+    }
+
     const selectFiveE = () => {
         setOneE(true)
         setTwoE(true)
@@ -167,6 +136,49 @@ const useRating = () => {
         setFourE(false)
         setFiveE(false)
     }
+
+
+    //COMMUNICATION
+    const selectOneCo = () => {
+        setOneCo(true)
+    }
+    const deSelectOneCo = () => {
+        setOneCo(false)
+    }
+
+    const selectTwoCo = () => {
+        setOneCo(true)
+        setTwoCo(true)
+    }
+    const deSelectTwoCo = () => {
+        setOneCo(false)
+        setTwoCo(false)
+    }
+
+    const selectThreeCo = () => {
+        setOneCo(true)
+        setTwoCo(true)
+        setThreeCo(true)
+    }
+    const deSelectThreeCo = () => {
+        setOneCo(false)
+        setTwoCo(false)
+        setThreeCo(false)
+    }
+    
+    const selectFourCo = () => {
+        setOneCo(true)
+        setTwoCo(true)
+        setThreeCo(true)
+        setFourCo(true)
+    }
+    const deSelectFourCo = () => {
+        setOneCo(false)
+        setTwoCo(false)
+        setThreeCo(false)
+        setFourCo(false)
+    }
+    
     const selectFiveCo = () => {
         setOneCo(true)
         setTwoCo(true)
@@ -182,6 +194,8 @@ const useRating = () => {
         setFiveCo(false)
     }
 
+   
+
 
 const [clarity, setClarity] = useState(0);
 const [engagement, setEngagement] = useState(0);
@@ -190,15 +204,69 @@ const [communication, setCommunication] = useState(0);
 const handleClarityClick = (e) => {
     switch(e.target.className) {
         case 'one': 
-            return setClarity(1);
+             setClarity(1);
+             setOneC(prev => !prev);
+             setTwoC(false);
+             setThreeC(false);
+             setFourC(false);
+             setFiveC(false);
+             break;
         case 'two': 
-            return setClarity(2);
+             setClarity(2);
+             setOneC(prev => !prev);
+             setTwoC(prev => !prev);
+             setThreeC(false);
+             setFourC(false);
+             setFiveC(false);
+
+             break;
         case 'three': 
-            return setClarity(3);
+             setClarity(3);
+
+             if(twoC === false) {
+                setOneC(prev => !prev);
+                setTwoC(prev => !prev);
+                setThreeC(prev => !prev);
+                setFourC(false);
+                setFiveC(false);
+             } else {
+                setOneC(true);
+                setTwoC(true);
+                setThreeC(true);
+                setFourC(false);
+                setFiveC(false);
+             }
+
+             if(threeC === false) {
+                setOneC(prev => !prev);
+                setTwoC(prev => !prev);
+                setThreeC(prev => !prev);
+                setFourC(false);
+                setFiveC(false);
+             } else {
+                setOneC(false);
+                setTwoC(false);
+                setThreeC(false);
+                setFourC(false);
+                setFiveC(false);
+             }
+             break;
         case 'four': 
-            return setClarity(4);
+             setClarity(4);
+             setOneC(prev => !prev);
+             setTwoC(prev => !prev);
+             setThreeC(prev => !prev);
+             setFourC(prev => !prev);
+             setFiveC(false);
+             break;
         case 'five': 
-            return setClarity(5);
+             setClarity(5);
+             setOneC(prev => !prev);
+             setTwoC(prev => !prev);
+             setThreeC(prev => !prev);
+             setFourC(prev => !prev);
+             setFiveC(prev => !prev);
+             break;
         default:
             return setClarity(0);
     }
