@@ -1,7 +1,8 @@
 main.student-profile {
     width: 100%;
-    height: 100vh;
-    padding: 20px ;
+    height: auto;
+    padding: 20px;
+    display: flex;
 
     h3 {
         width: 80%;
@@ -108,5 +109,12 @@ main.student-profile {
                 }
             }
         }
+    }
+}
+
+@media screen and (max-width: 780px) {
+    main.student-profile {
+        display: flex;
+        flex-direction: column;
     }
 }

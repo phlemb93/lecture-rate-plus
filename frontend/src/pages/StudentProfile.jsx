@@ -44,12 +44,18 @@ const StudentProfile = () => {
    getReviews();
 }, [])
 
+let firstName = student.studentName && student.studentName.split(' ')[0];
+let firstInitials = student.studentName && student.studentName.split(' ')[0].slice(0, 1);
+let lastInitials = student.studentName && student.studentName.split(' ')[1].slice(0, 1);
+
 
   return (
+    <>
+    { isLoading ? <h3>Loading...</h3> : 
     <main className='student-profile'>
-      <h3>Good day, { student.studentName.split(' ')[0] }!</h3>
+      <h3>Good day, { firstName }!</h3>
       <section className="details">
-        <div className="pic">{`${student.studentName.split(' ')[0].slice(0, 1)}${student.studentName.split(' ')[1].slice(0, 1)} `}</div>
+        <div className="pic">{`${firstInitials}${lastInitials}`}</div>
         <p>{ student.studentName }</p>
         <div className="hr"></div>
         <p className="email">{ student.studentEmail }</p>
@@ -73,7 +79,8 @@ const StudentProfile = () => {
           ))}
         </div>
       </section>
-    </main>
+    </main> }
+    </>
   )
 }
 

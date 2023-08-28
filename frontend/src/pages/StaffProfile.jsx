@@ -1,27 +1,35 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useUserContext } from '../utilities/UserContext';
 import { useFetchUrl } from '../utilities/useFetchUrl';
+import { format } from 'timeago.js';
 
 const StaffProfile = () => {
 
-    const {user} = useUserContext();
-    // console.log(user)
-
+    const { user } = useUserContext();
     const { id } = useParams();
-    const { data: staff, loading } = useFetchUrl(`staffs/${id}`)
+    const navigate = useNavigate();
+    const token = user && user.token
+  
+    const [reviews, setReviews] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [staffs, setStaff] = useState({});
+
+    const { data:reviewList, loading } = useFetchUrl(`reviews/find/staffs/${id}`)
+    const staff = reviewList && reviewList[0];
 
     const nameInitials = () => {
         
-        if(staff) {
-            const fname = staff.name.split(' ')[1];
-            const lname = staff.name.split(' ')[2];
+        if(staff !== null) {
 
-            if(staff.name.split(' ').length === 3 && (staff.name.split(' ')[0] === 'Prof' || staff.name.split(' ')[0] === 'Dr' || staff.name.split(' ')[0] === 'Mr' || staff.name.split(' ')[0] === 'Mrs' || staff.name.split(' ')[0] === 'Miss')) {
+            const fname = staff.staffName.split(' ')[1];
+            const lname = staff.staffName.split(' ')[2];
+
+            if(staff.staffName.split(' ').length === 3 && (staff.staffName.split(' ')[0] === 'Prof' || staff.staffName.split(' ')[0] === 'Dr' || staff.staffName.split(' ')[0] === 'Mr' || staff.staffName.split(' ')[0] === 'Mrs' || staff.staffName.split(' ')[0] === 'Miss')) {
                 
                 return fname.split('')[0] + lname.split('')[0];
 
-            } else if(staff.name.split(' ').length === 2 && (staff.name.split(' ')[0] === 'Prof' || staff.name.split(' ')[0] === 'Dr' || staff.name.split(' ')[0] === 'Mr' || staff.name.split(' ')[0] === 'Mrs' || staff.name.split(' ')[0] === 'Miss')) {
+            } else if(staff.staffName.split(' ').length === 2 && (staff.staffName.split(' ')[0] === 'Prof' || staff.staffName.split(' ')[0] === 'Dr' || staff.staffName.split(' ')[0] === 'Mr' || staff.staffName.split(' ')[0] === 'Mrs' || staff.staffName.split(' ')[0] === 'Miss')) {
 
                 return fname.split('')[0] + fname.split('')[1];
 
@@ -32,28 +40,33 @@ const StaffProfile = () => {
   return (
     <>
         { loading ? <div>Loading...</div> : 
-            <div className="staff-profile">
-                <div className="profile">
+            <main className="staff-profile">
+
+                <h3>Good day, { staff && staff.staffName.split(' ')[1] }!</h3>
+
+                <section className="profile">
                     <div className="image">
-                        <h1>{ nameInitials() }</h1>
+                     { nameInitials() }
                     </div>
+                    <p>{ staff && staff.staffName }</p>
+                    <div className="hr"></div>
+                    <p className="email">{  staff && staff.staffEmail }</p>
+                    <div className="status">Staff</div>
+                </section>
 
-                    <input 
-                        type="text" 
-                        value={ staff && staff.name }
-                        className="name" 
-                    />
-                    <input 
-                        type="text" 
-                        value={ staff && staff.department }
-                        className="dept" 
-                        
-                    />
-                    {/* <h2>{ staff && staff.name }</h2> */}
-                    {/* <small>{staff && staff.department }</small> */}
-                </div>
+                <section className="ratings">
+                    <p className="header">Latest Ratings</p>
+                    <div className="data">
+                    { reviewList && reviewList.slice(0,5).map(review => (
+                            <div className="review" key={review.reviewId} onClick={() => navigate(`/ratings/${review.reviewId}`)}>
+                                { review.anonymous !== 0 ? <p className='author'><span>Anonymous</span> provided a review</p> : <p className='author'><span>{review.studentName}</span> provided a review</p>}
+                                <p className='time'>{format(review.createdAt)}</p>
+                            </div>
+                    ))}
+                    </div>
+                </section>
 
-            </div>
+            </main>
         }
     </>
   )
