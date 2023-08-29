@@ -13,7 +13,8 @@ main.home {
         gap: 5rem;
 
         .left {
-            width: 450px;
+            width: 100%;
+            max-width: 450px;
             height: 350px;
             padding: 20px;
 
@@ -48,7 +49,8 @@ main.home {
             }
         }
         .right {
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
             height: 400px;
             padding: 20px;
             
@@ -73,8 +75,9 @@ main.home {
         gap: 5rem;
 
         .right {
-            width: 400px;
-            height: 200px;
+            width: 100%;
+            max-width: 400px;
+            height: 220px;
             padding: 20px;
             box-shadow: 2px 2px 10px $deep-color;
 
@@ -112,7 +115,8 @@ main.home {
         }
 
         .left {
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
             height: 400px;  
 
             .image {
@@ -134,8 +138,9 @@ main.home {
         gap: 5rem;
 
         .right {
-            width: 400px;
-            height: 200px;
+            width: 100%;
+            max-width: 400px;
+            height: 220px;
             padding: 20px;
             box-shadow: 2px 2px 10px $deep-color;
 
@@ -172,7 +177,8 @@ main.home {
         }
 
         .left {
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
             height: 400px;  
 
             .image {

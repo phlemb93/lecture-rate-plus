@@ -5,7 +5,7 @@ main.register {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    padding: 0 20px;
 
     .form {   
         display: flex;
@@ -21,7 +21,8 @@ main.register {
         }
 
         form {
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
             height: 550px;
             padding: 20px;
             box-shadow: 2px 2px 8px $deep-color;

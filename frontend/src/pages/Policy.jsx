@@ -4,7 +4,7 @@ const About = () => {
   return (
     <main className="policy">
       <header>
-        <h1>Privacy Policy</h1>
+        <h2>Privacy Policy</h2>
         <small>Last Updated: 28/08/2023</small>
       </header>
 

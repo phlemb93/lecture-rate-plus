@@ -5,7 +5,7 @@ main.staff-profile {
     display: flex;
 
     h3 {
-        width: 80%;
+        width: 100%;
         max-width: 350px;
         color: gray;
         font-weight: normal;
@@ -16,7 +16,7 @@ main.staff-profile {
         border: 1px solid rgba(128, 128, 128, 0.25);
         border-radius: 5px;
         margin: 0 auto 50px;
-        width: 80%;
+        width: 100%;
         max-width: 350px;
         padding: 20px;
         display: flex;
@@ -57,7 +57,7 @@ main.staff-profile {
         border: 1px solid rgba(128, 128, 128, 0.25);
         border-radius: 10px;
         margin: 20px auto;
-        width: 80%;
+        width: 100%;
         max-width: 350px;
         font-size: 14px;
 
@@ -80,6 +80,10 @@ main.staff-profile {
 
                 &:last-child {
                     border: none;
+                }
+
+                span {
+                    color: $primary-color;
                 }
             }
         }

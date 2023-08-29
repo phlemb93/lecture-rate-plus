@@ -4,10 +4,24 @@ main.review {
     margin: 20px auto;
     padding: 20px;
 
-    h2 {
+    .header {
         margin: 0 auto 30px;
-        font-weight: normal;
         max-width: 780px;
+        position: relative;
+
+        h2 {
+            font-weight: normal;
+        }
+        &::after {
+            content: '';
+            height: 10px;
+            width: 180px;
+            background-color: $lighter-color;
+            position: absolute;
+            left: 5%;
+            bottom: 5%;
+            z-index: -1;
+        }
     }
 
     section.form {

@@ -4,9 +4,11 @@ main.login {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 20px;
 
     .content {
-        width: 400px;
+        width: 100%;
+        max-width: 400px;
         height: 400px;
         padding: 20px;
         box-shadow: 2px 2px 8px $deep-color;

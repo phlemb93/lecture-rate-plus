@@ -6,7 +6,7 @@ main.ratings {
     flex-direction: column;
     justify-content: center;
     gap: 20px;
-    margin: 0 auto;
+    margin: 0 auto 30px;
     padding: 20px;
 
     .ratings-container {
@@ -24,9 +24,11 @@ main.ratings {
             justify-content: center;
             border: none;
             border-radius: 5px;
+            overflow: hidden;
 
             h2 {
                 margin-bottom: 5px;
+                color: $deepest-color;
             }
             small {
                 margin-bottom: 20px;
@@ -43,6 +45,7 @@ main.ratings {
                 gap: 10px;
                 margin-bottom: 20px;
                 font-size: 14px;
+                color: $primary-color;
             }
 
             .foot-note {

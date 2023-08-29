@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useUserContext } from '../utilities/UserContext';
 import Chart from 'react-google-charts';
+import Loading from '../components/Loading';
 
 
 
@@ -79,7 +80,7 @@ const Rating = () => {
         <main className='rating'>
             <section className="container">
 
-                <h2 className='header'>Rating for <Link to={`/staffs/${review.staffId}`}>{ name()}</Link></h2> 
+                <h3 className='header'>Rating for <Link to={`/staffs/${review.staffId}`}>{ name()}</Link></h3> 
                 
                 <textarea 
                     className="comment"
@@ -94,7 +95,7 @@ const Rating = () => {
                         options={{
                             title: 'Metrics',
                         }}
-                        width='500px'
+                        width='380px'
                         height='300px'
                     />
                 </div>
@@ -107,7 +108,7 @@ const Rating = () => {
                 </div>
 
             </section>
-        </main> : <h3>Loading...</h3>}
+        </main> : <Loading />}
     </>
   )
 }

@@ -5,6 +5,7 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 import axios from 'axios';
 import { useUserContext } from '../utilities/UserContext';
 import { format } from 'timeago.js';
+import Loading from '../components/Loading';
 
 
 
@@ -170,6 +171,7 @@ const StaffRatings = () => {
 }
 
   return (
+    <> { isLoading ? <Loading /> : 
     <div className='staff-ratings'>
         <div className="profile">
           <div className="image">
@@ -226,7 +228,6 @@ const StaffRatings = () => {
                     }}
                     width= "100%"
                     height= "100%"
-               
               />
             </div>
           </div>
@@ -241,12 +242,11 @@ const StaffRatings = () => {
                 </div>
               ))}
             </div>
-          </div>
-          
+          </div>    
         </div>
 
-       
-    </div>
+    </div> }
+    </> 
   )
 }
 

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useUserContext } from '../utilities/UserContext';
 import { useFetchUrl } from '../utilities/useFetchUrl';
 import { format } from 'timeago.js';
+import Loading from '../components/Loading';
 
 const StaffProfile = () => {
 
@@ -39,7 +40,7 @@ const StaffProfile = () => {
 
   return (
     <>
-        { loading ? <div>Loading...</div> : 
+        { loading ? <Loading /> : 
             <main className="staff-profile">
 
                 <h3>Good day, { staff && staff.staffName.split(' ')[1] }!</h3>
@@ -59,8 +60,7 @@ const StaffProfile = () => {
                     <div className="data">
                     { reviewList && reviewList.slice(0,5).map(review => (
                             <div className="review" key={review.reviewId} onClick={() => navigate(`/ratings/${review.reviewId}`)}>
-                                { review.anonymous !== 0 ? <p className='author'><span>Anonymous</span> provided a review</p> : <p className='author'><span>{review.studentName}</span> provided a review</p>}
-                                <p className='time'>{format(review.createdAt)}</p>
+                                { review.anonymous !== 0 ? <p className='author'><span>Anonymous</span> provided a feedback, {format(review.createdAt)}.</p> : <p className='author'><span>{review.studentName}</span> provided a feedback, {format(review.createdAt)}.</p>}
                             </div>
                     ))}
                     </div>

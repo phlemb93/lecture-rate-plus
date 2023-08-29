@@ -49,15 +49,9 @@ const Login = () => {
                 setPassword('');
                 setError('');
 
+                //NAVIGATE TO THE REVIEW PAGE
+                navigate('/review');
 
-                //OPEN EMAIL CONFIRMATION PAGE
-                if(user && user.studentId !== null){
-                    // navigate('/review');
-                    console.log('Student logs in')
-                } else if(user && user.staffId !== null){
-                    // navigate('/ratings');
-                    console.log('Staff logs in')
-                }
             }
             
         } catch (error) {

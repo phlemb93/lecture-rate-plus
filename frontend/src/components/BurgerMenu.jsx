@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useIsOpenContext } from '../utilities/IsOpenContext';
 import PersonIcon from '@mui/icons-material/Person';
-import InfoIcon from '@mui/icons-material/Info';
+import PolicyIcon from '@mui/icons-material/Policy';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -29,7 +29,7 @@ function BurgerMenu() {
     }
     const handleAbout = (e) => {
        closeBurgerMenu();
-       navigate('/about')
+       navigate('/policy')
     }
     const handleRegister = (e) => {
        closeBurgerMenu();
@@ -66,8 +66,8 @@ function BurgerMenu() {
             <div className="content">
                 <div className="not-active">
                     <div onClick={handleAbout}>
-                        <InfoIcon style={{fontSize: 20}} />
-                        <p>About</p>
+                        <PolicyIcon style={{fontSize: 20}} />
+                        <p>Policy</p>
                     </div>
 
                     <div onClick={handleRegister} style={{display: user ? 'none' : 'flex'}}>

@@ -18,6 +18,7 @@ const Register = () => {
     const [passError, setPassError] = useState(false);
 
     const { handleOpenEmail } = useIsOpenContext();
+    const navigate = useNavigate();
 
     const handleError = (e) => {
         setConfirmPassword(e.target.value)
@@ -53,7 +54,7 @@ const Register = () => {
                         return setError('Invalid credentials')
                     }
                     if (res.status === 500) {
-                        return setError('There is an error')
+                        return setError('Internal error')
                     }
 
                     if(res.status === 200) {
@@ -84,7 +85,6 @@ const Register = () => {
   return (
     <main className='register'>
         <div className='content'>
-            
             <div className="form">
                 <h2>Sign Up</h2>
                 <form onSubmit={handleSubmit}>
@@ -136,7 +136,7 @@ const Register = () => {
                             onChange={(e) => setAgreement(e.target.checked)}
                             checked={agreement}
                         />
-                        <p>By creating an account, I acknowledge that I have read, understood, and agree to the <span>Terms of Use</span> and <span>Privacy Policy.</span></p>
+                        <p>By creating an account, I acknowledge that I have read, understood, and agree to the <span onClick={() => navigate('/policy')}>Policy.</span></p>
                     </div>
                 
                     <button type="submit" 
@@ -144,10 +144,10 @@ const Register = () => {
                     >Sign Up</button>
 
                     <Link to='/login'>Log In</Link>
-                    { error && 
-                    <div className="error">
-                        <p>{error}</p>
-                    </div> }
+                   
+                    <div className="error" style={{display: error ? 'flex' : 'none'}}>
+                        <p>{ error }</p>
+                    </div> 
                 </form>
             </div>
             

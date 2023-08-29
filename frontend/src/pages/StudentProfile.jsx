@@ -4,6 +4,7 @@ import { useUserContext } from '../utilities/UserContext';
 import { useFetchUrl } from '../utilities/useFetchUrl';
 import axios from 'axios';
 import { format } from 'timeago.js';
+import Loading from '../components/Loading';
 
 
 const StudentProfile = () => {
@@ -51,7 +52,7 @@ let lastInitials = student.studentName && student.studentName.split(' ')[1].slic
 
   return (
     <>
-    { isLoading ? <h3>Loading...</h3> : 
+    { isLoading ? <Loading /> : 
     <main className='student-profile'>
       <h3>Good day, { firstName }!</h3>
       
@@ -74,8 +75,10 @@ let lastInitials = student.studentName && student.studentName.split(' ')[1].slic
         <div className="data">
           { reviews && reviews.slice(0,5).map(review => (
                   <div className="review" key={review.reviewId} onClick={() => navigate(`/ratings/${review.reviewId}`)}>
-                    { review.anonymous !== 0 ? <p className='author'><span>Anonymous</span> provided a review</p> : <p className='author'><span>{review.studentName}</span> provided a review</p>}
-                    <p className='time'>{format(review.createdAt)}</p>
+                    { review.anonymous !== 0 ? 
+                    <p className='author'>You provided a feedback on <span className='lecturer'>{review.staffName}</span> as<span className='anon'> anonymous,</span> {format(review.createdAt)}.</p> 
+                    : 
+                    <p className='author'>You provided a feedback on <span className='lecturer'>{review.staffName}, </span>{format(review.createdAt)}.</p> }
                   </div>
           ))}
         </div>

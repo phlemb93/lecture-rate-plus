@@ -8,11 +8,13 @@ const Review = () => {
 const { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, setCourse, course, setComment, comment, setAnonymous, anonymous, inactive, courses } = useRating();
 
 
-// const { name, id } = useLocation().state;
-
 
 return (
     <main className='review'>
+
+        <div className="header">
+            <h2>Give a Rating</h2>
+        </div>
 
     {/* REVIEW FORM */}
         <section className="form">

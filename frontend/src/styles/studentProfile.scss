@@ -5,7 +5,7 @@ main.student-profile {
     display: flex;
 
     h3 {
-        width: 80%;
+        width: 100%;
         max-width: 350px;
         color: gray;
         font-weight: normal;
@@ -16,7 +16,7 @@ main.student-profile {
         border: 1px solid rgba(128, 128, 128, 0.25);
         border-radius: 5px;
         margin: 0 auto 50px;
-        width: 80%;
+        width: 100%;
         max-width: 350px;
         padding: 20px;
         display: flex;
@@ -58,7 +58,7 @@ main.student-profile {
         border-radius: 2px;
         margin: 0 auto 50px;
         padding: 30px;
-        width: 80%;
+        width: 100%;
         max-width: 350px;
         background-color: #fff3d6af;
         display: flex;
@@ -83,7 +83,7 @@ main.student-profile {
         border: 1px solid rgba(128, 128, 128, 0.25);
         border-radius: 10px;
         margin: 20px auto;
-        width: 80%;
+        width: 100%;
         max-width: 350px;
         font-size: 14px;
 
@@ -102,10 +102,19 @@ main.student-profile {
             .review {
                 border-bottom: 1px solid gray;
                 padding: 10px 0;
+                font-size: 14px;
                 cursor: pointer;
 
                 &:last-child {
                     border: none;
+                }
+
+                .lecturer{
+                    color: $primary-color;
+                }
+                .anon{
+                    color: $deep-color;
+                    font-weight: bold;
                 }
             }
         }
