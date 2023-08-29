@@ -53,7 +53,7 @@ const NavBar = () => {
                     <MenuIcon style={{ fontSize: 32, color: '#320900' }} />
                 </div>
                 <div className="not-active">
-                    <Link to='/about'>About</Link>
+                    <Link to='/policy'>Policy</Link>
                     <Link to='/register' className='signup' style={{display: user ? 'none' : 'flex'}}>Sign Up</Link>
                     <Link to='/login' style={{display: user ? 'none' : 'flex'}}>Login</Link>
                 </div>

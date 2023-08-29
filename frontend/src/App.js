@@ -8,7 +8,7 @@ import ConfirmEmail from './components/ConfirmEmail';
 import StudentProfile from './pages/StudentProfile';
 import StaffRatings from './pages/StaffRatings';
 import NotFound from './pages/NotFound';
-import About from './pages/About';
+import Policy from './pages/Policy';
 import Review from './pages/Review';
 import ResetPassword from './pages/ResetPassword';
 import BurgerMenu from './components/BurgerMenu';
@@ -38,7 +38,7 @@ const App = () => {
         <Route path='/register' element={ user ? <Ratings /> : <Register /> } />
         <Route path='/review' element={ user ? ( user.studentId ? <Review /> : <Ratings /> ) : <Login />} />
         <Route path='/ratings' element={ user ? <Ratings /> : <Home />} />
-        <Route path='/about' element={ <About /> } />
+        <Route path='/policy' element={ <Policy /> } />
         <Route path='/reset-password' element={ <ResetPassword /> } />
         <Route path='/ratings/:id' element={ user ? <Rating /> : <Home />} />
         <Route path='/staffs/:id' element={ user ? <StaffRatings /> : <Login /> } />

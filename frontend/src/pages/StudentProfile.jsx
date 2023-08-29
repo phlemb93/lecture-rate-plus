@@ -54,6 +54,7 @@ let lastInitials = student.studentName && student.studentName.split(' ')[1].slic
     { isLoading ? <h3>Loading...</h3> : 
     <main className='student-profile'>
       <h3>Good day, { firstName }!</h3>
+      
       <section className="details">
         <div className="pic">{`${firstInitials}${lastInitials}`}</div>
         <p>{ student.studentName }</p>
