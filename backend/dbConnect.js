@@ -3,8 +3,8 @@ import mysql from 'mysql';
 
 
 export const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Badrudeen93$',
-    database: 'lecture_rate_plus_schema'
+    host: 'sql8.freesqldatabase.com',
+    user: 'sql8644523',
+    password: 'UALxnj7tkF',
+    database: 'sql8644523'
 })

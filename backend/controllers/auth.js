@@ -39,7 +39,7 @@ import { db } from '../dbConnect.js';
 
 //REGISTER 
 export const register = (req, res) => {
-    const { name, email, password, isStudent, isStaff, department, image } = req.body;
+    const { name, email, password, isStudent, isStaff, department } = req.body;
 
     if(validator.isEmail(email)) {
 
