@@ -20,19 +20,16 @@ const StudentProfile = () => {
 
   const { data: courses } = useFetchUrl('courses');
   const [day, setDay] = useState('');
-  let d; 
 
   const setNotification = () => {
 
     const today = new Date();
-    d = today.getDay();
     const time = today.toLocaleTimeString();
 
     courses && courses.map(course => {
 
       if(course.days.includes(day) && course.notifyTime === time) {
-        console.log(course)
-        axios.post('http://localhost:8000/api/courses/notification', { course, studentId })
+        axios.post('https://lecture-rate-plus-api.vercel.app/api/courses/notification', { course, studentId })
         .then(res => console.log(res))
         .catch(err => console.log(err))
       }
@@ -40,9 +37,11 @@ const StudentProfile = () => {
     })
   }
 
-  setInterval(setNotification, 1000)
+setInterval(setNotification, 1000)
 
 useEffect(() => {
+
+  const d = new Date().getDay();
 
   switch(d){
     case 0: return setDay('Sunday');
@@ -58,8 +57,6 @@ useEffect(() => {
 }, [])
 
 
-
-
   //FETCH ALL THE REVIEWS OF THE STUDENT USER
   useEffect(() => {
 
@@ -67,7 +64,7 @@ useEffect(() => {
 
     const getReviews = async () => {
         try {
-            const res = await axios.get('http://localhost:8000/api/reviews/find/students/' + id, {
+            const res = await axios.get('https://lecture-rate-plus-api.vercel.app/api/reviews/find/students/' + id, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`

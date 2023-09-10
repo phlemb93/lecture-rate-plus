@@ -20,10 +20,7 @@ const Register = () => {
     const { handleOpenEmail } = useIsOpenContext();
     const navigate = useNavigate();
 
-    const handleError = (e) => {
-        setConfirmPassword(e.target.value)
-        setPassError(false)
-    }
+  
 
     useEffect(() => {
         if(status === 'Student'){
@@ -45,10 +42,11 @@ const Register = () => {
 
             if(password !== confirmPassword) {
                 setPassError(true)
+                setError('Confirm password must match password')
             } else {
 
                 try {
-                    const res = await axios.post('http://localhost:8000/api/auth/register', values)
+                    const res = await axios.post('https://lecture-rate-plus-api.vercel.app/api/auth/register', values)
 
                     if (res.status === 404) {
                         return setError('Invalid credentials')
@@ -76,38 +74,91 @@ const Register = () => {
                     
                 } catch (error) {
                     console.log(error)
+
+                    if(!error.response) {
+
+                        if(error.code === "ERR_NETWORK"){
+                            setError('Network Error')
+                        }
+                    }
+
+                    if (error.response && error.response.status === 404) {
+                        
+                        if(error && error.response.data === "Invalid email") {
+                            // setVerifyError(true)
+                            setError('Only the university email is accepted')
+                        } else {
+                            setError('Invalid credentials')
+                        }
+                    }
+        
+                    if (error.response && error.response.status === 500) {
+                        setError('There is an Internal Error')
+                    }
                 }
             }
-        } 
+        } else {
+            setError('Kindly tick the agreement box')
+        }
     }
 
+    const handleNameChange = (e) => {
+        setName(e.target.value);
+        setError('');
+        setPassError(false);
+    }
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+        setError('');
+        setPassError(false);
+    }
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        setError('');
+        setPassError(false);
+    }
+    const handleStatusChange = (e) => {
+        setStatus(e.target.value);
+        setError('');
+        setPassError(false);
+    }
+    const handleError = (e) => {
+        setConfirmPassword(e.target.value);
+        setPassError(false);
+        setError('');
+    }
 
   return (
     <main className='register'>
         <div className='content'>
             <div className="form">
                 <h2>Sign Up</h2>
+                  
+                <div className="error" style={{display: error ? 'flex' : 'none'}}>
+                        <p>{ error }</p>
+                </div> 
+
                 <form onSubmit={handleSubmit}>
                     <div className="name">
                         <label htmlFor="name">Full Name</label>
                         <input type="text" name="name" 
                         placeholder='Enter your full name'
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={ handleNameChange }
                         value={name}
                         /> 
                     </div>
                     <div className="email">
                         <label htmlFor="email">Email</label>
                         <input type="email" name="email" 
-                        placeholder='name@study.beds.ac.uk'
-                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder='firstname.lastname@study.beds.ac.uk'
+                        onChange={ handleEmailChange }
                         value={email}
                         /> 
                     </div>
                     <div className="status">
                         <label>I'm A</label>
                         <select 
-                            onChange={(e) => setStatus(e.target.value)}
+                            onChange={ handleStatusChange }
                             value={status}
                         >
                             <option>Student</option> 
@@ -118,7 +169,7 @@ const Register = () => {
                         <label htmlFor="password">Password</label>
                         <input type="password" name="password"
                           placeholder='Enter Password' 
-                          onChange={(e) => setPassword(e.target.value)}
+                          onChange={ handlePasswordChange }
                           value={password}
                           />
                     </div>
@@ -126,7 +177,7 @@ const Register = () => {
                         <label htmlFor="confirm-password">Confirm Password</label>
                         <input type="password" name="confirm-password"
                           placeholder='Re-enter Password' 
-                          onChange={handleError}
+                          onChange={ handleError }
                           value={confirmPassword}
                           style={{border: passError ? '2px solid red' : '1px solid rgba(128, 128, 128, 0.576)'}}
                           />
@@ -144,10 +195,7 @@ const Register = () => {
                     >Sign Up</button>
 
                     <Link to='/login'>Log In</Link>
-                   
-                    <div className="error" style={{display: error ? 'flex' : 'none'}}>
-                        <p>{ error }</p>
-                    </div> 
+                 
                 </form>
             </div>
             

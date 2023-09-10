@@ -332,7 +332,7 @@ const handleSubmit = async () => {
     const data = { clarity, engagement, communication, comment, courseId, anonymous }
 
     try {
-        const res = await axios.post('http://localhost:8000/api/reviews/', { ...data }, {
+        const res = await axios.post('https://lecture-rate-plus-api.vercel.app/api/reviews/', { ...data }, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
@@ -355,8 +355,6 @@ const handleSubmit = async () => {
 
 
 }
-
-
 
 
   return { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, course, setCourse, comment, setComment, anonymous, setAnonymous,  inactive, courses }

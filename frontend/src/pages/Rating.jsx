@@ -24,6 +24,10 @@ const Rating = () => {
 
     const { id } = useParams();
 
+    let clarityVal = review.clarity;
+    let engagementVal = review.engagement;
+    let commVal = review.communication;
+
     const chartData = [
         [
     "Element",
@@ -36,15 +40,15 @@ const Rating = () => {
       calc: "stringify",
     },
   ],
-        ["Clarity", 5, 'color: #4F1800', null],
-        ["Engagement", 3, 'color: #c35300', null],
-        ["Communication", 4, 'color: #ffd2a1', null]
+        ["Clarity", {clarityVal}, 'color: #4F1800', null],
+        ["Engagement", {engagementVal}, 'color: #c35300', null],
+        ["Communication", {commVal}, 'color: #ffd2a1', null]
       ];
 
     useEffect(() => {
         const getReviews = async () => {
             try {
-                const res = await axios.get('http://localhost:8000/api/reviews/' + id, {
+                const res = await axios.get('https://lecture-rate-plus-api.vercel.app/api/reviews/' + id, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
