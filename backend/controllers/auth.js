@@ -5,35 +5,6 @@ import jwt from 'jsonwebtoken';
 import { db } from '../dbConnect.js';
 
 
-// // CREATE A TRANSPORTER FOR EMAIL VERIFICATION
-
-// const verifyUser = (email) => {
-//     const transporter = nodemailer.createTransport({
-//         service: 'hotmail',
-//         auth: {
-//             user: 'flemb6362@outlook.com',
-//             pass: 'Badrudeen'
-//         }
-//     })
-    
-//     const mailOptions = {
-//         from: '"LectureRate+" <flemb6362@outlook.com>',
-//         to: email,
-//         subject: 'Verify Your Email Address!',
-//         html: '<p>Hello, kindly verify your <a>email address</a></p>'
-//     }
-    
-//     transporter.sendMail(mailOptions, (err, info) => {
-//         if(err){
-//            return console.log(err)
-//         } else{
-//             return console.log("Email sent!")
-//         }
-//     })
-
-// }
-
-
 
 
 
@@ -137,13 +108,13 @@ export const confirmEmail = async (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'hotmail',
         auth: {
-            user: 'flemb6362@outlook.com',
-            pass: 'Badrudeen'
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
         }
     })
     
     const mailOptions = {
-        from: '"LectureRate+" <flemb6362@outlook.com>',
+        from: `"LectureRate+" <${process.env.EMAIL_USER}>`,
         to: email,
         subject: 'Verify Your Email Address!',
         html: `<div>
