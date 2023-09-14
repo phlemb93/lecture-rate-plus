@@ -48,7 +48,7 @@ const Rating = () => {
     useEffect(() => {
         const getReviews = async () => {
             try {
-                const res = await axios.get('https://lecture-rate-plus-api.vercel.app/api/reviews/' + id, {
+                const res = await axios.get('http://localhost:8000/api/reviews/' + id, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`

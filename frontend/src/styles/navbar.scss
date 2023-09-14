@@ -40,6 +40,10 @@ nav {
         align-items: center;
         justify-content: flex-end;
 
+        a:hover, p:hover {
+            color: $deep-color;
+        }
+
         .burger {
             display: none;
             cursor: pointer;
@@ -54,70 +58,26 @@ nav {
         }
         
         .active {
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: flex-end;
             gap: 20px;
             font-size: 14px;
 
             .profile {
-                // font-size: 13px;
-                // display: flex;
-                // align-items: center;
-                // gap: 10px;
-                // cursor: pointer;
+                cursor: pointer;
                 position: relative;
-
-                .drop-down-icon {
-                    font-size: 13px;
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    cursor: pointer;
-                    position: relative;
-                    padding: 10px;
-
-                    .name {
-                        height: 100%;
-                        small {
-                            font-size: 10px;
-                            color: $link-color;
-                        }
-                    }
-                }
-            }
-
-            .drop-down-menu {
-                position: absolute;
-                top: 110%;
-                right: 0;
-                border: 1px solid $deepest-color;
-                display: flex;
-                flex-direction: column;
-                width: 150px;
-                height: 90px;
-                padding: 10px 5px;
-                font-size: 12px;
-                z-index: 100;
-                background-color: #FFF;
-                border: none;
-                border-radius: 5px;
-                box-shadow: 2px 2px 6px $deep-color;
-
-                div {
-                    display: flex;
-                    flex-direction:row-reverse;
-                    justify-content: flex-end;
-                    align-items: center;
-                    gap: 5px;
-                    width: 100%;
-                }
+                color: $primary-color;
+                font-weight: bold;
+                font-size: 1rem;
             }
         }
 
         a {
             padding: 8px 10px;
+            font-size: 1rem;
         }
+
         .signup {
             border: 1px solid #000;
         }

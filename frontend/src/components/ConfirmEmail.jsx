@@ -13,7 +13,7 @@ const ConfirmEmail = () => {
 
     try {
       const postData = async () => {
-        const res =  await axios.post('https://lecture-rate-plus-api.vercel.app/api/auth/confirmation', { email })
+        const res =  await axios.post('http://localhost:8000/api/auth/confirmation', { email })
   
         if(res.status === 200) {
           localStorage.removeItem('userEmail');

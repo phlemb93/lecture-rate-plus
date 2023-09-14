@@ -48,7 +48,7 @@ const StaffRatings = () => {
     useEffect(() => {
         const getReviews = async () => {
             try {
-                const res = await axios.get('https://lecture-rate-plus-api.vercel.app/api/reviews/find/staffs/' + id, {
+                const res = await axios.get('http://localhost:8000/api/reviews/find/staffs/' + id, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
@@ -73,7 +73,7 @@ const StaffRatings = () => {
     useEffect(() => {
         const getStats = async () => {
             try {
-                const res = await axios.get('https://lecture-rate-plus-api.vercel.app/api/reviews/find/staffs/stats/' + id, {
+                const res = await axios.get('http://localhost:8000/api/reviews/find/staffs/stats/' + id, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`

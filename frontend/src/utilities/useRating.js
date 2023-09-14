@@ -26,43 +26,57 @@ const useRating = () => {
     //CLARITY
     const selectOneC = () => {
         setOneC(true)
+        setTwoC(false)
+        setThreeC(false)
+        setFourC(false)
+        setFiveC(false)
+        setClarity(1)
     }
-    const deSelectOneC = () => {
-        setOneC(false)
-    }
+    // const deSelectOneC = () => {
+    //     setOneC(false)
+    // }
 
     const selectTwoC = () => {
         setOneC(true)
         setTwoC(true)
+        setThreeC(false)
+        setFourC(false)
+        setFiveC(false)
+        setClarity(2)
     }
-    const deSelectTwoC = () => {
-        setOneC(false)
-        setTwoC(false)
-    }
+    // const deSelectTwoC = () => {
+    //     setOneC(false)
+    //     setTwoC(false)
+    // }
 
     const selectThreeC = () => {
         setOneC(true)
         setTwoC(true)
         setThreeC(true)
+        setFourC(false)
+        setFiveC(false)
+        setClarity(3)
     }
-    const deSelectThreeC = () => {
-        setOneC(false)
-        setTwoC(false)
-        setThreeC(false)
-    }
+    // const deSelectThreeC = () => {
+    //     setOneC(false)
+    //     setTwoC(false)
+    //     setThreeC(false)
+    // }
 
     const selectFourC = () => {
         setOneC(true)
         setTwoC(true)
         setThreeC(true)
         setFourC(true)
+        setFiveC(false)
+        setClarity(4)
     }
-    const deSelectFourC = () => {
-        setOneC(false)
-        setTwoC(false)
-        setThreeC(false)
-        setFourC(false)
-    }
+    // const deSelectFourC = () => {
+    //     setOneC(false)
+    //     setTwoC(false)
+    //     setThreeC(false)
+    //     setFourC(false)
+    // }
 
     const selectFiveC = () => {
         setOneC(true)
@@ -70,57 +84,72 @@ const useRating = () => {
         setThreeC(true)
         setFourC(true)
         setFiveC(true)
+        setClarity(5)
     }
-    const deSelectFiveC = () => {
-        setOneC(false)
-        setTwoC(false)
-        setThreeC(false)
-        setFourC(false)
-        setFiveC(false)
-    }
+    // const deSelectFiveC = () => {
+    //     setOneC(false)
+    //     setTwoC(false)
+    //     setThreeC(false)
+    //     setFourC(false)
+    //     setFiveC(false)
+    // }
 
 
 
     //ENGAGEMENT
     const selectOneE = () => {
         setOneE(true)
+        setTwoE(false)
+        setThreeE(false)
+        setFourE(false)
+        setFiveE(false)
+        setEngagement(1)
     }
-    const deSelectOneE = () => {
-        setOneE(false)
-    }
+    // const deSelectOneE = () => {
+    //     setOneE(false)
+    // }
 
     const selectTwoE = () => {
         setOneE(true)
         setTwoE(true)
+        setThreeE(false)
+        setFourE(false)
+        setFiveE(false)
+        setEngagement(2)
     }
-    const deSelectTwoE = () => {
-        setOneE(false)
-        setTwoE(false)
-    }
+    // const deSelectTwoE = () => {
+    //     setOneE(false)
+    //     setTwoE(false)
+    // }
 
     const selectThreeE = () => {
         setOneE(true)
         setTwoE(true)
         setThreeE(true)
+        setFourE(false)
+        setFiveE(false)
+        setEngagement(3)
     }
-    const deSelectThreeE = () => {
-        setOneE(false)
-        setTwoE(false)
-        setThreeE(false)
-    }
+    // const deSelectThreeE = () => {
+    //     setOneE(false)
+    //     setTwoE(false)
+    //     setThreeE(false)
+    // }
 
     const selectFourE = () => {
         setOneE(true)
         setTwoE(true)
         setThreeE(true)
         setFourE(true)
+        setFiveE(false)
+        setEngagement(4)
     }
-    const deSelectFourE = () => {
-        setOneE(false)
-        setTwoE(false)
-        setThreeE(false)
-        setFourE(false)
-    }
+    // const deSelectFourE = () => {
+    //     setOneE(false)
+    //     setTwoE(false)
+    //     setThreeE(false)
+    //     setFourE(false)
+    // }
 
     const selectFiveE = () => {
         setOneE(true)
@@ -128,56 +157,71 @@ const useRating = () => {
         setThreeE(true)
         setFourE(true)
         setFiveE(true)
+        setEngagement(5)
     }
-    const deSelectFiveE = () => {
-        setOneE(false)
-        setTwoE(false)
-        setThreeE(false)
-        setFourE(false)
-        setFiveE(false)
-    }
+    // const deSelectFiveE = () => {
+    //     setOneE(false)
+    //     setTwoE(false)
+    //     setThreeE(false)
+    //     setFourE(false)
+    //     setFiveE(false)
+    // }
 
 
     //COMMUNICATION
     const selectOneCo = () => {
         setOneCo(true)
+        setTwoCo(false)
+        setThreeCo(false)
+        setFourCo(false)
+        setFiveCo(false)
+        setCommunication(1)
     }
-    const deSelectOneCo = () => {
-        setOneCo(false)
-    }
+    // const deSelectOneCo = () => {
+    //     setOneCo(false)
+    // }
 
     const selectTwoCo = () => {
         setOneCo(true)
         setTwoCo(true)
+        setThreeCo(false)
+        setFourCo(false)
+        setFiveCo(false)
+        setCommunication(2)
     }
-    const deSelectTwoCo = () => {
-        setOneCo(false)
-        setTwoCo(false)
-    }
+    // const deSelectTwoCo = () => {
+    //     setOneCo(false)
+    //     setTwoCo(false)
+    // }
 
     const selectThreeCo = () => {
         setOneCo(true)
         setTwoCo(true)
         setThreeCo(true)
+        setFourCo(false)
+        setFiveCo(false)
+        setCommunication(3)
     }
-    const deSelectThreeCo = () => {
-        setOneCo(false)
-        setTwoCo(false)
-        setThreeCo(false)
-    }
+    // const deSelectThreeCo = () => {
+    //     setOneCo(false)
+    //     setTwoCo(false)
+    //     setThreeCo(false)
+    // }
     
     const selectFourCo = () => {
         setOneCo(true)
         setTwoCo(true)
         setThreeCo(true)
         setFourCo(true)
+        setFiveCo(false)
+        setCommunication(4)
     }
-    const deSelectFourCo = () => {
-        setOneCo(false)
-        setTwoCo(false)
-        setThreeCo(false)
-        setFourCo(false)
-    }
+    // const deSelectFourCo = () => {
+    //     setOneCo(false)
+    //     setTwoCo(false)
+    //     setThreeCo(false)
+    //     setFourCo(false)
+    // }
     
     const selectFiveCo = () => {
         setOneCo(true)
@@ -185,14 +229,15 @@ const useRating = () => {
         setThreeCo(true)
         setFourCo(true)
         setFiveCo(true)
+        setCommunication(5)
     }
-    const deSelectFiveCo = () => {
-        setOneCo(false)
-        setTwoCo(false)
-        setThreeCo(false)
-        setFourCo(false)
-        setFiveCo(false)
-    }
+    // const deSelectFiveCo = () => {
+    //     setOneCo(false)
+    //     setTwoCo(false)
+    //     setThreeCo(false)
+    //     setFourCo(false)
+    //     setFiveCo(false)
+    // }
 
    
 
@@ -331,8 +376,10 @@ const handleSubmit = async () => {
 
     const data = { clarity, engagement, communication, comment, courseId, anonymous }
 
+    console.log(data)
+
     try {
-        const res = await axios.post('https://lecture-rate-plus-api.vercel.app/api/reviews/', { ...data }, {
+        const res = await axios.post('http://localhost:8000/api/reviews/', { ...data }, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
@@ -357,7 +404,10 @@ const handleSubmit = async () => {
 }
 
 
-  return { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, course, setCourse, comment, setComment, anonymous, setAnonymous,  inactive, courses }
+  return { oneC, oneCo, oneE, twoC, twoCo, twoE, threeC, threeCo, threeE, fourC, fourCo, fourE, fiveC, fiveCo, fiveE, selectFiveC, selectFiveCo, selectFiveE, selectFourC, selectFourCo, selectFourE, selectThreeC, selectThreeCo, selectThreeE, selectTwoC, selectTwoCo, selectTwoE, selectOneC, selectOneCo, selectOneE, clarity, engagement, communication, handleClarityClick, handleEngageClick, handleCommClick, handleSubmit, course, setCourse, comment, setComment, anonymous, setAnonymous,  inactive, courses }
 }
 
 export default useRating
+
+
+// deSelectFiveC, deSelectFiveCo, deSelectFiveE, deSelectFourC, deSelectFourCo, deSelectFourE, deSelectThreeC, deSelectThreeCo, deSelectThreeE, deSelectTwoC, deSelectTwoCo, deSelectTwoE, deSelectOneC, deSelectOneCo, deSelectOneE,

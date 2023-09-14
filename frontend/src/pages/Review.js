@@ -28,7 +28,7 @@ return (
                     onChange={(e) => setCourse(e.target.value)}
                     value={course}
                 >
-                    <option hidden >Select Course Code</option>
+                    <option hidden>Select Course Code</option>
                     { courses && courses.map(program => (
                         <option value={`${program.courseCode} - ${program.staffName}`} key={program.courseId}>{`${program.courseCode} - ${program.staffName}`}</option>
                     ))}
@@ -42,7 +42,7 @@ return (
 
                         <div 
                         className="one" 
-                        onClick={handleClarityClick}
+                        onClick={selectOneC}
                         // onMouseEnter={selectOneC} 
                         // onMouseLeave={clarity ? selectOneC : deSelectOneC } 
                         style={{backgroundColor: oneC ? 'rgba(255, 94, 0, 0.6)' : 'rgb(231, 229, 229)'}}
@@ -50,7 +50,7 @@ return (
 
                         <div 
                         className="two" 
-                        onClick={handleClarityClick}
+                        onClick={selectTwoC}
                         // onMouseEnter={selectTwoC} 
                         // onMouseLeave={clarity ? selectTwoC : deSelectTwoC} 
                         style={{backgroundColor: twoC ? 'rgba(255, 128, 0, 0.6)' : 'rgb(231, 229, 229)'}}
@@ -58,7 +58,7 @@ return (
 
                         <div 
                         className="three" 
-                        onClick={handleClarityClick}
+                        onClick={selectThreeC}
                         // onMouseEnter={selectThreeC} 
                         // onMouseLeave={clarity ? selectThreeC : deSelectThreeC}  
                         style={{backgroundColor: threeC ? 'rgba(213, 181, 0, 0.6)' : 'rgb(231, 229, 229)'}}
@@ -66,7 +66,7 @@ return (
 
                         <div 
                         className="four" 
-                        onClick={handleClarityClick}
+                        onClick={selectFourC}
                         // onMouseEnter={selectFourC} 
                         // onMouseLeave={clarity ? selectFourC : deSelectFourC}  
                         style={{backgroundColor: fourC ? 'rgba(100, 223, 0, 0.5)' : 'rgb(231, 229, 229)'}}
@@ -74,7 +74,7 @@ return (
 
                         <div 
                         className="five" 
-                        onClick={handleClarityClick}
+                        onClick={selectFiveC}
                         // onMouseEnter={selectFiveC} 
                         // onMouseLeave={clarity ? selectFiveC : deSelectFiveC}  
                         style={{backgroundColor: fiveC ? 'rgba(8, 153, 0, 0.7)' : 'rgb(231, 229, 229)'}}
@@ -90,41 +90,41 @@ return (
                     <div className="rate">
                         <div 
                         className="one" 
-                        onClick={handleEngageClick}
-                        onMouseEnter={selectOneE} 
-                        onMouseLeave={deSelectOneE} 
+                        onClick={selectOneE}
+                        // onMouseEnter={selectOneE} 
+                        // onMouseLeave={deSelectOneE} 
                         style={{backgroundColor: oneE ? 'rgba(255, 94, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="two" 
-                        onClick={handleEngageClick}
-                        onMouseEnter={selectTwoE} 
-                        onMouseLeave={deSelectTwoE} 
+                        onClick={selectTwoE}
+                        // onMouseEnter={selectTwoE} 
+                        // onMouseLeave={deSelectTwoE} 
                         style={{backgroundColor: twoE ? 'rgba(255, 128, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="three" 
-                        onClick={handleEngageClick}
-                        onMouseEnter={selectThreeE} 
-                        onMouseLeave={deSelectThreeE}  
+                        onClick={selectThreeE}
+                        // onMouseEnter={selectThreeE} 
+                        // onMouseLeave={deSelectThreeE}  
                         style={{backgroundColor: threeE ? 'rgba(213, 181, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="four" 
-                        onClick={handleEngageClick}
-                        onMouseEnter={selectFourE} 
-                        onMouseLeave={deSelectFourE}  
+                        onClick={selectFourE}
+                        // onMouseEnter={selectFourE} 
+                        // onMouseLeave={deSelectFourE}  
                         style={{backgroundColor: fourE ? 'rgba(100, 223, 0, 0.5)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="five" 
-                        onClick={handleEngageClick}
-                        onMouseEnter={selectFiveE} 
-                        onMouseLeave={deSelectFiveE}  
+                        onClick={selectFiveE}
+                        // onMouseEnter={selectFiveE} 
+                        // onMouseLeave={deSelectFiveE}  
                         style={{backgroundColor: fiveE ? 'rgba(8, 153, 0, 0.7)' : 'rgb(231, 229, 229)'}}
                         ></div>
                     </div>
@@ -139,41 +139,41 @@ return (
                         
                     <div 
                         className="one" 
-                        onClick={handleCommClick}
-                        onMouseEnter={selectOneCo} 
-                        onMouseLeave={deSelectOneCo} 
+                        onClick={selectOneCo}
+                        // onMouseEnter={selectOneCo} 
+                        // onMouseLeave={deSelectOneCo} 
                         style={{backgroundColor: oneCo ? 'rgba(255, 94, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="two" 
-                        onClick={handleCommClick}
-                        onMouseEnter={selectTwoCo} 
-                        onMouseLeave={deSelectTwoCo} 
+                        onClick={selectTwoCo}
+                        // onMouseEnter={selectTwoCo} 
+                        // onMouseLeave={deSelectTwoCo} 
                         style={{backgroundColor: twoCo ? 'rgba(255, 128, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="three" 
-                        onClick={handleCommClick}
-                        onMouseEnter={selectThreeCo} 
-                        onMouseLeave={deSelectThreeCo}  
+                        onClick={selectThreeCo}
+                        // onMouseEnter={selectThreeCo} 
+                        // onMouseLeave={deSelectThreeCo}  
                         style={{backgroundColor: threeCo ? 'rgba(213, 181, 0, 0.6)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="four" 
-                        onClick={handleCommClick}
-                        onMouseEnter={selectFourCo} 
-                        onMouseLeave={deSelectFourCo}  
+                        onClick={selectFourCo}
+                        // onMouseEnter={selectFourCo} 
+                        // onMouseLeave={deSelectFourCo}  
                         style={{backgroundColor: fourCo ? 'rgba(100, 223, 0, 0.5)' : 'rgb(231, 229, 229)'}}
                         ></div>
 
                         <div 
                         className="five" 
-                        onClick={handleCommClick}
-                        onMouseEnter={selectFiveCo} 
-                        onMouseLeave={deSelectFiveCo}  
+                        onClick={selectFiveCo}
+                        // onMouseEnter={selectFiveCo} 
+                        // onMouseLeave={deSelectFiveCo}  
                         style={{backgroundColor: fiveCo ? 'rgba(8, 153, 0, 0.7)' : 'rgb(231, 229, 229)'}}
                         ></div>
                     </div>

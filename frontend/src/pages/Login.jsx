@@ -34,7 +34,7 @@ const Login = () => {
         }
     
         try {
-            const res = await axios.post('https://lecture-rate-plus-api.vercel.app/api/auth/login', values);
+            const res = await axios.post('http://localhost:8000/api/auth/login', values);
 
 
             if(res && res.status === 200) {

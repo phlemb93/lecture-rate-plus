@@ -5,7 +5,7 @@ const Loading = () => {
   return (
     <div className='loading'>
         <div className="icon">
-            <AutorenewIcon />
+            <AutorenewIcon style={{fontSize: 58}}/>
         </div>
     </div>
   )
