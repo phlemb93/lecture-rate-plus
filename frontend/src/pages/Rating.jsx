@@ -28,6 +28,10 @@ const Rating = () => {
     let engagementVal = review.engagement;
     let commVal = review.communication;
 
+    console.log({ "clarityVal": clarityVal,
+    "engagementVal": engagementVal,
+    "commVal": commVal })
+
     const chartData = [
         [
     "Element",
@@ -40,9 +44,9 @@ const Rating = () => {
       calc: "stringify",
     },
   ],
-        ["Clarity", {clarityVal}, 'color: #4F1800', null],
-        ["Engagement", {engagementVal}, 'color: #c35300', null],
-        ["Communication", {commVal}, 'color: #ffd2a1', null]
+        ["Clarity", clarityVal, 'color: #4F1800', null],
+        ["Engagement", engagementVal, 'color: #c35300', null],
+        ["Communication", commVal, 'color: #ffd2a1', null]
       ];
 
     useEffect(() => {
