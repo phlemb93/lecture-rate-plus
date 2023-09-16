@@ -3,9 +3,10 @@ import mysql from 'mysql';
 
 
 export const db = mysql.createConnection({
-    host: 'localhost',
+    host: 'lecturerateplus-db.cyzq7n9aatzi.eu-north-1.rds.amazonaws.com',
     port: 3306,
-    user: 'root',
-    password: 'Badrudeen93$',
-    database: 'lecture_rate_plus_schema'
+    user: 'admin',
+    password: 'LectureRatePlus',
+    database: 'lecturerateplus-schema'
 })
+
