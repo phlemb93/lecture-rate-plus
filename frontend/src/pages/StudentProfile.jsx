@@ -29,7 +29,7 @@ const StudentProfile = () => {
     courses && courses.map(course => {
 
       if(course.days.includes(day) && course.notifyTime === time) {
-        axios.post('http://localhost:8000/api/courses/notification', { course, studentId })
+        axios.post('https://lecture-rate-plus-api.vercel.app/api/courses/notification', { course, studentId })
         .then(res => console.log(res))
         .catch(err => console.log(err))
       }
@@ -64,7 +64,7 @@ useEffect(() => {
 
     const getReviews = async () => {
         try {
-            const res = await axios.get('http://localhost:8000/api/reviews/find/students/' + id, {
+            const res = await axios.get('https://lecture-rate-plus-api.vercel.app/api/reviews/find/students/' + id, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`

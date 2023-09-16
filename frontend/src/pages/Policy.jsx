@@ -5,7 +5,7 @@ const About = () => {
     <main className="policy">
       <header>
         <h2>Privacy Policy</h2>
-        <small>Last Updated: 28/08/2023</small>
+        <small>Last Updated: 16/09/2023</small>
       </header>
 
       <section className="body">
@@ -48,7 +48,7 @@ const About = () => {
 
         <section className="six">
           <h3>Your Rights</h3>
-          <p>Under UK data protection laws, you have several rights concerning your personal data, including the right to access, rectify, and erase your data. You can also restrict or object to processing. To exercise these rights, please contact us at <strong>data@lecturerateplus.com.</strong></p>
+          <p>Under UK data protection laws, you have several rights concerning your personal data, including the right to access, rectify, and erase your data. You can also restrict or object to processing. </p>
         </section>
 
         <section className="seven">

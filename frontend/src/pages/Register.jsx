@@ -46,7 +46,7 @@ const Register = () => {
             } else {
 
                 try {
-                    const res = await axios.post('http://localhost:8000/api/auth/register', values)
+                    const res = await axios.post('https://lecture-rate-plus-api.vercel.app/api/auth/register', values)
 
                     if (res.status === 404) {
                         return setError('Invalid credentials')

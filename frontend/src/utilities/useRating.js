@@ -181,10 +181,8 @@ const handleSubmit = async () => {
 
     const data = { clarity, engagement, communication, comment, courseId, anonymous }
 
-    console.log(data)
-
     try {
-        const res = await axios.post('http://localhost:8000/api/reviews/', { ...data }, {
+        const res = await axios.post('https://lecture-rate-plus-api.vercel.app/api/reviews/', { ...data }, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
