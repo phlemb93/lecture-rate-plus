@@ -3,8 +3,6 @@ import { useEffect, useState } from "react"
 import { useUserContext } from "./UserContext";
 
 
-// const { token } = JSON.parse(localStorage.getItem('user'));
-
 export const useFetchUrl = (url) => {
 
     const { user } = useUserContext();

@@ -35,9 +35,9 @@ const NavBar = () => {
                 <div className="active" >
                     <Link to='/review'>Feedback</Link>
 
-                    <div className="profile">
+                    <Link to={`/profile/${user.studentId}`} className="profile">
                         <p>Hi, <span>{name}</span></p>
-                    </div>
+                    </Link>
                     
                 </div> : <div style={{display: 'none'}}></div> }
             </div>
