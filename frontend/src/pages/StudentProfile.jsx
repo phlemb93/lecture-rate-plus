@@ -8,7 +8,7 @@ import Loading from '../components/Loading';
 
 
 const StudentProfile = () => {
-  const { user } = useUserContext();
+  const { user, dispatch } = useUserContext();
   const { id } = useParams();
   const navigate = useNavigate();
   const token = user && user.token
@@ -123,12 +123,24 @@ let lastInitials = student.name && student.name.split(' ')[1].slice(0, 1);
 
 const stillLoading = isLoading || !student.name
 
+const handleLogout = () => {
+    dispatch({type: 'logout'});
+    localStorage.removeItem('user');
+    navigate('/')
+}
+
   return (
     <>
     { stillLoading  ? <Loading /> : 
 
     <main className='student-profile'>
-      <h3>Good day, { firstName === 'New' ? 'Guest' : firstName }!</h3>
+
+      <section className="first">
+        <h3>Good day, { firstName === 'New' ? 'Guest' : firstName }!</h3>
+        <div className="logout" >
+          <p onClick={handleLogout}>Logout</p>
+        </div>
+      </section>
       
       <section className="details">
         <div className="pic">{ `${firstInitials}${lastInitials}`}</div>
