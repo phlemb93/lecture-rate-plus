@@ -22,7 +22,7 @@ export const getAllCourses = (req, res) => {
 export const sendNotification = (req, res) => {
     const { course, studentId } = req.body;
     
-    const url = 'http://localhost:3000/review'
+    const url = 'https://lecturerateplus.netlify.app/review'
 
     const q = "SELECT students.email as studentEmail FROM students WHERE studentId = ?";
 

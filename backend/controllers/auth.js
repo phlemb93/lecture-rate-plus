@@ -6,8 +6,6 @@ import { db } from '../dbConnect.js';
 
 
 
-
-
 //REGISTER 
 export const register = (req, res) => {
     const { name, email, password, isStudent, isStaff, department } = req.body;
@@ -26,7 +24,7 @@ export const register = (req, res) => {
                 }
 
                 if(data.length) {
-                    res.status(404).json('User already exist')    
+                    res.status(404).json('Email already in use')    
                 } else {
                     const q = 'SELECT * FROM staffs WHERE email = ?';
 
@@ -56,7 +54,7 @@ export const register = (req, res) => {
 
                                     db.query(q, [values], (err, data) => {
                                         if(err) {
-                                            res.status(500).json('Server error')
+                                            res.status(500).json('Internal error')
                                             console.log(err)
                                         } else {                         
                                             res.status(200).json(email)
@@ -74,7 +72,7 @@ export const register = (req, res) => {
 
                                     db.query(q, [values], (err, data) => {
                                         if(err) {
-                                            res.status(500).json('Server error')
+                                            res.status(500).json('Internal error')
                                             console.log(err)
                                         } else {
                                             res.status(200).json(email)
@@ -95,15 +93,13 @@ export const register = (req, res) => {
 }
 
 //CONFIRM EMAIL ADDRESS
-
 export const confirmEmail = async (req, res) => {
 
     const { email } = req.body
 
     const emailToken = jwt.sign({email}, process.env.JWT_SECRET, { expiresIn: '1h'})
 
-
-    const url = `http://localhost:8000/api/auth/confirmation/${emailToken}`;
+    const url = `https://lecture-rate-plus-api.vercel.app/api/auth/confirmation/${emailToken}`;
 
     const transporter = nodemailer.createTransport({
         service: 'hotmail',
@@ -161,7 +157,7 @@ export const verifyEmail = (req, res) => {
                         res.status(500).json('Server Error')
                         console.log(err)
                     } else {
-                        res.status(200).redirect('http://localhost:3000/login');
+                        res.status(200).redirect('https://lecturerateplus.netlify.app/login');
                     }
                 })
             } else {
@@ -181,7 +177,7 @@ export const verifyEmail = (req, res) => {
                                 res.status(500).json('Server Error')
                                 console.log(err)
                             } else {
-                                res.status(200).redirect('http://localhost:3000/login');
+                                res.status(200).redirect('https://lecturerateplus.netlify.app/login');
                             }
                         })
                     } 
