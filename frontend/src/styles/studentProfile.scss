@@ -1,8 +1,10 @@
 main.student-profile {
     width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
     height: auto;
     padding: 20px;
-    display: flex;
+    display: grid;
 
     h3 {
         width: 100%;

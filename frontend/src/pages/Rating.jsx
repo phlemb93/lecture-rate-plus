@@ -86,11 +86,13 @@ const Rating = () => {
 
                 <h3 className='header'>Rating for <Link to={`/staffs/${review.staffId}`}>{ name()}</Link></h3> 
                 
-                <textarea 
+                {/* <textarea 
                     className="comment"
                     disabled={true}
                     value={review.comment}
-                />
+                /> */}
+
+                <div className="comment">{review.comment}</div>
 
                 <div className="rate">
                     <Chart 

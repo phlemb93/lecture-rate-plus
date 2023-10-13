@@ -36,7 +36,7 @@ const NavBar = () => {
                     <Link to='/review'>Feedback</Link>
 
                     <Link to={`/profile/${user.studentId}`} className="profile">
-                        <p>Hi, <span>{name}</span></p>
+                        <p>Hi, <span>{name === 'New' ? 'Guest' : name}</span></p>
                     </Link>
                     
                 </div> : <div style={{display: 'none'}}></div> }

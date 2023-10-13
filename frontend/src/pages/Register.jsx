@@ -49,6 +49,7 @@ const Register = () => {
                     const res = await axios.post('https://lecture-rate-plus-api.vercel.app/api/auth/register', values)
 
                     if (res.status === 404) {
+                        console.log(res)
                         return setError('Invalid credentials')
                     }
                     if (res.status === 500) {
@@ -86,19 +87,23 @@ const Register = () => {
                         
                         if(error && error.response.data === "Invalid email") {
                             // setVerifyError(true)
-                            setError('Only the university email is accepted')
-                        } else {
-                            setError('Invalid credentials')
+                            setError('Accept only university email')
                         }
+                        if(error && error.response.data === "Email already exist") {
+                            // setVerifyError(true)
+                            setError('Email already exist')
+                        }
+
+                        setError('Invalid credentials')
                     }
         
                     if (error.response && error.response.status === 500) {
-                        setError('There is an Internal Error')
+                        setError('Internal Error')
                     }
                 }
             }
         } else {
-            setError('Kindly tick the agreement box')
+            setError('Kindly check the agreement box')
         }
     }
 

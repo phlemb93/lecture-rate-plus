@@ -20,10 +20,9 @@ return (
 
     {/* REVIEW FORM */}
         <section className="form">
-            {/* { name ? <h2>Rate: <strong>{ name }</strong></h2> : null } */}
 
             <div className="course">
-                <h3>Select Course Code</h3>
+                <h3>Select Course Code<sup>*</sup></h3>
                 <select 
                     onChange={(e) => setCourse(e.target.value)}
                     value={course}
@@ -37,7 +36,7 @@ return (
 
             <div className="ratings">
                 <div className='head'>
-                    <h3>Clarity</h3>
+                    <h3>Clarity<sup>*</sup></h3>
                     <div className="rate">
 
                         <div 
@@ -76,7 +75,7 @@ return (
                     </div>
                 </div>
                 <div className='head'>
-                    <h3>Engagement</h3>
+                    <h3>Engagement<sup>*</sup></h3>
                     <div className="rate">
                         <div 
                         className="one" 
@@ -114,7 +113,7 @@ return (
                     </div>
                 </div>
                 <div className='head'>
-                    <h3>Communication</h3>
+                    <h3>Communication<sup>*</sup></h3>
                     <div className="rate">
                         
                     <div 
@@ -158,7 +157,7 @@ return (
 
         {/* COMMENT */}
         <section className="comment">
-            <h3>Write a Review</h3>
+            <h3>Write a Review<sup>*</sup></h3>
             <p>Discuss the professor's professional abilities including teaching style and ability to convey the material clearly</p>
             <div className="caution">
                 <div className="header">
@@ -172,7 +171,7 @@ return (
                 <Link to='https://www.beds.ac.uk/student-experience/academic-information/student-code-of-conduct/#:~:text=As%20independent%20adults%20with%20legal,students%2C%20staff%20and%20their%20successors.' target='_blank'>View the University's Student Code of Conduct</Link>
             </div>
             <textarea 
-                placeholder='What do you have to say about the just concluded lecture' 
+                placeholder='What do you have to say about the lecture' 
                 cols="30" 
                 rows="10" 
                 onChange={(e) => setComment(e.target.value)}

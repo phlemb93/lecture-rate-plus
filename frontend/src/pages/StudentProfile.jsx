@@ -21,24 +21,8 @@ const StudentProfile = () => {
   const { data: courses } = useFetchUrl('courses');
   const [day, setDay] = useState('');
 
-  const setNotification = () => {
-
-    const today = new Date();
-    const time = today.toLocaleTimeString();
-
-    courses && courses.map(course => {
-
-      if(course.days.includes(day) && course.notifyTime === time) {
-        axios.post('https://lecture-rate-plus-api.vercel.app/api/courses/notification', { course, studentId })
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-      }
-    
-    })
-  }
-
-setInterval(setNotification, 1000)
-
+ 
+//SET THE COURSE DAY
 useEffect(() => {
 
   const d = new Date().getDay();
@@ -55,6 +39,54 @@ useEffect(() => {
   }
 
 }, [])
+
+  //SET COURSE FEEDBACK NOTIFICATION
+  const setNotification = () => {
+
+    const today = new Date();
+    const time = today.toLocaleTimeString();
+
+    courses && courses.map(course => {
+
+      if(course.days.includes(day) && course.notifyTime === time) {
+        axios.post('https://lecture-rate-plus-api.vercel.app/api/courses/notification', { course, studentId })
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+      }
+    
+    })
+  }
+
+//SET INTERVAL TO CHECK THE COURSE TIME
+useEffect(() => {
+  setInterval(setNotification, 1000)
+}, [])
+
+
+
+//FETCH THE STUDENT USER'S DETAILS
+  useEffect(() => {
+
+    const getUser = async () => {
+        try {
+            const res = await axios.get('https://lecture-rate-plus-api.vercel.app/api/students/find/' + id, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if(res.status === 200) {
+                const { email, name } = res.data[0];
+                setStudent({name, email});
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    getUser();
+  }, [])
 
 
   //FETCH ALL THE REVIEWS OF THE STUDENT USER
@@ -74,7 +106,6 @@ useEffect(() => {
             if(res.status === 200) {
                 setReviews(res.data);
                 setIsLoading(false);
-                setStudent(res.data[0]);
             }
 
         } catch (error) {
@@ -82,25 +113,28 @@ useEffect(() => {
             setIsLoading(false);
         }
     }
-   getReviews();
-}, [])
+    getReviews();
+  }, [])
+  
 
-let firstName = student.studentName && student.studentName.split(' ')[0];
-let firstInitials = student.studentName && student.studentName.split(' ')[0].slice(0, 1);
-let lastInitials = student.studentName && student.studentName.split(' ')[1].slice(0, 1);
+let firstName = student.name && student.name.split(' ')[0];
+let firstInitials = student.name && student.name.split(' ')[0].slice(0, 1);
+let lastInitials = student.name && student.name.split(' ')[1].slice(0, 1);
 
+const stillLoading = isLoading || !student.name
 
   return (
     <>
-    { isLoading ? <Loading /> : 
+    { stillLoading  ? <Loading /> : 
+
     <main className='student-profile'>
-      <h3>Good day, { firstName }!</h3>
+      <h3>Good day, { firstName === 'New' ? 'Guest' : firstName }!</h3>
       
       <section className="details">
-        <div className="pic">{`${firstInitials}${lastInitials}`}</div>
-        <p>{ student.studentName }</p>
+        <div className="pic">{ `${firstInitials}${lastInitials}`}</div>
+        <p>{ student && student.name}</p>
         <div className="hr"></div>
-        <p className="email">{ student.studentEmail }</p>
+        <p className="email">{ student ? student.studentEmail : 'guest@lecturerateplus.com' }</p>
         <div className="status">Student</div>
       </section>
 
@@ -124,6 +158,7 @@ let lastInitials = student.studentName && student.studentName.split(' ')[1].slic
         </div>
       </section>
     </main> }
+
     </>
   )
 }
